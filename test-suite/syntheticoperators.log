@@ -1,0 +1,2 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+PASS syntheticoperators (exit status: 0)

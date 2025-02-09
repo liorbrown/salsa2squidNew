@@ -1,0 +1,28 @@
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: ssl/libsslsquid.la Config (not implemented).
+.......SKIP: HttpReply.cc HttpReply (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+.SKIP: HttpReply.cc HttpReply (not implemented).
+.SKIP: tools.cc UsingSmp (not implemented).
+.SKIP: HttpReply.cc HttpReply (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+.SKIP: HttpReply.cc HttpReply (not implemented).
+.SKIP: tools.cc UsingSmp (not implemented).
+
+OK (12)
+SKIP: ssl/libsslsquid.la ~Config (not implemented).
+PASS tests/testStore (exit status: 0)

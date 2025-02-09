@@ -1,0 +1,4 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+......
+OK (6)
+PASS tests/testTokenizer (exit status: 0)

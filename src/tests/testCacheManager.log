@@ -1,0 +1,26 @@
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: store/libstore.la Controller (not implemented).
+...
+OK (3)
+SKIP: store/libstore.la ~Controller (not implemented).
+PASS tests/testCacheManager (exit status: 0)

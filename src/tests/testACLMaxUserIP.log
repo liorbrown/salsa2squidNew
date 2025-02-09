@@ -1,0 +1,6 @@
+SKIP: http/libhttp.la HeaderLookupTable_t (not implemented).
+SKIP: mem/libmem.la MemPools (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+..
+OK (2)
+PASS tests/testACLMaxUserIP (exit status: 0)

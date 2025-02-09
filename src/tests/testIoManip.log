@@ -1,0 +1,4 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+.
+OK (1)
+PASS tests/testIoManip (exit status: 0)

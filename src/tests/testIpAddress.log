@@ -1,0 +1,5 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+...............stub time| ERROR: Unable to convert '192.168.100.12' to the rDNS type requested.
+..
+OK (17)
+PASS tests/testIpAddress (exit status: 0)

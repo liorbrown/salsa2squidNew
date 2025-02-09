@@ -1,0 +1,29 @@
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: mem/libmem.la MemPools (not implemented).
+SKIP: lmgr/libmgr.la ActionParams (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: ssl/libsslsquid.la Config (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+
+OK (1)
+SKIP: ssl/libsslsquid.la ~Config (not implemented).
+PASS tests/testHttpReply (exit status: 0)

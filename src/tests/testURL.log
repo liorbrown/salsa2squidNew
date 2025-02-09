@@ -1,0 +1,15 @@
+SKIP: http/libhttp.la HeaderLookupTable_t (not implemented).
+SKIP: mem/libmem.la MemPools (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+
+OK (10)
+PASS tests/testURL (exit status: 0)

@@ -1,0 +1,26 @@
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la Config (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+.SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: tools.cc UsingSmp (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: store_client.cc invokeHandlers (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: store_client.cc storeLog (not implemented).
+SKIP: store_client.cc storePendingNClients (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+.
+OK (2)
+PASS tests/testUfs (exit status: 0)

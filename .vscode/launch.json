@@ -1,0 +1,48 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Attach to Squid Process",
+        "type": "cppdbg",
+        "request": "attach",
+        "program": "/usr/sbin/squid",
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            {
+                "description": "Set Disassembly Flavor to Intel",
+                "text": "-gdb-set disassembly-flavor intel",
+                "ignoreFailures": true
+            }
+        ],
+        "sourceFileMap": {
+            "/home/lior/squid-6.12": "${workspaceFolder}"
+        }
+      },
+      {
+        "name": "Launch Squid",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/usr/sbin/squid",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": false
+          }
+        ],
+        "miDebuggerPath": "/usr/bin/gdb"
+      }
+    ]
+  }
+  

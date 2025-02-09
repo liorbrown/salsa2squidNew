@@ -1,0 +1,4 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+..
+OK (2)
+PASS tests/testIcmp (exit status: 0)

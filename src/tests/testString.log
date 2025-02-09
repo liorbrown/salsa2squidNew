@@ -1,0 +1,8 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+
+OK (4)
+PASS tests/testString (exit status: 0)

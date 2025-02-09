@@ -1,0 +1,6 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: store/libstore.la Controller (not implemented).
+SKIP: mem/libmem.la Init (not implemented).
+SKIP: store/libstore.la ~Controller (not implemented).
+PASS tests/test_http_range (exit status: 0)

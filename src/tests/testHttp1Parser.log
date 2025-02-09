@@ -1,0 +1,6 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+...SKIP: mem/libmem.la Init (not implemented).
+....
+OK (7)
+PASS tests/testHttp1Parser (exit status: 0)

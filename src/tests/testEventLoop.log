@@ -1,0 +1,14 @@
+....stub time| ERROR: Select loop Error. Retry 1
+stub time| ERROR: Select loop Error. Retry 1
+stub time| ERROR: Select loop Error. Retry 2
+stub time| ERROR: Select loop Error. Retry 3
+stub time| ERROR: Select loop Error. Retry 4
+stub time| ERROR: Select loop Error. Retry 5
+stub time| ERROR: Select loop Error. Retry 6
+stub time| ERROR: Select loop Error. Retry 7
+stub time| ERROR: Select loop Error. Retry 8
+stub time| ERROR: Select loop Error. Retry 9
+stub time| ERROR: Select loop Error. Retry 10
+..
+OK (6)
+PASS tests/testEventLoop (exit status: 0)

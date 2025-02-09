@@ -1,0 +1,36 @@
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: StatHist.cc enumInit (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la Config (not implemented).
+SKIP: security/libsecurity.la PeerOptions (not implemented).
+SKIP: store/libstore.la Controller (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+SKIP: ip/libip.la setEmpty (not implemented).
+.
+OK (1)
+SKIP: store/libstore.la ~Controller (not implemented).
+PASS tests/testDiskIO (exit status: 0)

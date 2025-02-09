@@ -1,0 +1,17 @@
+SKIP: mem/libmem.la MemPools (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+Actual Text:
+Last event to run: last event
+
+Operation                \tNext Execution \tWeight\tCallback Valid?
+test event               \t0.000 sec\t    0\t N/A
+test event2              \t0.000 sec\t    0\t N/A
+
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+.SKIP: mem/libmem.la Init (not implemented).
+
+OK (6)
+PASS tests/testEvent (exit status: 0)
