@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream& stream, StoreDigestCBlock& cblock)
 void clientReplyContext::investigateDigest(StoreIOBuffer result)
 {
     // Quick trace showing which URL we're checking.
-    debugs(96, DBG_CRITICAL, "salsa2: check url: " << http->storeEntry()->url());
+    debugs(96, 4, "salsa2: check url: " << http->storeEntry()->url());
 
     // Only proceed if we have non-empty data and the URL matches the store_digest path.
     if (result.length &&

@@ -402,13 +402,6 @@ peerDigestHandleReply(void *data, StoreIOBuffer receivedData)
      */
     assert(!receivedData.data || fetch->buf + fetch->bufofs == receivedData.data);
 
-    debugs(96, 4, "recivied.length: " << receivedData.length
-        << "\nreceivedData.data is:\n" 
-        << CacheDigest::maskToString(receivedData.data, receivedData.length)
-        << "\nfetch->buf address is: " << (size_t)fetch->buf
-        << "\nfetch->buf is:\n"
-        << CacheDigest::maskToString(fetch->buf, receivedData.length));
-
     /* Update the buffer size */
     fetch->bufofs += receivedData.length;
 
@@ -432,7 +425,6 @@ peerDigestHandleReply(void *data, StoreIOBuffer receivedData)
     /* (So keep going if the state has changed and we still have data */
     do {
         prevstate = fetch->state;
-        debugs(96, 4, "fetch->state = " << fetch->state);
         switch (fetch->state) {
 
         case DIGEST_READ_REPLY:
@@ -467,10 +459,6 @@ peerDigestHandleReply(void *data, StoreIOBuffer receivedData)
          * and update the bufofs / bufsize
          */
         newsize = fetch->bufofs - retsize;
-
-        debugs(96,4, "salsa2: retsize = " << retsize 
-            << "\tfetch->bufofs = " << fetch->bufofs
-            << "\tnewsize = " << newsize);
 
         // @category salsa2
         memmove(fetch->buf, fetch->buf + retsize, newsize);
@@ -590,9 +578,6 @@ peerDigestSwapInCBlock(void *data, char *buf, ssize_t size)
 
     assert(fetch->state == DIGEST_READ_CBLOCK);
 
-    debugs(96, 4, "salsa2: in peerDigestSwapInCBlock. size = " << size
-        << "\nbuf =\n" << CacheDigest::maskToString(buf, size));
-
     if (peerDigestFetchedEnough(fetch, buf, size, "peerDigestSwapInCBlock"))
         return -1;
 
@@ -632,22 +617,11 @@ peerDigestSwapInMask(void *data, char *buf, ssize_t size)
 
     pd = fetch->pd;
     assert(pd->cd && pd->cd->mask);
-
-    debugs(96,4, "Updating " << pd->host
-        << " digest\nold mask is:\n" << pd->cd->maskToString() 
-        << "\nsize is: " << size
-        << "\nbuf adress is: " << (size_t)buf
-        << "\nbuf content is:\n" << CacheDigest::maskToString(buf, size));
     /*
      * NOTENOTENOTENOTENOTE: buf doesn't point to pd->cd->mask anymore!
      * we need to do the copy ourselves!
      */
     memcpy(pd->cd->mask + fetch->mask_offset, buf, size);
-
-    debugs(96,DBG_CRITICAL, "new mask is:\n" << pd->cd->maskToString() 
-        << "\nsize is: " << size
-        << "\nbuf adress is: " << (size_t)buf
-        << "\nbuf content is:\n" << CacheDigest::maskToString(buf, size));
 
     /* NOTE! buf points to the middle of pd->cd->mask! */
 

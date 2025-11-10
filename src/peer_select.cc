@@ -749,8 +749,12 @@ PeerSelector::selectSomeNeighbor()
         return;
     }
 
+    const bool isConnect = (request->method == Http::METHOD_CONNECT);
+    if (isConnect)
+        debugs(44, 3, "CONNECT request; skipping digest and ICP checks.");
+
 #if USE_CACHE_DIGESTS
-    if ((p = neighborsDigestSelect(this))) {
+    if (!isConnect && (p = neighborsDigestSelect(this))) {
         if (neighborType(p, request->url) == PEER_PARENT)
             code = CD_PARENT_HIT;
         else
@@ -759,7 +763,7 @@ PeerSelector::selectSomeNeighbor()
 #endif
         if ((p = netdbClosestParent(this))) {
             code = CLOSEST_PARENT;
-        } else if (peerSelectIcpPing(this, direct, entry)) {
+        } else if (!isConnect && peerSelectIcpPing(this, direct, entry)) {
             debugs(44, 3, "Doing ICP pings");
             ping.start = current_time;
             ping.n_sent = neighborsUdpPing(request,
