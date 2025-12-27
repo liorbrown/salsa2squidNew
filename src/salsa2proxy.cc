@@ -11,11 +11,6 @@
 #define NOT_FOUND 99999
 #define V_INIT (0.85)
 
-// This flag tells to not relly check digest
-// but random it it hit or miss
-// Uses opnly for dev porpuse
-#undef RANDOM_DIGEST
-
 using namespace std;
 
 // Copy this class from peer_select.cc
@@ -105,25 +100,13 @@ CachePeer* Salsa2Proxy::currentPeer = nullptr;
 
 map<const CachePeer*, ProbabilityMatrix> Salsa2Proxy::exclusionProbabilities;
 
-#ifdef REQ_UPDATE
-Salsa2Proxy* Salsa2Proxy::activeSalsa = nullptr;
-#endif
-
 Salsa2Proxy::Salsa2Proxy(PeerSelector *peerSelector, FwdServer *&fwdServers): 
     selector(peerSelector),
     servers(fwdServers),
     tail(nullptr),
     request(peerSelector->request),
     digestsHits({})
-
-    #ifdef REQ_UPDATE
-    ,cachesData(new cacheData[Config.npeers])
-    #endif
 {
-    #ifdef REQ_UPDATE
-    Salsa2Proxy::activeSalsa = nullptr;
-    #endif
-
     this->peerSelection();
 }
 
@@ -208,15 +191,6 @@ void Salsa2Proxy::peerSelection()
     // Iterate through the list of selected forward servers and print their information.
     for(FwdServer* f = this->servers; f; f = f->next)
         debugs(96,4,"Salsa2: "<< *(f->_peer));
-
-    #ifdef REQ_UPDATE
-        if (this->request->url.getScheme().image().c_str() == string("http"))
-            this->getResolutions();
-        else
-            this->updateReq();
-    #else
-        this->dispatch();
-    #endif    
 }
 
 // This function checks the digests of each peer to see if they have the requested content.
@@ -248,31 +222,14 @@ void Salsa2Proxy::checkDigestsHits()
                 << " Digest URL is: " << peer->digest_url);
 
         // If the digest lookup was not negative (i.e., the peer has some information about the object).
-        if (peerHTTPOkay(peer, this->selector)
-
-            #ifndef RANDOM_DIGEST
-            && lookup != LOOKUP_NONE
-            #endif
-
-            )
+        if (peerHTTPOkay(peer, this->selector) && lookup != LOOKUP_NONE)
         {
             // Increment the total number of choices for hierarchical selection.
             this->request->hier.n_choices++;
 
-            #ifdef RANDOM_DIGEST
-            if (rand() % 2)
-            #else
             // If the digest lookup was a hit and the peer is HTTP okay (available and healthy).
             if (lookup == LOOKUP_HIT)
-            #endif
-            {            
-                #ifdef REQ_UPDATE
-
-                // Mark this cache as having an indication (digest hit) and being accessed.
-                this->cachesData[cacheIndex].indication = 1;
-                    
-                #endif
-
+            {                
                 this->digestsHits.insert(peer);
 
                 // Increment the number of ideal choices (peers with a digest hit).
@@ -305,10 +262,6 @@ void Salsa2Proxy::addPeer(CachePeer* peer, hier_code code)
         // Append the new server to the end of the list and update the tail.
         this->tail = this->tail->next = newTail;
     }
-
-    #ifdef REQ_UPDATE
-    this->cachesData[this->getPeerIndex(peer->name)].accessed = 1;
-    #endif
 }
 
 size_t Salsa2Proxy::naiveSelection() const
@@ -452,95 +405,3 @@ void Salsa2Proxy::addRoundRobin()
         debugs(96,4,"Salsa2: Not found any online parent");
     }
 }
-
-void Salsa2Proxy::dispatch()
-{
-    debugs(96, 4, "Salsa2: send request - " << *this->request); 
-            
-    // Sends request to all selected peers
-    this->selector->resolveSelected();
-
-    delete this;
-}
-
-// Conditional compilation block for request updating functionality.
-#ifdef REQ_UPDATE
-
-// Helper function to get the index of a peer in the cachesData array by its name.
-size_t Salsa2Proxy::getPeerIndex(const char* name) const
-{
-    // Iterate through the cachesData array
-    for (int i = 0; i < Config.npeers; i++)
-        // If the name matches, return the index.
-        if (this->cachesData[i].name == name)
-            return i;
-
-    // If the peer name is not found, return the NOT_FOUND value.
-    return NOT_FOUND;
-}
-
-// Function to update the request information, by executing an external command.
-void Salsa2Proxy::updateReq()
-{
-    Salsa2Proxy::activeSalsa = nullptr;
-
-    // Create a stringstream to build the command.
-    stringstream sstr;
-
-    // Start building the command with the REQ_UPDATE flag and the requested URL host.
-    sstr << REQ_UPDATE << " " << this->request->storeId();
-
-    // Iterate through the cachesData array to append peer information.
-    for (int i = 0; i < Config.npeers; i++)
-    {
-        // Append peer name, indication (digest hit), accessed status, and a simulated resolution status.
-        sstr << " " << this->cachesData[i].name
-             << " " << this->cachesData[i].indication
-             << " " << this->cachesData[i].accessed
-             << " " << this->cachesData[i].resolution;
-    }
-
-    // Execute the constructed command using the system() call.
-    int res = system(sstr.str().c_str());
-
-    // Log the executed command and its return code.
-    debugs(96,4,"Salsa2: command " << sstr.str() << " returned code " << res );
-
-    this->dispatch(); 
-}
-
-void Salsa2Proxy::getResolutions()
-{
-    // Set static member to this for that neighbors::neighborsUdpAck
-    // will call it when ICP returns
-    Salsa2Proxy::activeSalsa = this;
-
-    int timeout;
-
-    // Sends ICP query to all parents
-    neighborsUdpPing(request,
-                    this->selector->entry,
-                    nullptr,
-                    this->selector,
-                    &this->pingsWaiting,
-                    &timeout);
-
-    debugs(96,4,"Salsa2: icpReqWaiting = " << this->pingsWaiting);
-}
-
-void Salsa2Proxy::getIcp(CachePeer * p, icp_common_t* header)
-{   
-    // Sets peer resultion to 1 if ICP result is HIT 
-    this->cachesData[this->getPeerIndex(p->name)].resolution = 
-        header->getOpCode() == ICP_HIT;
-
-    debugs(96,4,"Salsa2: Recive new icp response from cache " << p->name << 
-        " Result: " << header->getOpCode() <<
-        " pingsWaiting is " << this->pingsWaiting);
-
-    // Check if all ICPs returned, then update simulator DB and send request
-    if (!--this->pingsWaiting)
-        this->updateReq();
-}
-
-#endif

@@ -64,8 +64,6 @@ ErrorState *clientBuildError(err_type, Http::StatusCode, char const *, const Con
 /* privates */
 
 // @category salsa2
-
-// @category salsa2
 #ifdef SALSA_DEBUG
 std::ostream& operator<<(std::ostream& stream, StoreDigestCBlock& cblock);
 std::ostream& operator<<(std::ostream& stream, StoreDigestCBlock& cblock)

@@ -1027,20 +1027,6 @@ neighborsUdpAck(const cache_key * key, icp_common_t * header, const Ip::Address 
 
     const char *opcode_d = icp_opcode_str[opcode];
 
-    #ifdef REQ_UPDATE
-
-    // @category salsa2
-
-    // If Salsa2Proxy::activeSalsa sets its says that we are in the middle of check ICP 
-    // by our salsa2 algo, so we call the salsa2 ICP retrive method
-    if (Salsa2Proxy::activeSalsa)
-    {
-        Salsa2Proxy::activeSalsa->getIcp(p,header);
-        return;
-    }
-
-    #endif
-
     if (p)
         neighborUpdateRtt(p, mem);
 

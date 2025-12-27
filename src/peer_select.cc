@@ -617,8 +617,7 @@ PeerSelector::selectMore()
         Config.npeers &&
         request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
 
-            // Not need to create a pointer, because object do self-destruction
-            new Salsa2Proxy(this, servers);
+            Salsa2Proxy salsa2(this, servers);
     else {
         debugs(96,4,"Salsa2: Not salsa selection: " 
         << this->request->storeId());
@@ -702,10 +701,10 @@ PeerSelector::selectMore()
 
             break;
         }
-    
-        // end peer selection; start resolving selected peers
-        resolveSelected();
     }
+
+    // end peer selection; start resolving selected peers
+    resolveSelected();
 }
 
 bool peerAllowedToUse(const CachePeer *, PeerSelector*);
