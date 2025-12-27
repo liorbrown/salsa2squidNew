@@ -1610,6 +1610,7 @@ clientProcessRequestFinished(ConnStateData *conn, const HttpRequest::Pointer &re
 void
 clientProcessRequest(ConnStateData *conn, const Http1::RequestParserPointer &hp, Http::Stream *context)
 {
+    
     ClientHttpRequest *http = context->http;
     bool mustReplyToOptions = false;
     bool expectBody = false;
@@ -1619,6 +1620,16 @@ clientProcessRequest(ConnStateData *conn, const Http1::RequestParserPointer &hp,
     assert(http->request);
     HttpRequest::Pointer request = http->request;
 
+    debugs(96, DBG_CRITICAL, "salsa2: in clientProcessRequest:\n" << *request);
+    
+    // Check if request has X-Originally-HTTPS header with value "1"
+    String headerValue;
+    const bool isOriginallyHttps = 
+        request->header.hasNamed(SBuf("X-Originally-HTTPS"), &headerValue) &&
+                                 !headerValue.cmp("1");
+
+    debugs(96, DBG_CRITICAL, "salsa2: isOriginallyHttps = " << isOriginallyHttps);
+        
     // temporary hack to avoid splitting this huge function with sensitive code
     const bool isFtp = !hp;
 

@@ -448,7 +448,7 @@ am__set_b = \
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/cfgaux/depcomp \
 	$(top_srcdir)/cfgaux/test-driver $(top_srcdir)/src/Common.am
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} '/home/lior/salsa2squidNew/cfgaux/missing' aclocal-1.16
+ACLOCAL = ${SHELL} '/home/lior/salsa2squid/cfgaux/missing' aclocal-1.16
 ADAPTATION_LIBS = adaptation/libadaptation.la
 AIOLIB = -lrt
 ALLOCA = 
@@ -459,9 +459,9 @@ AR_R = /usr/bin/ar r
 ATOMICLIB = 
 AUTH_LIBS_TO_BUILD =  basic/libbasic.la digest/libdigest.la negotiate/libnegotiate.la ntlm/libntlm.la
 AUTH_MODULES =  basic digest negotiate ntlm
-AUTOCONF = ${SHELL} '/home/lior/salsa2squidNew/cfgaux/missing' autoconf
-AUTOHEADER = ${SHELL} '/home/lior/salsa2squidNew/cfgaux/missing' autoheader
-AUTOMAKE = ${SHELL} '/home/lior/salsa2squidNew/cfgaux/missing' automake-1.16
+AUTOCONF = ${SHELL} '/home/lior/salsa2squid/cfgaux/missing' autoconf
+AUTOHEADER = ${SHELL} '/home/lior/salsa2squid/cfgaux/missing' autoheader
+AUTOMAKE = ${SHELL} '/home/lior/salsa2squid/cfgaux/missing' automake-1.16
 AWK = gawk
 BASIC_AUTH_HELPERS =  DB NCSA POP3 RADIUS SMB fake getpwnam
 BUILDCXX = g++ -std=c++17
@@ -574,7 +574,7 @@ LT_DLLOADERS =  libltdl/dlopen.la
 LT_DLPREOPEN = -dlpreopen libltdl/dlopen.la 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} '/home/lior/salsa2squidNew/cfgaux/missing' makeinfo
+MAKEINFO = ${SHELL} '/home/lior/salsa2squid/cfgaux/missing' makeinfo
 MANIFEST_TOOL = :
 MINGW_LIBS = 
 MKDIR = /usr/bin/mkdir
@@ -634,10 +634,10 @@ WBINFO =
 WIN32_PSAPI = 
 XTRA_LIBS = -lm -ldl
 XTRA_OBJS = 
-abs_builddir = /home/lior/salsa2squidNew/src/auth/ntlm/SMB_LM
-abs_srcdir = /home/lior/salsa2squidNew/src/auth/ntlm/SMB_LM
-abs_top_builddir = /home/lior/salsa2squidNew
-abs_top_srcdir = /home/lior/salsa2squidNew
+abs_builddir = /home/lior/salsa2squid/src/auth/ntlm/SMB_LM
+abs_srcdir = /home/lior/salsa2squid/src/auth/ntlm/SMB_LM
+abs_top_builddir = /home/lior/salsa2squid
+abs_top_srcdir = /home/lior/salsa2squid
 ac_ct_AR = 
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -667,7 +667,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/lior/salsa2squidNew/cfgaux/install-sh
+install_sh = ${SHELL} /home/lior/salsa2squid/cfgaux/install-sh
 krb5_config = no
 libdir = ${exec_prefix}/lib
 libexecdir = /lib/squid
@@ -746,9 +746,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/ntlm/SMB_LM/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/ntlm/SMB_LM/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/auth/ntlm/SMB_LM/Makefile
+	  $(AUTOMAKE) --foreign src/auth/ntlm/SMB_LM/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

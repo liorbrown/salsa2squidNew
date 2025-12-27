@@ -35,7 +35,7 @@ shouldnotlink=no
 
 # Files to dlopen/dlpreopen
 dlopen=''
-dlpreopen=' /home/lior/salsa2squidNew/libltdl/./.libs/dlopen.a'
+dlpreopen=' /home/lior/salsa2squid/libltdl/./.libs/dlopen.a'
 
 # Directory that this library needs to be installed in:
 libdir=''

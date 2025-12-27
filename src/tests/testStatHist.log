@@ -1,4 +1,0 @@
-SKIP: mem/libmem.la MemPools (not implemented).
-....
-OK (4)
-PASS tests/testStatHist (exit status: 0)

@@ -223,7 +223,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/cfgaux/compile \
 	$(top_srcdir)/cfgaux/install-sh $(top_srcdir)/cfgaux/ltmain.sh \
 	$(top_srcdir)/cfgaux/missing \
 	$(top_srcdir)/include/autoconf.h.in COPYING ChangeLog INSTALL \
-	README cfgaux/compile cfgaux/config.guess cfgaux/config.sub \
+	README.md cfgaux/compile cfgaux/config.guess cfgaux/config.sub \
 	cfgaux/depcomp cfgaux/install-sh cfgaux/ltmain.sh \
 	cfgaux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)

@@ -126,9 +126,6 @@ enum HdrType {
     FTP_PRE,                        /**< Internal header containing leading FTP control response lines */
     FTP_STATUS,                     /**< Internal header for FTP reply status */
     FTP_REASON,                     /**< Internal header for FTP reply reason */
-    
-    
-
     OTHER,                          /**< internal tag value for "unknown" headers */
     BAD_HDR,                        /**< Invalid header */    
     enumEnd_                        // internal tag for end-of-headers

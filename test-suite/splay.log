@@ -1,2 +1,0 @@
-SKIP: mem/libmem.la MemPools (not implemented).
-PASS splay (exit status: 0)

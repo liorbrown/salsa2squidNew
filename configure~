@@ -58700,9 +58700,6 @@ if test "$no_recursion" != yes; then
   # Remove --cache-file, --srcdir, and --disable-option-checking arguments
   # so they do not pile up.
   ac_sub_configure_args=
-  # Add --quiet option if used
-  test "$silent" = yes &&
-    ac_sub_configure_args="$ac_sub_configure_args --quiet"
   ac_prev=
   eval "set x $ac_configure_args"
   shift
