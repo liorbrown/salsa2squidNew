@@ -403,5 +403,5 @@ void Salsa2Proxy::addRoundRobin()
 
         // If the loop finishes without finding any online parent.
         debugs(96,4,"Salsa2: Not found any online parent");
-    }
+    }   
 }

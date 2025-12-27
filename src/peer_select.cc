@@ -614,8 +614,8 @@ PeerSelector::selectMore()
 
     // @category SALSA2
     if (Config.salsa2 && 
-        Config.npeers &&
-        request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
+        Config.npeers)
+        // && request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
 
             Salsa2Proxy salsa2(this, servers);
     else {

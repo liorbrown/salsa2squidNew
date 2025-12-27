@@ -1120,6 +1120,17 @@ clientInterpretRequestHeaders(ClientHttpRequest * http)
     if (clientHierarchical(http))
         request->flags.hierarchical = true;
 
+    // @category salsa2
+    // Check if request has X-Originally-HTTPS header with value "1"
+    String headerValue;
+    request->flags.originally_https =
+        request->header.hasNamed(SBuf("X-Originally-HTTPS"), &headerValue) &&
+                                 !headerValue.cmp("1");
+
+    debugs(96, DBG_CRITICAL, "salsa2: isOriginallyHttps (" <<
+        request->url << 
+        ") = " << request->flags.originally_https);
+
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_NOCACHE = " <<
            (request->flags.noCache ? "SET" : "NOT SET"));
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_CACHABLE = " <<

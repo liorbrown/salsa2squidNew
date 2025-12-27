@@ -1619,16 +1619,6 @@ clientProcessRequest(ConnStateData *conn, const Http1::RequestParserPointer &hp,
     // only need to go through the final body/conn setup to doCallouts().
     assert(http->request);
     HttpRequest::Pointer request = http->request;
-
-    debugs(96, DBG_CRITICAL, "salsa2: in clientProcessRequest:\n" << *request);
-    
-    // Check if request has X-Originally-HTTPS header with value "1"
-    String headerValue;
-    const bool isOriginallyHttps = 
-        request->header.hasNamed(SBuf("X-Originally-HTTPS"), &headerValue) &&
-                                 !headerValue.cmp("1");
-
-    debugs(96, DBG_CRITICAL, "salsa2: isOriginallyHttps = " << isOriginallyHttps);
         
     // temporary hack to avoid splitting this huge function with sensitive code
     const bool isFtp = !hp;

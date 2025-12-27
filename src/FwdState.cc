@@ -982,6 +982,30 @@ FwdState::secureConnectionToPeerIfNeeded(const Comm::ConnectionPointer &conn)
     assert(!request->flags.pinned);
 
     const auto p = conn->getPeer();
+    
+    debugs(96, DBG_CRITICAL, "salsa2: secureConnectionToPeerIfNeeded called for " << request->url 
+        << " originally_https=" << request->flags.originally_https 
+        << " scheme=" << request->url.getScheme() 
+        << " peer=" << (p ? p->name : "DIRECT"));
+    
+    // Fiddler workaround: For peer forwarding, keep request as HTTP and let the peer restore HTTPS
+    // For DIRECT connections, restore HTTPS now before connecting to origin
+    if (request->flags.originally_https && request->url.getScheme() == AnyP::PROTO_HTTP) {
+        if (!p) {
+            // Going DIRECT to origin - restore HTTPS now
+            request->url.setScheme(AnyP::PROTO_HTTPS, "https");
+            if (request->url.port() == 80) {
+                request->url.port(443);
+            }
+            debugs(96, DBG_CRITICAL, "salsa2: Restored HTTPS for DIRECT connection: " << request->url);
+        } else {
+            // Forwarding to peer - keep as HTTP, peer will restore HTTPS
+            debugs(96, DBG_CRITICAL, "salsa2: Keeping HTTP for peer " << p->name << ", will restore HTTPS there: " << request->url);
+        }
+    } else {
+        debugs(96, DBG_CRITICAL, "salsa2: Condition NOT met - no restoration");
+    }
+    
     const bool peerWantsTls = p && p->secure.encryptTransport;
     // userWillTlsToPeerForUs assumes CONNECT == HTTPS
     const bool userWillTlsToPeerForUs = p && p->options.originserver &&
