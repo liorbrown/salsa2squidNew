@@ -163,10 +163,6 @@ void FwdState::start(Pointer aSelf)
     // just in case; should already be initialized to false
     request->flags.pinned = false;
 
-    // @category salsa2
-    // Fiddler workaround: Restore HTTPS BEFORE peer selection so destinations get correct port
-    Salsa2Parent::restoreHttpsIfNeeded(request);
-
 #if STRICT_ORIGINAL_DST
     // Bug 3243: CVE 2009-0801
     // Bypass of browser same-origin access control in intercepted communication

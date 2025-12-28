@@ -1131,6 +1131,16 @@ clientInterpretRequestHeaders(ClientHttpRequest * http)
         request->url << 
         ") = " << request->flags.originally_https);
 
+    // Restore HTTPS immediately on nodes with no peers
+    if (request->flags.originally_https && !Config.npeers && 
+        request->url.getScheme() == AnyP::PROTO_HTTP) {
+        request->url.setScheme(AnyP::PROTO_HTTPS, "https");
+        if (request->url.port() == 80) {
+            request->url.port(443);
+        }
+        debugs(96, DBG_CRITICAL, "salsa2: Restored HTTPS early in clientInterpretRequestHeaders: " << request->url);
+    }
+
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_NOCACHE = " <<
            (request->flags.noCache ? "SET" : "NOT SET"));
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_CACHABLE = " <<
