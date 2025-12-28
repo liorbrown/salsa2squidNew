@@ -1272,6 +1272,12 @@ FwdState::dispatch()
         assert(!request->flags.sslPeek);
         request->prepForDirect();
 
+        // @category salsa2
+        // Remove custom headers when going DIRECT to origin (not to peer)
+        // These headers are only for internal Squid-to-Squid communication
+        request->header.delByName("X-Originally-HTTPS");
+        request->header.delByName("salsa2");
+
         switch (request->url.getScheme()) {
 
         case AnyP::PROTO_HTTPS:
