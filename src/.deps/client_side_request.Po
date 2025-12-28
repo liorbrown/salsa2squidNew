@@ -445,10 +445,11 @@ client_side_request.o: client_side_request.cc /usr/include/stdc-predef.h \
  ../src/FwdState.h ../src/adaptation/Initiator.h http/StateFlags.h \
  http/Stream.h HttpHdrCc.h ip/NfMarkConfig.h ip/QosConfig.h \
  ../src/ip/NfMarkConfig.h log/access_log.h Parsing.h proxyp/Header.h \
- redirect.h ../include/rfc1738.h sbuf/StringConvert.h SquidConfig.h \
+ redirect.h ../include/rfc1738.h salsa2parent.h SquidConfig.h \
  base/YesNoNone.h HttpHeaderTools.h format/Format.h HttpHeader.h \
  sbuf/forward.h store/Disk.h ../src/store/Controlled.h \
- ../src/StoreIOState.h time/gadgets.h StrList.h tools.h wordlist.h \
+ ../src/StoreIOState.h time/gadgets.h CachePeer.h icp_opcode.h \
+ security/PeerOptions.h sbuf/StringConvert.h StrList.h tools.h wordlist.h \
  globals.h sbuf/List.h adaptation/AccessCheck.h \
  ../src/adaptation/ServiceFilter.h adaptation/Answer.h \
  adaptation/Iterator.h ../src/adaptation/Initiate.h \
@@ -1238,7 +1239,7 @@ Parsing.h:
 proxyp/Header.h:
 redirect.h:
 ../include/rfc1738.h:
-sbuf/StringConvert.h:
+salsa2parent.h:
 SquidConfig.h:
 base/YesNoNone.h:
 HttpHeaderTools.h:
@@ -1249,6 +1250,10 @@ store/Disk.h:
 ../src/store/Controlled.h:
 ../src/StoreIOState.h:
 time/gadgets.h:
+CachePeer.h:
+icp_opcode.h:
+security/PeerOptions.h:
+sbuf/StringConvert.h:
 StrList.h:
 tools.h:
 wordlist.h:

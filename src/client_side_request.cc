@@ -51,6 +51,7 @@
 #include "proxyp/Header.h"
 #include "redirect.h"
 #include "rfc1738.h"
+#include "salsa2parent.h"
 #include "sbuf/StringConvert.h"
 #include "SquidConfig.h"
 #include "Store.h"
@@ -1131,15 +1132,8 @@ clientInterpretRequestHeaders(ClientHttpRequest * http)
         request->url << 
         ") = " << request->flags.originally_https);
 
-    // Restore HTTPS immediately on nodes with no peers
-    if (request->flags.originally_https && !Config.npeers && 
-        request->url.getScheme() == AnyP::PROTO_HTTP) {
-        request->url.setScheme(AnyP::PROTO_HTTPS, "https");
-        if (request->url.port() == 80) {
-            request->url.port(443);
-        }
-        debugs(96, DBG_CRITICAL, "salsa2: Restored HTTPS early in clientInterpretRequestHeaders: " << request->url);
-    }
+    // Restore HTTPS immediately on nodes with no peers (before peer selection)
+    Salsa2Parent::restoreHttpsIfNeeded(request);
 
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_NOCACHE = " <<
            (request->flags.noCache ? "SET" : "NOT SET"));
