@@ -445,7 +445,8 @@ client_side_reply.o: client_side_reply.cc /usr/include/stdc-predef.h \
  base/YesNoNone.h helper/ChildConfig.h store/Disk.h \
  ../src/store/Controlled.h ../src/StoreIOState.h time/gadgets.h \
  SquidMath.h base/TypeTraits.h StrList.h tools.h salsa2parent.h \
- PeerDigest.h StatCounters.h base/ByteCounter.h StatHist.h
+ CachePeer.h security/PeerOptions.h PeerDigest.h StatCounters.h \
+ base/ByteCounter.h StatHist.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1231,6 +1232,8 @@ base/TypeTraits.h:
 StrList.h:
 tools.h:
 salsa2parent.h:
+CachePeer.h:
+security/PeerOptions.h:
 PeerDigest.h:
 StatCounters.h:
 base/ByteCounter.h:

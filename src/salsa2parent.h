@@ -2,6 +2,7 @@
 #include "squid.h"
 #include "SquidConfig.h"
 #include "HttpRequest.h"
+#include "CachePeer.h"
 
 #define DELTA_V (0.5)
 #define DELTA_PI (0.25)
@@ -95,6 +96,10 @@ class Salsa2Parent{
 
         /// @brief Called when this server shutdown 
         static void free(){if (instance) delete instance;}
+
+        /// @brief Fiddler workaround: Restore HTTPS scheme for originally-HTTPS requests
+        /// @param request The request to potentially restore
+        static void restoreHttpsIfNeeded(HttpRequest* request);
 
         /// @brief Parse from request header, data for salsa2
         /// @param request The request to get the data from

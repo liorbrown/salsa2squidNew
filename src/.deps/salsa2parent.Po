@@ -412,7 +412,7 @@ salsa2parent.o: salsa2parent.cc /usr/include/stdc-predef.h salsa2parent.h \
  ../src/helper/forward.h adaptation/History.h \
  ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
  ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
- eui/Eui48.h eui/Eui64.h
+ eui/Eui48.h eui/Eui64.h CachePeer.h icp_opcode.h security/PeerOptions.h
 /usr/include/stdc-predef.h:
 salsa2parent.h:
 /usr/include/c++/13/cstddef:
@@ -1084,3 +1084,6 @@ adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+CachePeer.h:
+icp_opcode.h:
+security/PeerOptions.h:

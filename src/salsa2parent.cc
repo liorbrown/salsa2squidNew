@@ -201,6 +201,31 @@ void Salsa2Parent::newReq(HttpRequest::Pointer request)
     }
 }
 
+void
+Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request)
+{
+    // Fiddler workaround: Restore HTTPS scheme for originally-HTTPS requests
+    // Only restore if this Squid has NO peers (i.e., it goes DIRECT to origin)
+    debugs(96, DBG_CRITICAL, "salsa2: restoreHttpsIfNeeded for " << request->url 
+        << " originally_https=" << request->flags.originally_https 
+        << " scheme=" << request->url.getScheme() 
+        << " npeers=" << Config.npeers);
+    
+    if (request->flags.originally_https && request->url.getScheme() == AnyP::PROTO_HTTP) {
+        if (!Config.npeers) {
+            // This Squid has no peers - going DIRECT to origin, restore HTTPS now
+            request->url.setScheme(AnyP::PROTO_HTTPS, "https");
+            if (request->url.port() == 80) {
+                request->url.port(443);
+            }
+            debugs(96, DBG_CRITICAL, "salsa2: Restored HTTPS for DIRECT connection: " << request->url);
+        } else {
+            // This Squid has peers - keep as HTTP, peers will restore HTTPS
+            debugs(96, DBG_CRITICAL, "salsa2: Keeping HTTP (forwarding to peers): " << request->url);
+        }
+    }
+}
+
 #ifdef SALSA_DEBUG
 
 std::ostream& operator<<(std::ostream& stream, HttpRequest &request)

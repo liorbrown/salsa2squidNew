@@ -161,8 +161,8 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/x86_64-linux-gnu/sys/vfs.h \
  /usr/include/x86_64-linux-gnu/sys/statfs.h \
  /usr/include/x86_64-linux-gnu/bits/statfs.h ../compat/debug.h \
- ../compat/valgrind.h AccessLogEntry.h anyp/PortCfg.h \
- ../src/anyp/forward.h ../src/base/RefCount.h ../src/base/Lock.h \
+ ../compat/valgrind.h salsa2parent.h /usr/include/c++/13/cstddef \
+ SquidConfig.h acl/forward.h ../src/base/RefCount.h ../src/base/Lock.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/c++/13/ostream /usr/include/c++/13/ios \
  /usr/include/c++/13/iosfwd /usr/include/c++/13/bits/stringfwd.h \
@@ -234,7 +234,7 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cerrno \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
+ /usr/include/c++/13/bits/memory_resource.h \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/locale_classes.tcc \
@@ -251,37 +251,20 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc ../src/anyp/ProtocolVersion.h \
- ../src/anyp/ProtocolType.h ../src/anyp/TrafficMode.h \
- ../src/base/CodeContext.h ../src/base/InstanceId.h \
- ../src/base/Stopwatch.h /usr/include/c++/13/chrono \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/limits /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h ../src/comm/Connection.h \
- ../src/comm/forward.h /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc ../src/defines.h ../src/eui/Eui48.h \
- /usr/include/c++/13/cstring ../src/eui/Eui64.h ../src/hier_code.h \
- ../src/ip/Address.h ../src/ip/forward.h /usr/include/netinet/ip.h \
- /usr/include/netdb.h /usr/include/rpc/netdb.h \
- /usr/include/x86_64-linux-gnu/bits/netdb.h ../src/mem/forward.h \
- ../src/mem/AllocatorProxy.h ../src/time/gadgets.h ../src/comm/Tcp.h \
- ../src/sbuf/SBuf.h ../src/base/TextException.h ../src/base/Assure.h \
- ../src/base/Here.h ../src/debug/Stream.h /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iomanip \
- /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/c++/13/bits/istream.tcc base/RefCount.h base/YesNoNone.h \
+ ../src/base/TextException.h ../src/base/Assure.h ../src/base/Here.h \
+ ../src/debug/Stream.h ../src/mem/AllocatorProxy.h \
+ /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
+ /usr/include/c++/13/iomanip /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h /usr/include/c++/13/ctime \
  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
  /usr/include/c++/13/bits/locale_facets_nonio.tcc \
  /usr/include/c++/13/bits/locale_conv.h \
- /usr/include/c++/13/bits/quoted_string.h ../src/globals.h \
- ../src/CacheDigest.h ../src/mem/forward.h ../src/store_key_md5.h \
- ../include/hash.h ../src/http/forward.h ../src/http/one/forward.h \
- ../src/parser/forward.h ../src/sbuf/forward.h \
+ /usr/include/c++/13/bits/quoted_string.h helper/ChildConfig.h \
+ HttpHeaderTools.h format/Format.h ../src/ConfigParser.h \
+ ../src/acl/forward.h ../src/base/forward.h ../src/sbuf/forward.h \
  /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
@@ -290,7 +273,11 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/array \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
  /usr/include/c++/13/compare /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
@@ -298,19 +285,7 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/list \
  /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/allocated_ptr.h \
- /usr/include/c++/13/bits/list.tcc ../src/store/forward.h \
- ../src/defines.h ../src/IoStats.h ../include/rfc2181.h \
- ../src/sbuf/SBuf.h ../src/sbuf/MemBlob.h ../src/sbuf/Stats.h \
- /usr/include/c++/13/climits \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
- /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
- ../src/security/ServerOptions.h ../src/security/PeerOptions.h \
- ../src/base/YesNoNone.h ../src/ConfigParser.h ../src/acl/forward.h \
- ../src/base/forward.h ../src/sbuf/forward.h ../src/SquidString.h \
+ /usr/include/c++/13/bits/list.tcc ../src/SquidString.h \
  ../src/base/TextException.h ../src/debug/Stream.h \
  /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
@@ -327,10 +302,33 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/c++/13/deque /usr/include/c++/13/bits/stl_deque.h \
  /usr/include/c++/13/bits/deque.tcc /usr/include/c++/13/bits/stl_queue.h \
  /usr/include/c++/13/stack /usr/include/c++/13/bits/stl_stack.h \
- ../src/security/forward.h ../src/base/CbDataList.h ../src/cbdata.h \
- ../src/base/forward.h ../src/security/Context.h ../compat/openssl.h \
+ ../src/sbuf/SBuf.h ../src/base/InstanceId.h ../src/globals.h \
+ ../src/CacheDigest.h ../src/mem/forward.h ../src/store_key_md5.h \
+ ../include/hash.h ../src/http/forward.h ../src/http/one/forward.h \
+ ../src/parser/forward.h ../src/sbuf/forward.h ../src/store/forward.h \
+ ../src/defines.h ../src/IoStats.h ../include/rfc2181.h \
+ ../src/sbuf/SBuf.h ../src/sbuf/MemBlob.h ../src/mem/forward.h \
+ ../src/sbuf/Stats.h /usr/include/c++/13/climits \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
+ HttpHeader.h anyp/ProtocolVersion.h ../src/anyp/ProtocolType.h \
+ base/LookupTable.h ../src/sbuf/Algorithms.h \
  /usr/include/c++/13/algorithm \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
+ /usr/include/c++/13/pstl/glue_numeric_defs.h http/RegisteredHeaders.h \
+ ../src/base/LookupTable.h HttpHeaderMask.h mem/PoolingAllocator.h \
+ sbuf/forward.h SquidString.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h ip/Address.h ../src/ip/forward.h \
+ /usr/include/netinet/ip.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/x86_64-linux-gnu/bits/netdb.h Notes.h mem/forward.h \
+ security/forward.h ../src/base/CbDataList.h ../src/cbdata.h \
+ ../src/base/forward.h ../src/security/Context.h ../compat/openssl.h \
  /usr/include/openssl/asn1.h /usr/include/openssl/macros.h \
  /usr/include/x86_64-linux-gnu/openssl/opensslconf.h \
  /usr/include/x86_64-linux-gnu/openssl/configuration.h \
@@ -365,89 +363,95 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  /usr/include/openssl/ssl2.h /usr/include/openssl/ssl3.h \
  /usr/include/openssl/tls1.h /usr/include/openssl/dtls1.h \
  /usr/include/openssl/srtp.h ../src/security/Session.h \
- ../src/base/HardFun.h ../src/security/LockingPointer.h \
+ ../src/base/HardFun.h ../src/comm/forward.h ../src/security/forward.h \
+ ../src/security/LockingPointer.h /usr/include/c++/13/limits \
  /usr/include/openssl/err.h /usr/include/c++/13/unordered_set \
- /usr/include/c++/13/bits/unordered_set.h ../src/security/KeyData.h \
- base/CodeContext.h comm/Connection.h error/Error.h ../src/error/Detail.h \
- ../src/error/forward.h ../src/http/forward.h HierarchyLogEntry.h enums.h \
- hier_code.h http/StatusCode.h lookup_t.h PingData.h \
- mem/PoolingAllocator.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h http/ProtocolVersion.h \
- http/RequestMethod.h ../src/http/MethodType.h HttpHeader.h \
- anyp/ProtocolVersion.h base/LookupTable.h ../src/sbuf/Algorithms.h \
- /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
- /usr/include/c++/13/pstl/glue_numeric_defs.h http/RegisteredHeaders.h \
- ../src/base/LookupTable.h HttpHeaderMask.h sbuf/forward.h SquidString.h \
- icp_opcode.h ip/Address.h LogTags.h CollapsingHistory.h MessageSizes.h \
- Notes.h acl/forward.h base/RefCount.h format/Format.h mem/forward.h \
- proxyp/forward.h sbuf/SBuf.h adaptation/icap/Elements.h \
- ../src/adaptation/Elements.h ssl/gadgets.h ../src/ssl/crtd_message.h \
+ /usr/include/c++/13/bits/unordered_set.h ssl/support.h \
+ ../src/ssl/gadgets.h ../src/ssl/crtd_message.h \
  /usr/include/openssl/txt_db.h /usr/include/openssl/x509v3.h \
- /usr/include/openssl/x509v3err.h ssl/support.h ../src/ssl/gadgets.h \
- /usr/include/openssl/engine.h /usr/include/openssl/rand.h \
- /usr/include/openssl/randerr.h /usr/include/openssl/ui.h \
- /usr/include/openssl/uierr.h /usr/include/openssl/engineerr.h \
- acl/Address.h ../src/acl/Acl.h ../src/acl/forward.h ../src/acl/Options.h \
- ../src/dlink.h acl/FilledChecklist.h ../src/AccessLogEntry.h \
- ../src/acl/Checklist.h ../src/acl/InnerNode.h ../src/base/CbcPointer.h \
- ../src/auth/UserRequest.h ../src/auth/AuthAclState.h \
- ../src/auth/Scheme.h ../src/auth/forward.h ../src/auth/User.h \
- ../src/auth/CredentialState.h ../src/auth/Type.h ../src/Notes.h \
- ../src/helper/forward.h ../src/HttpHeader.h ../src/security/CertError.h \
- acl/Gadgets.h base/AsyncCallbacks.h ../src/base/AsyncCall.h \
- ../src/event.h ../src/AsyncEngine.h ../src/base/Packable.h \
- ../src/base/RefCount.h ../src/base/AsyncJobCalls.h \
- ../src/base/AsyncJob.h ../src/debug/Messages.h ../src/base/TypeTraits.h \
- base/AsyncCbdataCalls.h CacheManager.h anyp/forward.h comm/forward.h \
- log/forward.h mgr/Action.h ../src/ipc/forward.h ../src/mgr/forward.h \
- mgr/ActionProfile.h ../src/mgr/ActionCreator.h mgr/Command.h \
- ../src/mgr/ActionParams.h ../src/http/RequestMethod.h \
- ../src/mgr/QueryParams.h ../src/mgr/QueryParam.h ../src/SquidString.h \
- /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- ../src/RequestFlags.h ../src/base/SupportOrVeto.h \
- /usr/include/c++/13/optional mgr/forward.h CachePeer.h base/CbcPointer.h \
- security/PeerOptions.h client_side.h acl/ChecklistFiller.h \
- base/RunnersRegistry.h clientStreamForward.h comm.h comm/IoCallback.h \
- ../src/comm/Flag.h CommCalls.h base/AsyncCall.h base/AsyncJobCalls.h \
- comm/Flag.h MasterXaction.h base/InstanceId.h base/Lock.h \
- XactionInitiator.h StoreIOBuffer.h base/Range.h MemBuf.h base/Packable.h \
- cbdata.h helper/forward.h http/forward.h HttpControlMsg.h HttpReply.h \
- http/StatusLine.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
- HttpBody.h HttpRequest.h anyp/Uri.h ../src/anyp/UriScheme.h \
- dns/forward.h http/Message.h ../src/BodyPipe.h ../src/base/AsyncJob.h \
- ../src/base/CbcPointer.h ../src/MemBuf.h ../src/enums.h RequestFlags.h \
- auth/UserRequest.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h ../src/adaptation/forward.h \
- adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
- ipc/FdNotes.h servers/Server.h ../src/comm/Write.h ../src/CommCalls.h \
- ../src/log/forward.h ../src/Pipeline.h ../src/base/RefCount.h \
+ /usr/include/openssl/x509v3err.h /usr/include/openssl/engine.h \
+ /usr/include/openssl/rand.h /usr/include/openssl/randerr.h \
+ /usr/include/openssl/ui.h /usr/include/openssl/uierr.h \
+ /usr/include/openssl/engineerr.h store/Disk.h ../src/store/Controlled.h \
+ ../src/store/Storage.h ../src/http/RequestMethod.h ../src/http/forward.h \
+ ../src/http/MethodType.h ../src/store/forward.h ../src/store_key_md5.h \
+ ../src/StoreIOState.h ../src/base/RefCount.h ../src/cbdata.h \
+ store/forward.h time/gadgets.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/bits/parse_numbers.h HttpRequest.h anyp/Uri.h \
+ ../src/anyp/UriScheme.h ../src/ip/Address.h base/CbcPointer.h \
+ dns/forward.h error/Error.h ../src/error/Detail.h ../src/error/forward.h \
+ HierarchyLogEntry.h comm/Connection.h ../src/base/CodeContext.h \
+ ../src/base/Stopwatch.h ../src/defines.h ../src/eui/Eui48.h \
+ /usr/include/c++/13/cstring ../src/eui/Eui64.h ../src/hier_code.h \
+ ../src/time/gadgets.h enums.h hier_code.h http/StatusCode.h lookup_t.h \
+ PingData.h http/Message.h ../src/BodyPipe.h ../src/base/AsyncJob.h \
+ ../src/base/AsyncCall.h ../src/event.h ../src/AsyncEngine.h \
+ ../src/base/Packable.h ../src/base/RefCount.h ../src/base/CbcPointer.h \
+ ../src/MemBuf.h ../src/enums.h ../src/http/ProtocolVersion.h \
+ ../src/anyp/ProtocolVersion.h ../src/http/StatusCode.h \
+ ../src/HttpHeader.h http/RequestMethod.h MasterXaction.h anyp/forward.h \
+ anyp/PortCfg.h ../src/anyp/forward.h ../src/anyp/TrafficMode.h \
+ ../src/comm/Connection.h ../src/comm/Tcp.h \
+ ../src/security/ServerOptions.h ../src/security/PeerOptions.h \
+ ../src/base/YesNoNone.h ../src/security/KeyData.h base/InstanceId.h \
+ base/Lock.h comm/forward.h XactionInitiator.h RequestFlags.h \
+ base/SupportOrVeto.h /usr/include/c++/13/optional auth/UserRequest.h \
+ ../src/AccessLogEntry.h ../src/anyp/PortCfg.h ../src/base/CodeContext.h \
+ ../src/comm/Connection.h ../src/error/Error.h ../src/HierarchyLogEntry.h \
+ ../src/http/ProtocolVersion.h ../src/http/RequestMethod.h \
+ ../src/HttpHeader.h ../src/icp_opcode.h ../src/ip/Address.h \
+ ../src/LogTags.h ../src/CollapsingHistory.h ../src/MessageSizes.h \
+ ../src/Notes.h ../src/proxyp/forward.h ../src/adaptation/icap/Elements.h \
+ ../src/adaptation/Elements.h ../src/ssl/gadgets.h ../src/ssl/support.h \
+ ../src/auth/AuthAclState.h ../src/auth/Scheme.h ../src/auth/forward.h \
+ ../src/auth/User.h ../src/auth/CredentialState.h ../src/auth/Type.h \
+ ../src/base/CbcPointer.h ../src/dlink.h ../src/Notes.h \
+ ../src/helper/forward.h adaptation/History.h \
+ ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
+ ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
+ eui/Eui48.h eui/Eui64.h CachePeer.h icp_opcode.h security/PeerOptions.h \
+ AccessLogEntry.h acl/Address.h ../src/acl/Acl.h ../src/acl/forward.h \
+ ../src/acl/Options.h acl/FilledChecklist.h ../src/acl/Checklist.h \
+ ../src/acl/InnerNode.h ../src/auth/UserRequest.h \
+ ../src/security/CertError.h acl/Gadgets.h base/AsyncCallbacks.h \
+ ../src/base/AsyncJobCalls.h ../src/base/AsyncJob.h \
+ ../src/debug/Messages.h ../src/base/TypeTraits.h base/AsyncCbdataCalls.h \
+ CacheManager.h log/forward.h mgr/Action.h ../src/ipc/forward.h \
+ ../src/mgr/forward.h mgr/ActionProfile.h ../src/mgr/ActionCreator.h \
+ mgr/Command.h ../src/mgr/ActionParams.h ../src/mgr/QueryParams.h \
+ ../src/mgr/QueryParam.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h ../src/RequestFlags.h \
+ mgr/forward.h client_side.h acl/ChecklistFiller.h base/RunnersRegistry.h \
+ clientStreamForward.h comm.h comm/IoCallback.h ../src/comm/Flag.h \
+ CommCalls.h base/AsyncCall.h base/AsyncJobCalls.h comm/Flag.h \
+ StoreIOBuffer.h base/Range.h MemBuf.h helper/forward.h http/forward.h \
+ HttpControlMsg.h HttpReply.h http/StatusLine.h HttpBody.h sbuf/SBuf.h \
+ ipc/FdNotes.h proxyp/forward.h servers/Server.h ../src/comm/Write.h \
+ ../src/CommCalls.h ../src/log/forward.h ../src/Pipeline.h \
  ../src/servers/forward.h security/KeyLogger.h \
- ../src/security/CommunicationSecrets.h security/forward.h \
- security/Handshake.h ../src/parser/BinaryTokenizer.h clients/forward.h \
- clients/HttpTunneler.h ../src/base/AsyncCallbacks.h \
- ../src/clients/forward.h ../src/clients/HttpTunnelerAnswer.h \
- comm/ConnOpener.h comm/Loops.h errorpage.h error/Detail.h \
- error/forward.h event.h fd.h fde.h base/forward.h defines.h ip/forward.h \
- typedefs.h anyp/ProtocolType.h FwdState.h base/JobWait.h \
- PeerSelectState.h acl/Checklist.h ipcache.h ResolvedPeers.h globals.h \
- HappyConnOpener.h http.h clients/Client.h ../src/FwdState.h \
- ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
- http/Stream.h icmp/net_db.h internal.h ip/Intercept.h ip/NfMarkConfig.h \
- ip/QosConfig.h ../src/ip/NfMarkConfig.h ip/tools.h MemObject.h \
- base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h dlink.h \
- RemovalPolicy.h stmem.h ../include/splay.h ../src/fatal.h \
- store/forward.h StoreIOState.h mgr/Registration.h neighbors.h ICP.h \
- store_key_md5.h StoreClient.h store/ParsingBuffer.h pconn.h \
- /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
+ ../src/security/CommunicationSecrets.h security/Handshake.h \
+ ../src/parser/BinaryTokenizer.h clients/forward.h clients/HttpTunneler.h \
+ ../src/base/AsyncCallbacks.h ../src/clients/forward.h \
+ ../src/clients/HttpTunnelerAnswer.h comm/ConnOpener.h comm/Loops.h \
+ errorpage.h cbdata.h error/Detail.h error/forward.h event.h fd.h fde.h \
+ base/CodeContext.h base/forward.h defines.h ip/forward.h typedefs.h \
+ anyp/ProtocolType.h FwdState.h base/JobWait.h PeerSelectState.h \
+ acl/Checklist.h ipcache.h ResolvedPeers.h globals.h HappyConnOpener.h \
+ http.h clients/Client.h ../src/FwdState.h ../src/StoreIOBuffer.h \
+ ../src/adaptation/Initiator.h http/StateFlags.h http/Stream.h \
+ icmp/net_db.h internal.h ip/Intercept.h ip/NfMarkConfig.h ip/QosConfig.h \
+ ../src/ip/NfMarkConfig.h ip/tools.h MemObject.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h dlink.h RemovalPolicy.h stmem.h \
+ ../include/splay.h ../src/fatal.h StoreIOState.h mgr/Registration.h \
+ neighbors.h ICP.h LogTags.h store_key_md5.h StoreClient.h \
+ store/ParsingBuffer.h pconn.h /usr/include/c++/13/set \
+ /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h PeerPoolMgr.h base/AsyncJob.h \
  security/BlindPeerConnector.h ../src/security/PeerConnector.h \
  ../src/acl/ChecklistFiller.h ../src/base/JobWait.h \
  ../src/security/EncryptorAnswer.h ../src/security/KeyLogger.h \
- ../src/ssl/support.h SquidConfig.h base/YesNoNone.h helper/ChildConfig.h \
- HttpHeaderTools.h store/Disk.h ../src/store/Controlled.h \
- ../src/store/Storage.h ../src/store/forward.h ../src/store_key_md5.h \
- ../src/StoreIOState.h time/gadgets.h ssl/PeekingPeerConnector.h Store.h \
+ ../src/ssl/support.h ssl/PeekingPeerConnector.h Store.h base/Packable.h \
  store/Controller.h StoreStats.h urn.h whois.h \
  ssl/cert_validate_message.h ../src/helper/ResultCode.h ssl/Config.h \
  ../src/helper/ChildConfig.h ssl/helper.h ../src/base/ClpMap.h \
@@ -669,9 +673,10 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
 /usr/include/x86_64-linux-gnu/bits/statfs.h:
 ../compat/debug.h:
 ../compat/valgrind.h:
-AccessLogEntry.h:
-anyp/PortCfg.h:
-../src/anyp/forward.h:
+salsa2parent.h:
+/usr/include/c++/13/cstddef:
+SquidConfig.h:
+acl/forward.h:
 ../src/base/RefCount.h:
 ../src/base/Lock.h:
 /usr/include/c++/13/iostream:
@@ -765,7 +770,6 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/charconv.h:
 /usr/include/c++/13/bits/basic_string.tcc:
 /usr/include/c++/13/bits/memory_resource.h:
-/usr/include/c++/13/cstddef:
 /usr/include/c++/13/bits/uses_allocator.h:
 /usr/include/c++/13/bits/uses_allocator_args.h:
 /usr/include/c++/13/tuple:
@@ -788,50 +792,19 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/ostream.tcc:
 /usr/include/c++/13/istream:
 /usr/include/c++/13/bits/istream.tcc:
-../src/anyp/ProtocolVersion.h:
-../src/anyp/ProtocolType.h:
-../src/anyp/TrafficMode.h:
-../src/base/CodeContext.h:
-../src/base/InstanceId.h:
-../src/base/Stopwatch.h:
-/usr/include/c++/13/chrono:
-/usr/include/c++/13/bits/chrono.h:
-/usr/include/c++/13/ratio:
-/usr/include/c++/13/limits:
-/usr/include/c++/13/ctime:
-/usr/include/c++/13/bits/parse_numbers.h:
-../src/comm/Connection.h:
-../src/comm/forward.h:
-/usr/include/c++/13/vector:
-/usr/include/c++/13/bits/stl_uninitialized.h:
-/usr/include/c++/13/bits/stl_vector.h:
-/usr/include/c++/13/bits/stl_bvector.h:
-/usr/include/c++/13/bits/vector.tcc:
-../src/defines.h:
-../src/eui/Eui48.h:
-/usr/include/c++/13/cstring:
-../src/eui/Eui64.h:
-../src/hier_code.h:
-../src/ip/Address.h:
-../src/ip/forward.h:
-/usr/include/netinet/ip.h:
-/usr/include/netdb.h:
-/usr/include/rpc/netdb.h:
-/usr/include/x86_64-linux-gnu/bits/netdb.h:
-../src/mem/forward.h:
-../src/mem/AllocatorProxy.h:
-../src/time/gadgets.h:
-../src/comm/Tcp.h:
-../src/sbuf/SBuf.h:
+base/RefCount.h:
+base/YesNoNone.h:
 ../src/base/TextException.h:
 ../src/base/Assure.h:
 ../src/base/Here.h:
 ../src/debug/Stream.h:
+../src/mem/AllocatorProxy.h:
 /usr/include/c++/13/sstream:
 /usr/include/c++/13/bits/sstream.tcc:
 /usr/include/c++/13/iomanip:
 /usr/include/c++/13/locale:
 /usr/include/c++/13/bits/locale_facets_nonio.h:
+/usr/include/c++/13/ctime:
 /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
 /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h:
 /usr/include/libintl.h:
@@ -839,14 +812,12 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/locale_facets_nonio.tcc:
 /usr/include/c++/13/bits/locale_conv.h:
 /usr/include/c++/13/bits/quoted_string.h:
-../src/globals.h:
-../src/CacheDigest.h:
-../src/mem/forward.h:
-../src/store_key_md5.h:
-../include/hash.h:
-../src/http/forward.h:
-../src/http/one/forward.h:
-../src/parser/forward.h:
+helper/ChildConfig.h:
+HttpHeaderTools.h:
+format/Format.h:
+../src/ConfigParser.h:
+../src/acl/forward.h:
+../src/base/forward.h:
 ../src/sbuf/forward.h:
 /usr/include/c++/13/functional:
 /usr/include/c++/13/bits/std_function.h:
@@ -858,6 +829,11 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/enable_special_members.h:
 /usr/include/c++/13/bits/node_handle.h:
 /usr/include/c++/13/bits/erase_if.h:
+/usr/include/c++/13/vector:
+/usr/include/c++/13/bits/stl_uninitialized.h:
+/usr/include/c++/13/bits/stl_vector.h:
+/usr/include/c++/13/bits/stl_bvector.h:
+/usr/include/c++/13/bits/vector.tcc:
 /usr/include/c++/13/array:
 /usr/include/c++/13/compare:
 /usr/include/c++/13/bits/stl_algo.h:
@@ -869,29 +845,6 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/stl_list.h:
 /usr/include/c++/13/bits/allocated_ptr.h:
 /usr/include/c++/13/bits/list.tcc:
-../src/store/forward.h:
-../src/defines.h:
-../src/IoStats.h:
-../include/rfc2181.h:
-../src/sbuf/SBuf.h:
-../src/sbuf/MemBlob.h:
-../src/sbuf/Stats.h:
-/usr/include/c++/13/climits:
-/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
-/usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
-/usr/include/limits.h:
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
-/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-/usr/include/c++/13/iterator:
-/usr/include/c++/13/bits/stream_iterator.h:
-../src/security/ServerOptions.h:
-../src/security/PeerOptions.h:
-../src/base/YesNoNone.h:
-../src/ConfigParser.h:
-../src/acl/forward.h:
-../src/base/forward.h:
-../src/sbuf/forward.h:
 ../src/SquidString.h:
 ../src/base/TextException.h:
 ../src/debug/Stream.h:
@@ -915,14 +868,68 @@ anyp/PortCfg.h:
 /usr/include/c++/13/bits/stl_queue.h:
 /usr/include/c++/13/stack:
 /usr/include/c++/13/bits/stl_stack.h:
-../src/security/forward.h:
+../src/sbuf/SBuf.h:
+../src/base/InstanceId.h:
+../src/globals.h:
+../src/CacheDigest.h:
+../src/mem/forward.h:
+../src/store_key_md5.h:
+../include/hash.h:
+../src/http/forward.h:
+../src/http/one/forward.h:
+../src/parser/forward.h:
+../src/sbuf/forward.h:
+../src/store/forward.h:
+../src/defines.h:
+../src/IoStats.h:
+../include/rfc2181.h:
+../src/sbuf/SBuf.h:
+../src/sbuf/MemBlob.h:
+../src/mem/forward.h:
+../src/sbuf/Stats.h:
+/usr/include/c++/13/climits:
+/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
+/usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
+/usr/include/limits.h:
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+/usr/include/c++/13/iterator:
+/usr/include/c++/13/bits/stream_iterator.h:
+HttpHeader.h:
+anyp/ProtocolVersion.h:
+../src/anyp/ProtocolType.h:
+base/LookupTable.h:
+../src/sbuf/Algorithms.h:
+/usr/include/c++/13/algorithm:
+/usr/include/c++/13/pstl/glue_algorithm_defs.h:
+/usr/include/c++/13/numeric:
+/usr/include/c++/13/bits/stl_numeric.h:
+/usr/include/c++/13/pstl/glue_numeric_defs.h:
+http/RegisteredHeaders.h:
+../src/base/LookupTable.h:
+HttpHeaderMask.h:
+mem/PoolingAllocator.h:
+sbuf/forward.h:
+SquidString.h:
+/usr/include/c++/13/map:
+/usr/include/c++/13/bits/stl_tree.h:
+/usr/include/c++/13/bits/stl_map.h:
+/usr/include/c++/13/bits/stl_multimap.h:
+ip/Address.h:
+../src/ip/forward.h:
+/usr/include/netinet/ip.h:
+/usr/include/netdb.h:
+/usr/include/rpc/netdb.h:
+/usr/include/x86_64-linux-gnu/bits/netdb.h:
+Notes.h:
+mem/forward.h:
+security/forward.h:
 ../src/base/CbDataList.h:
 ../src/cbdata.h:
 ../src/base/forward.h:
 ../src/security/Context.h:
 ../compat/openssl.h:
-/usr/include/c++/13/algorithm:
-/usr/include/c++/13/pstl/glue_algorithm_defs.h:
 /usr/include/openssl/asn1.h:
 /usr/include/openssl/macros.h:
 /usr/include/x86_64-linux-gnu/openssl/opensslconf.h:
@@ -990,106 +997,160 @@ anyp/PortCfg.h:
 /usr/include/openssl/srtp.h:
 ../src/security/Session.h:
 ../src/base/HardFun.h:
+../src/comm/forward.h:
+../src/security/forward.h:
 ../src/security/LockingPointer.h:
+/usr/include/c++/13/limits:
 /usr/include/openssl/err.h:
 /usr/include/c++/13/unordered_set:
 /usr/include/c++/13/bits/unordered_set.h:
-../src/security/KeyData.h:
-base/CodeContext.h:
-comm/Connection.h:
-error/Error.h:
-../src/error/Detail.h:
-../src/error/forward.h:
-../src/http/forward.h:
-HierarchyLogEntry.h:
-enums.h:
-hier_code.h:
-http/StatusCode.h:
-lookup_t.h:
-PingData.h:
-mem/PoolingAllocator.h:
-/usr/include/c++/13/map:
-/usr/include/c++/13/bits/stl_tree.h:
-/usr/include/c++/13/bits/stl_map.h:
-/usr/include/c++/13/bits/stl_multimap.h:
-http/ProtocolVersion.h:
-http/RequestMethod.h:
-../src/http/MethodType.h:
-HttpHeader.h:
-anyp/ProtocolVersion.h:
-base/LookupTable.h:
-../src/sbuf/Algorithms.h:
-/usr/include/c++/13/numeric:
-/usr/include/c++/13/bits/stl_numeric.h:
-/usr/include/c++/13/pstl/glue_numeric_defs.h:
-http/RegisteredHeaders.h:
-../src/base/LookupTable.h:
-HttpHeaderMask.h:
-sbuf/forward.h:
-SquidString.h:
-icp_opcode.h:
-ip/Address.h:
-LogTags.h:
-CollapsingHistory.h:
-MessageSizes.h:
-Notes.h:
-acl/forward.h:
-base/RefCount.h:
-format/Format.h:
-mem/forward.h:
-proxyp/forward.h:
-sbuf/SBuf.h:
-adaptation/icap/Elements.h:
-../src/adaptation/Elements.h:
-ssl/gadgets.h:
+ssl/support.h:
+../src/ssl/gadgets.h:
 ../src/ssl/crtd_message.h:
 /usr/include/openssl/txt_db.h:
 /usr/include/openssl/x509v3.h:
 /usr/include/openssl/x509v3err.h:
-ssl/support.h:
-../src/ssl/gadgets.h:
 /usr/include/openssl/engine.h:
 /usr/include/openssl/rand.h:
 /usr/include/openssl/randerr.h:
 /usr/include/openssl/ui.h:
 /usr/include/openssl/uierr.h:
 /usr/include/openssl/engineerr.h:
-acl/Address.h:
-../src/acl/Acl.h:
-../src/acl/forward.h:
-../src/acl/Options.h:
-../src/dlink.h:
-acl/FilledChecklist.h:
-../src/AccessLogEntry.h:
-../src/acl/Checklist.h:
-../src/acl/InnerNode.h:
+store/Disk.h:
+../src/store/Controlled.h:
+../src/store/Storage.h:
+../src/http/RequestMethod.h:
+../src/http/forward.h:
+../src/http/MethodType.h:
+../src/store/forward.h:
+../src/store_key_md5.h:
+../src/StoreIOState.h:
+../src/base/RefCount.h:
+../src/cbdata.h:
+store/forward.h:
+time/gadgets.h:
+/usr/include/c++/13/chrono:
+/usr/include/c++/13/bits/chrono.h:
+/usr/include/c++/13/ratio:
+/usr/include/c++/13/bits/parse_numbers.h:
+HttpRequest.h:
+anyp/Uri.h:
+../src/anyp/UriScheme.h:
+../src/ip/Address.h:
+base/CbcPointer.h:
+dns/forward.h:
+error/Error.h:
+../src/error/Detail.h:
+../src/error/forward.h:
+HierarchyLogEntry.h:
+comm/Connection.h:
+../src/base/CodeContext.h:
+../src/base/Stopwatch.h:
+../src/defines.h:
+../src/eui/Eui48.h:
+/usr/include/c++/13/cstring:
+../src/eui/Eui64.h:
+../src/hier_code.h:
+../src/time/gadgets.h:
+enums.h:
+hier_code.h:
+http/StatusCode.h:
+lookup_t.h:
+PingData.h:
+http/Message.h:
+../src/BodyPipe.h:
+../src/base/AsyncJob.h:
+../src/base/AsyncCall.h:
+../src/event.h:
+../src/AsyncEngine.h:
+../src/base/Packable.h:
+../src/base/RefCount.h:
 ../src/base/CbcPointer.h:
-../src/auth/UserRequest.h:
+../src/MemBuf.h:
+../src/enums.h:
+../src/http/ProtocolVersion.h:
+../src/anyp/ProtocolVersion.h:
+../src/http/StatusCode.h:
+../src/HttpHeader.h:
+http/RequestMethod.h:
+MasterXaction.h:
+anyp/forward.h:
+anyp/PortCfg.h:
+../src/anyp/forward.h:
+../src/anyp/TrafficMode.h:
+../src/comm/Connection.h:
+../src/comm/Tcp.h:
+../src/security/ServerOptions.h:
+../src/security/PeerOptions.h:
+../src/base/YesNoNone.h:
+../src/security/KeyData.h:
+base/InstanceId.h:
+base/Lock.h:
+comm/forward.h:
+XactionInitiator.h:
+RequestFlags.h:
+base/SupportOrVeto.h:
+/usr/include/c++/13/optional:
+auth/UserRequest.h:
+../src/AccessLogEntry.h:
+../src/anyp/PortCfg.h:
+../src/base/CodeContext.h:
+../src/comm/Connection.h:
+../src/error/Error.h:
+../src/HierarchyLogEntry.h:
+../src/http/ProtocolVersion.h:
+../src/http/RequestMethod.h:
+../src/HttpHeader.h:
+../src/icp_opcode.h:
+../src/ip/Address.h:
+../src/LogTags.h:
+../src/CollapsingHistory.h:
+../src/MessageSizes.h:
+../src/Notes.h:
+../src/proxyp/forward.h:
+../src/adaptation/icap/Elements.h:
+../src/adaptation/Elements.h:
+../src/ssl/gadgets.h:
+../src/ssl/support.h:
 ../src/auth/AuthAclState.h:
 ../src/auth/Scheme.h:
 ../src/auth/forward.h:
 ../src/auth/User.h:
 ../src/auth/CredentialState.h:
 ../src/auth/Type.h:
+../src/base/CbcPointer.h:
+../src/dlink.h:
 ../src/Notes.h:
 ../src/helper/forward.h:
-../src/HttpHeader.h:
+adaptation/History.h:
+../src/adaptation/DynamicGroupCfg.h:
+../src/SquidString.h:
+../src/adaptation/forward.h:
+adaptation/icap/History.h:
+../src/LogTags.h:
+eui/Eui48.h:
+eui/Eui64.h:
+CachePeer.h:
+icp_opcode.h:
+security/PeerOptions.h:
+AccessLogEntry.h:
+acl/Address.h:
+../src/acl/Acl.h:
+../src/acl/forward.h:
+../src/acl/Options.h:
+acl/FilledChecklist.h:
+../src/acl/Checklist.h:
+../src/acl/InnerNode.h:
+../src/auth/UserRequest.h:
 ../src/security/CertError.h:
 acl/Gadgets.h:
 base/AsyncCallbacks.h:
-../src/base/AsyncCall.h:
-../src/event.h:
-../src/AsyncEngine.h:
-../src/base/Packable.h:
-../src/base/RefCount.h:
 ../src/base/AsyncJobCalls.h:
 ../src/base/AsyncJob.h:
 ../src/debug/Messages.h:
 ../src/base/TypeTraits.h:
 base/AsyncCbdataCalls.h:
 CacheManager.h:
-anyp/forward.h:
-comm/forward.h:
 log/forward.h:
 mgr/Action.h:
 ../src/ipc/forward.h:
@@ -1098,19 +1159,12 @@ mgr/ActionProfile.h:
 ../src/mgr/ActionCreator.h:
 mgr/Command.h:
 ../src/mgr/ActionParams.h:
-../src/http/RequestMethod.h:
 ../src/mgr/QueryParams.h:
 ../src/mgr/QueryParam.h:
-../src/SquidString.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ../src/RequestFlags.h:
-../src/base/SupportOrVeto.h:
-/usr/include/c++/13/optional:
 mgr/forward.h:
-CachePeer.h:
-base/CbcPointer.h:
-security/PeerOptions.h:
 client_side.h:
 acl/ChecklistFiller.h:
 base/RunnersRegistry.h:
@@ -1122,53 +1176,26 @@ CommCalls.h:
 base/AsyncCall.h:
 base/AsyncJobCalls.h:
 comm/Flag.h:
-MasterXaction.h:
-base/InstanceId.h:
-base/Lock.h:
-XactionInitiator.h:
 StoreIOBuffer.h:
 base/Range.h:
 MemBuf.h:
-base/Packable.h:
-cbdata.h:
 helper/forward.h:
 http/forward.h:
 HttpControlMsg.h:
 HttpReply.h:
 http/StatusLine.h:
-../src/http/ProtocolVersion.h:
-../src/http/StatusCode.h:
 HttpBody.h:
-HttpRequest.h:
-anyp/Uri.h:
-../src/anyp/UriScheme.h:
-dns/forward.h:
-http/Message.h:
-../src/BodyPipe.h:
-../src/base/AsyncJob.h:
-../src/base/CbcPointer.h:
-../src/MemBuf.h:
-../src/enums.h:
-RequestFlags.h:
-auth/UserRequest.h:
-adaptation/History.h:
-../src/adaptation/DynamicGroupCfg.h:
-../src/adaptation/forward.h:
-adaptation/icap/History.h:
-../src/LogTags.h:
-eui/Eui48.h:
-eui/Eui64.h:
+sbuf/SBuf.h:
 ipc/FdNotes.h:
+proxyp/forward.h:
 servers/Server.h:
 ../src/comm/Write.h:
 ../src/CommCalls.h:
 ../src/log/forward.h:
 ../src/Pipeline.h:
-../src/base/RefCount.h:
 ../src/servers/forward.h:
 security/KeyLogger.h:
 ../src/security/CommunicationSecrets.h:
-security/forward.h:
 security/Handshake.h:
 ../src/parser/BinaryTokenizer.h:
 clients/forward.h:
@@ -1179,11 +1206,13 @@ clients/HttpTunneler.h:
 comm/ConnOpener.h:
 comm/Loops.h:
 errorpage.h:
+cbdata.h:
 error/Detail.h:
 error/forward.h:
 event.h:
 fd.h:
 fde.h:
+base/CodeContext.h:
 base/forward.h:
 defines.h:
 ip/forward.h:
@@ -1219,11 +1248,11 @@ RemovalPolicy.h:
 stmem.h:
 ../include/splay.h:
 ../src/fatal.h:
-store/forward.h:
 StoreIOState.h:
 mgr/Registration.h:
 neighbors.h:
 ICP.h:
+LogTags.h:
 store_key_md5.h:
 StoreClient.h:
 store/ParsingBuffer.h:
@@ -1240,19 +1269,9 @@ security/BlindPeerConnector.h:
 ../src/security/EncryptorAnswer.h:
 ../src/security/KeyLogger.h:
 ../src/ssl/support.h:
-SquidConfig.h:
-base/YesNoNone.h:
-helper/ChildConfig.h:
-HttpHeaderTools.h:
-store/Disk.h:
-../src/store/Controlled.h:
-../src/store/Storage.h:
-../src/store/forward.h:
-../src/store_key_md5.h:
-../src/StoreIOState.h:
-time/gadgets.h:
 ssl/PeekingPeerConnector.h:
 Store.h:
+base/Packable.h:
 store/Controller.h:
 StoreStats.h:
 urn.h:

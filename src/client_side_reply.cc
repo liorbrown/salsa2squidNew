@@ -105,7 +105,7 @@ void clientReplyContext::investigateDigest(StoreIOBuffer result)
         cblock.del_count = ntohl(cblock.del_count);
         cblock.mask_size = ntohl(cblock.mask_size);
 
-        debugs(96, DBG_CRITICAL, "salsa2: cblock.mask_size = " << cblock.mask_size);
+        debugs(96, 5, "salsa2: cblock.mask_size = " << cblock.mask_size);
 
         // If the CBlock declares a non-zero mask size, copy the mask bytes and log them.
         if (cblock.mask_size)
