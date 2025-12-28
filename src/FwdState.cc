@@ -1273,6 +1273,10 @@ FwdState::dispatch()
         request->prepForDirect();
 
         // @category salsa2
+        // Restore HTTPS for originally-HTTPS requests going DIRECT to origin
+        // This happens AFTER cache checks to avoid cache key mismatch
+        Salsa2Parent::restoreHttpsIfNeeded(request);
+
         // Remove custom headers when going DIRECT to origin (not to peer)
         // These headers are only for internal Squid-to-Squid communication
         request->header.delByName("X-Originally-HTTPS");

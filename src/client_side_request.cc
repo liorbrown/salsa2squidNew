@@ -1132,8 +1132,7 @@ clientInterpretRequestHeaders(ClientHttpRequest * http)
         request->url << 
         ") = " << request->flags.originally_https);
 
-    // Restore HTTPS immediately on nodes with no peers (before peer selection)
-    Salsa2Parent::restoreHttpsIfNeeded(request);
+    // Note: HTTPS restoration happens later in FwdState::dispatch() to avoid cache key mismatch
 
     debugs(85, 5, "clientInterpretRequestHeaders: REQ_NOCACHE = " <<
            (request->flags.noCache ? "SET" : "NOT SET"));
