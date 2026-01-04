@@ -97,9 +97,13 @@ class Salsa2Parent{
         /// @brief Called when this server shutdown 
         static void free(){if (instance) delete instance;}
 
-        /// @brief Fiddler workaround: Restore HTTPS scheme for originally-HTTPS requests
+        /// @brief Restores HTTPS scheme for originally-HTTPS requests
+        /// Only restores if going DIRECT to origin (no peers)
+        /// Updates both request URL and uri string if restoration occurs
         /// @param request The request to potentially restore
-        static void restoreHttpsIfNeeded(HttpRequest* request);
+        /// @param uri Pointer to uri string to update if HTTPS is restored
+        /// @return True - If change URI, False - Otherwise
+        static bool restoreHttpsIfNeeded(HttpRequest* request, char** uri);
 
         /// @brief Parse from request header, data for salsa2
         /// @param request The request to get the data from

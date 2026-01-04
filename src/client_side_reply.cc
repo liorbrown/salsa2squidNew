@@ -89,7 +89,7 @@ void clientReplyContext::investigateDigest(StoreIOBuffer result)
         StoreDigestCBlock cblock;
 
         // Log raw buffer info. maskToString will produce a human-readable list of set bits.
-        debugs(96, DBG_CRITICAL, "salsa2: result.length = " << result.length
+        debugs(96, 4, "salsa2: result.length = " << result.length
             << "\nresult =\n" << CacheDigest::maskToString(result.data, result.length)
             << "\nsizeof(cblock) = " << sizeof(cblock));
 
@@ -117,7 +117,7 @@ void clientReplyContext::investigateDigest(StoreIOBuffer result)
             memcpy(mask, result.data + sizeof(cblock), cblock.mask_size);
 
             // Log the parsed CBlock and a human-readable dump of the mask.
-            debugs(96, DBG_CRITICAL, "URL is: http://192.168.10.50:3128/squid-internal-periodic/store_digest\nStoreDigestCBlock cblock = " << cblock
+            debugs(96, 4, "URL is: http://192.168.10.50:3128/squid-internal-periodic/store_digest\nStoreDigestCBlock cblock = " << cblock
                 << "\nmask =\n" << CacheDigest::maskToString(mask, cblock.mask_size));
         }
     }

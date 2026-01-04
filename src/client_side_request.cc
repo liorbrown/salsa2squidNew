@@ -1778,6 +1778,14 @@ ClientHttpRequest::doCallouts()
             clientInterpretRequestHeaders(this);
         }
 
+        
+        // @category salsa2
+        // Restore HTTPS for originally-HTTPS requests BEFORE cache lookup
+        // This must happen AFTER clientInterpretRequestHeaders() sets the originally_https flag
+        // but BEFORE processRequest() which does cache lookups
+        if (Salsa2Parent::restoreHttpsIfNeeded(request, &uri))
+            setLogUriToRequestUri(); // Update log_uri if uri was changed
+
         if (!calloutContext->no_cache_done) {
             calloutContext->no_cache_done = true;
 
