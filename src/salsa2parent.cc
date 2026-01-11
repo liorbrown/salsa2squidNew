@@ -64,14 +64,14 @@ void Salsa2Parent::reEstimateExclusionProb(HttpRequest* request, HttpHeader* res
                     << " = " << this->exclusionProbability[i][j] << " | ";
     }
 
-    debugs(96, DBG_CRITICAL, "Salsa2: " << stream.str());
+    debugs(96, 4, "Salsa2: " << stream.str());
 
     misses = 0;
 }
 
 void Salsa2Parent::VClamping(size_t posIndications)
 {
-    debugs(96, DBG_CRITICAL, "Salsa2: Clamping v[" << posIndications << ']');
+    debugs(96, 4, "Salsa2: Clamping v[" << posIndications << ']');
 
     double &trueNegativeProb = this->exclusionProbability[0][posIndications];
 
@@ -83,7 +83,7 @@ void Salsa2Parent::newMiss(HttpRequest::Pointer request) const
 {
     if (Salsa2Parent::isSalsa(request))
     {
-        debugs(96, DBG_CRITICAL,"Salsa2: new Miss\n" << *request);
+        debugs(96, 4, "Salsa2: new Miss\n" << *request);
 
         // Sets request to miss
         request->isMiss = true;
@@ -94,7 +94,7 @@ void Salsa2Parent::reEstimateProbabilities(HttpRequest* request, HttpHeader* res
 {
     if (Salsa2Parent::isSalsa(request))
     {
-        debugs(96, DBG_CRITICAL, "Salsa2: new ReEstimation\n" << *request);
+        debugs(96, 4, "Salsa2: new ReEstimation\n" << *request);
 
         // It's crucial to update all the 3 counters here only
         // for prevent situation when some request update only few of the counters
@@ -134,7 +134,7 @@ Salsa2Parent &Salsa2Parent::getInstance(size_t caches)
     // because proxy know its parents, but parents dont know proxy
     if (caches && Config.salsa2 && !Config.npeers && !instance)
     {
-        debugs(96,DBG_CRITICAL,"Salsa2: Creates salsa2parent instance, with " << caches);
+        debugs(96, 4, "Salsa2: Creates salsa2parent instance, with " << caches);
         instance = new Salsa2Parent(caches);
     }
 
@@ -178,7 +178,7 @@ void Salsa2Parent::newReq(HttpRequest::Pointer request)
 {
     if (Salsa2Parent::isSalsa(request))
     {          
-        debugs(96, DBG_CRITICAL, "Salsa2: new req\n" << *request);
+        debugs(96, 4, "Salsa2: new req\n" << *request);
 
         bool isPos;
         size_t posIndications;
@@ -206,7 +206,7 @@ Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request, char** uri)
 {
     // Fiddler workaround: Restore HTTPS scheme for originally-HTTPS requests
     // Only restore if this Squid has NO peers (i.e., it goes DIRECT to origin)
-    debugs(96, DBG_CRITICAL, "salsa2: restoreHttpsIfNeeded for " << request->url 
+    debugs(96, 4, "salsa2: restoreHttpsIfNeeded for " << request->url 
         << " originally_https=" << request->flags.originally_https 
         << " scheme=" << request->url.getScheme() 
         << " npeers=" << Config.npeers);
@@ -219,7 +219,7 @@ Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request, char** uri)
             if (request->url.port() == 80) {
                 request->url.port(443);
             }
-            debugs(96, DBG_CRITICAL, "salsa2: Restored HTTPS for DIRECT connection: " << request->url);
+            debugs(96, 4, "salsa2: Restored HTTPS for DIRECT connection: " << request->url);
 
             
             // Update uri string to match the restored HTTPS URL
@@ -232,7 +232,7 @@ Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request, char** uri)
             }
         } else {
             // This Squid has peers - keep as HTTP, peers will restore HTTPS
-            debugs(96, DBG_CRITICAL, "salsa2: Keeping HTTP (forwarding to peers): " << request->url);
+            debugs(96, 4, "salsa2: Keeping HTTP (forwarding to peers): " << request->url);
         }
     }
 

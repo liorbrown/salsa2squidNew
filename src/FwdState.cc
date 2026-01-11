@@ -1267,6 +1267,9 @@ FwdState::dispatch()
     if (const auto peer = serverConnection()->getPeer()) {
         ++peer->stats.fetches;
         request->prepForPeering(*peer);
+
+        debugs(96, DBG_IMPORTANT, "Start requesting " << request->url << " from " << *peer);
+
         httpStart(this);
     } else {
         assert(!request->flags.sslPeek);
@@ -1277,7 +1280,7 @@ FwdState::dispatch()
         // These headers are only for internal Squid-to-Squid communication
         request->header.delByName("X-Originally-HTTPS");
         request->header.delByName("salsa2");
-
+        debugs(96, DBG_IMPORTANT, "Start requesting " << request->url << " from origin");
         switch (request->url.getScheme()) {
 
         case AnyP::PROTO_HTTPS:

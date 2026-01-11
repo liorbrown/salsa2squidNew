@@ -1296,6 +1296,12 @@ clientReplyContext::buildReplyHeader()
     // Re-estimate exclusion probability
     Salsa2Parent::getInstance().reEstimateProbabilities(request, hdr);
 
+    ConnStateData *clientConn = http->getConn();
+
+    debugs(96, DBG_IMPORTANT, "Salsa2: replays to " 
+        << clientConn->clientConnection << ":" << clientConn->port
+        << "\nResponse for " << request->url);
+
     if (is_hit || collapsedRevalidation == crSlave)
         hdr->delById(Http::HdrType::SET_COOKIE);
     // TODO: RFC 2965 : Must honour Cache-Control: no-cache="set-cookie2" and remove header.

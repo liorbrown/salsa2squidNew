@@ -734,6 +734,9 @@ HttpStateData::processReplyHeader()
     if (!peerSupportsConnectionPinning())
         request->flags.connectionAuthDisabled = true;
 
+    debugs(96, DBG_IMPORTANT, "Got response for " << request->url 
+        << "\nfrom " << (this->_peer ? (this->_peer->name) : "origin"));
+
     // @category salsa2 
     // Update parent statistics
     Salsa2Proxy::updateProbabilty(newrep, request, this->_peer);
