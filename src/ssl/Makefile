@@ -788,9 +788,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(top
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/ssl/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/ssl/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/ssl/Makefile
+	  $(AUTOMAKE) --gnu src/ssl/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

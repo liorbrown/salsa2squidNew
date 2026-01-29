@@ -778,9 +778,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(top
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/adaptation/icap/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/adaptation/icap/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/adaptation/icap/Makefile
+	  $(AUTOMAKE) --gnu src/adaptation/icap/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

@@ -740,9 +740,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/basic/LDAP/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/basic/LDAP/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/auth/basic/LDAP/Makefile
+	  $(AUTOMAKE) --gnu src/auth/basic/LDAP/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

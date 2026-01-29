@@ -782,9 +782,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(top
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/DiskIO/DiskDaemon/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/DiskIO/DiskDaemon/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/DiskIO/DiskDaemon/Makefile
+	  $(AUTOMAKE) --gnu src/DiskIO/DiskDaemon/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

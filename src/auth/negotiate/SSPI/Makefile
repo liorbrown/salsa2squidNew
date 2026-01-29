@@ -748,9 +748,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/negotiate/SSPI/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/negotiate/SSPI/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/auth/negotiate/SSPI/Makefile
+	  $(AUTOMAKE) --gnu src/auth/negotiate/SSPI/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

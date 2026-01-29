@@ -546,9 +546,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(srcdir)/template.am $(srcdir)/l
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign errors/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu errors/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign errors/Makefile
+	  $(AUTOMAKE) --gnu errors/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

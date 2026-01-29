@@ -1,0 +1,4 @@
+Salsa2Dispatcher.o: Salsa2Dispatcher.cc /usr/include/stdc-predef.h \
+ Salsa2Dispatcher.h
+/usr/include/stdc-predef.h:
+Salsa2Dispatcher.h:

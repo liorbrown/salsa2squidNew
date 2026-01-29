@@ -36,7 +36,7 @@
 #include "SquidConfig.h"
 #include "Store.h"
 #include "time/gadgets.h"
-#include "salsa2proxy.h"
+#include "salsa2selector.h"
 
 /**
  * A CachePeer which has been selected as a possible destination.
@@ -629,7 +629,7 @@ PeerSelector::selectMore()
         Config.npeers)
         // && request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
 
-            Salsa2Proxy salsa2(this, servers);
+            Salsa2Selector salsa2(this, servers);
     else {
         debugs(96,4,"Salsa2: Not salsa selection: " 
         << this->request->storeId());

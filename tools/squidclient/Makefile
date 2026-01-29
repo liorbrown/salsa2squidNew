@@ -854,9 +854,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(top
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tools/squidclient/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tools/squidclient/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tools/squidclient/Makefile
+	  $(AUTOMAKE) --gnu tools/squidclient/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

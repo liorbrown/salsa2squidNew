@@ -401,7 +401,8 @@ squid_SOURCES = \
 	peer_proxy_negotiate_auth.cc \
 	peer_proxy_negotiate_auth.h \
 	peer_select.cc \
-	salsa2proxy.cc \
+	salsa2selector.cc \
+	Salsa2Dispatcher.cc \
 	salsa2parent.cc \
 	peer_sourcehash.cc \
 	peer_sourcehash.h \
@@ -1889,7 +1890,8 @@ tests_test_http_range_SOURCES = \
 	peer_proxy_negotiate_auth.cc \
 	peer_proxy_negotiate_auth.h \
 	peer_select.cc \
-	salsa2proxy.cc \
+	salsa2selector.cc \
+	Salsa2Dispatcher.cc \
 	salsa2parent.cc \
 	peer_sourcehash.cc \
 	peer_sourcehash.h \
@@ -2278,7 +2280,8 @@ tests_testHttpRequest_SOURCES = \
 	peer_proxy_negotiate_auth.cc \
 	peer_proxy_negotiate_auth.h \
 	peer_select.cc \
-	salsa2proxy.cc \
+	salsa2selector.cc \
+	Salsa2Dispatcher.cc \
 	salsa2parent.cc \
 	peer_sourcehash.cc \
 	peer_sourcehash.h \
@@ -2577,7 +2580,8 @@ tests_testCacheManager_SOURCES = \
 	peer_proxy_negotiate_auth.cc \
 	peer_proxy_negotiate_auth.h \
 	peer_select.cc \
-	salsa2proxy.cc \
+	salsa2selector.cc \
+	Salsa2Dispatcher.cc \
 	salsa2parent.cc \
 	peer_sourcehash.cc \
 	peer_sourcehash.h \

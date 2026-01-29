@@ -2,7 +2,7 @@
 #include "debug/Stream.h"
 #include "HttpRequest.h"
 #include "HttpReply.h"
-#include "salsa2proxy.h"
+#include "salsa2selector.h"
 #include <random>
 #include "neighbors.h"
 #include "mem/AllocatorProxy.h"
@@ -96,11 +96,11 @@ string to_string(const map<const CachePeer*, ProbabilityMatrix>& m)
 #endif
 
 // Static member to keep track of the current peer for round-robin selection.
-CachePeer* Salsa2Proxy::currentPeer = nullptr;
+CachePeer* Salsa2Selector::currentPeer = nullptr;
 
-map<const CachePeer*, ProbabilityMatrix> Salsa2Proxy::exclusionProbabilities;
+map<const CachePeer*, ProbabilityMatrix> Salsa2Selector::exclusionProbabilities;
 
-Salsa2Proxy::Salsa2Proxy(PeerSelector *peerSelector, FwdServer *&fwdServers): 
+Salsa2Selector::Salsa2Selector(PeerSelector *peerSelector, FwdServer *&fwdServers): 
     selector(peerSelector),
     servers(fwdServers),
     tail(nullptr),
@@ -110,16 +110,16 @@ Salsa2Proxy::Salsa2Proxy(PeerSelector *peerSelector, FwdServer *&fwdServers):
     this->peerSelection();
 }
 
-map<const CachePeer*, ProbabilityMatrix>& Salsa2Proxy::getProbabilities()
+map<const CachePeer*, ProbabilityMatrix>& Salsa2Selector::getProbabilities()
 {
     // If exclusionProbabilities is empty, init it
-    if (Salsa2Proxy::exclusionProbabilities.empty())
+    if (Salsa2Selector::exclusionProbabilities.empty())
     {
         // Runs on all peers in configuration
         for (CachePeer* p = Config.peers; p; p = p->next)
         {
             // Create new matrix for current peer, and init its values
-            auto newMatrix = Salsa2Proxy::exclusionProbabilities[p] = 
+            auto newMatrix = Salsa2Selector::exclusionProbabilities[p] = 
                 {new double[Config.npeers + 1], 
                  new double[Config.npeers + 1]{0.0}};
                 
@@ -128,13 +128,13 @@ map<const CachePeer*, ProbabilityMatrix>& Salsa2Proxy::getProbabilities()
         }
 
         debugs(96, 4, "Salsa2: exclusionProbabilities:\n" 
-            << to_string(Salsa2Proxy::exclusionProbabilities));
+            << to_string(Salsa2Selector::exclusionProbabilities));
     }
 
-    return Salsa2Proxy::exclusionProbabilities;
+    return Salsa2Selector::exclusionProbabilities;
 }
 
-void Salsa2Proxy::updateProbabilty
+void Salsa2Selector::updateProbabilty
     (const HttpReply* reply, 
     const HttpRequestPointer request, 
     const CachePeer* peer)
@@ -155,16 +155,16 @@ void Salsa2Proxy::updateProbabilty
             Salsa2Parent::parse(request, peer->name, isPos, posIndications);
 
             // Update right cell with new probability
-            Salsa2Proxy::getProbabilities()[peer][isPos][posIndications] =
+            Salsa2Selector::getProbabilities()[peer][isPos][posIndications] =
                 stod(updateProb.rawBuf());
 
             debugs(96, 4, "Salsa2: exclusionProbabilities:" 
-                << to_string(Salsa2Proxy::exclusionProbabilities));
+                << to_string(Salsa2Selector::exclusionProbabilities));
         }
     }
 }
 
-void Salsa2Proxy::peerSelection()
+void Salsa2Selector::peerSelection()
 {
     debugs(96,4,"Salsa2: Starting salsa2 peer selection for URL: " 
         << this->request->storeId());
@@ -194,7 +194,7 @@ void Salsa2Proxy::peerSelection()
 }
 
 // This function checks the digests of each peer to see if they have the requested content.
-void Salsa2Proxy::checkDigestsHits()
+void Salsa2Selector::checkDigestsHits()
 {
     #ifdef REQ_UPDATE
     // Index to keep track of the current cache in the cachesData array.
@@ -247,7 +247,7 @@ void Salsa2Proxy::checkDigestsHits()
     }
 }
 
-void Salsa2Proxy::addPeer(CachePeer* peer, hier_code code)
+void Salsa2Selector::addPeer(CachePeer* peer, hier_code code)
 {
     // Create a new FwdServer object.
     FwdServer* newTail = new FwdServer(peer, code);
@@ -264,7 +264,7 @@ void Salsa2Proxy::addPeer(CachePeer* peer, hier_code code)
     }
 }
 
-size_t Salsa2Proxy::naiveSelection() const
+size_t Salsa2Selector::naiveSelection() const
 {
     // If expextation greater that miss penalty, so we prefer to not choose any peer
     double minExpectaion = Config.missPenalty;
@@ -290,7 +290,7 @@ size_t Salsa2Proxy::naiveSelection() const
     return result;
 }
 
-double Salsa2Proxy::getCost(size_t peersSelection) const
+double Salsa2Selector::getCost(size_t peersSelection) const
 {
     double missProbability = 1;
     double expectaion = 0;
@@ -325,11 +325,11 @@ double Salsa2Proxy::getCost(size_t peersSelection) const
     return expectaion;
 }
 
-void Salsa2Proxy::selectPeers()
+void Salsa2Selector::selectPeers()
 {
     // Runs on all peers, and calculate their miss probability for current request
     for (CachePeer* peer = Config.peers; peer; peer = peer->next)
-        this->missProbabilities.insert({Salsa2Proxy::getProbabilities()
+        this->missProbabilities.insert({Salsa2Selector::getProbabilities()
             [peer]
             [this->digestsHits.find(peer) != end(this->digestsHits)]
             [this->request->hier.n_ichoices],
@@ -359,7 +359,7 @@ void Salsa2Proxy::selectPeers()
     }
 }
 
-void Salsa2Proxy::addRoundRobin()
+void Salsa2Selector::addRoundRobin()
 {
     // If no servers have been selected yet by salsa2
     if (!this->servers)

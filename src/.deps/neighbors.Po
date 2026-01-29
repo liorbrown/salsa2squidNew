@@ -443,7 +443,7 @@ neighbors.o: neighbors.cc /usr/include/stdc-predef.h ../include/squid.h \
  SquidConfig.h base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h \
  format/Format.h sbuf/forward.h store/Disk.h ../src/store/Controlled.h \
  ../src/StoreIOState.h time/gadgets.h SquidMath.h base/TypeTraits.h \
- stat.h tools.h salsa2proxy.h salsa2parent.h
+ stat.h tools.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1223,5 +1223,3 @@ SquidMath.h:
 base/TypeTraits.h:
 stat.h:
 tools.h:
-salsa2proxy.h:
-salsa2parent.h:

@@ -612,7 +612,7 @@ configure:16851: checking how to hardcode library paths into programs
 configure:16876: result: immediate
 configure:16978: checking for shl_load
 configure:16978: gcc -o conftest -g -O2  -g conftest.c  >&5
-/usr/bin/ld: /tmp/cct2IRZD.o: in function `main':
+/usr/bin/ld: /tmp/cco4A67r.o: in function `main':
 /home/lior/salsa2squid/conftest.c:69:(.text.startup+0xb): undefined reference to `shl_load'
 collect2: error: ld returned 1 exit status
 configure:16978: $? = 1
@@ -760,7 +760,7 @@ configure:17264: $? = 0
 configure:17282: result: yes
 configure:17287: checking whether a statically linked program can dlopen itself
 configure:17368: gcc -o conftest -g -O2  -DHAVE_DLFCN_H -g -Wl,--export-dynamic -static conftest.c   >&5
-/usr/bin/ld: /tmp/ccp1gg3k.o: in function `main':
+/usr/bin/ld: /tmp/ccCbMvq7.o: in function `main':
 /home/lior/salsa2squid/conftest.c:17347:(.text.startup+0xd): warning: Using 'dlopen' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
 configure:17371: $? = 0
 conftest: undefined symbol: _fnord
@@ -4071,7 +4071,7 @@ configure:31480: $? = 0
 configure:31490: result: yes
 configure:31498: checking for SSL_CTX_set_tmp_rsa_callback in -lssl
 configure:31520: g++ -std=c++17 -o conftest   -g -O2 -march=native    -g conftest.cpp -lssl  -ldl   -lssl -lcrypto   >&5
-/usr/bin/ld: /tmp/ccl5IWVL.o: in function `main':
+/usr/bin/ld: /tmp/ccmpsIlW.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:146:(.text.startup+0x5): undefined reference to `SSL_CTX_set_tmp_rsa_callback'
 collect2: error: ld returned 1 exit status
 configure:31520: $? = 1
@@ -8282,7 +8282,7 @@ configure: failed program was:
 configure:42050: result: no
 configure:42062: checking for library containing ldap_url_desc2str
 configure:42091: g++ -std=c++17 -o conftest      -g -O2 -march=native    -g conftest.cpp  -lpthread -ldl  >&5
-/usr/bin/ld: /tmp/cch9Qkvl.o: in function `main':
+/usr/bin/ld: /tmp/ccJ3kgDU.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:168:(.text.startup+0x5): undefined reference to `ldap_url_desc2str'
 collect2: error: ld returned 1 exit status
 configure:42091: $? = 1
@@ -8461,7 +8461,7 @@ configure: failed program was:
 configure:42111: result: no
 configure:42124: checking for library containing ldap_url_parse
 configure:42153: g++ -std=c++17 -o conftest      -g -O2 -march=native    -g conftest.cpp  -lpthread -ldl  >&5
-/usr/bin/ld: /tmp/ccOrkcUh.o: in function `main':
+/usr/bin/ld: /tmp/ccwt2ALz.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:168:(.text.startup+0x5): undefined reference to `ldap_url_parse'
 collect2: error: ld returned 1 exit status
 configure:42153: $? = 1
@@ -8640,7 +8640,7 @@ configure: failed program was:
 configure:42173: result: no
 configure:42186: checking for library containing ldap_start_tls_s
 configure:42215: g++ -std=c++17 -o conftest      -g -O2 -march=native    -g conftest.cpp  -lpthread -ldl  >&5
-/usr/bin/ld: /tmp/cc0Ccmfc.o: in function `main':
+/usr/bin/ld: /tmp/ccAePTGT.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:168:(.text.startup+0x5): undefined reference to `ldap_start_tls_s'
 collect2: error: ld returned 1 exit status
 configure:42215: $? = 1
@@ -9254,7 +9254,7 @@ configure: failed program was:
 configure:42762: result: no
 configure:42782: checking for kqueue
 configure:42782: g++ -std=c++17 -o conftest      -g -O2 -march=native    -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccKNOp4I.o: in function `main':
+/usr/bin/ld: /tmp/ccFREQhX.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:190:(.text.startup+0x9): undefined reference to `kqueue'
 collect2: error: ld returned 1 exit status
 configure:42782: $? = 1
@@ -9690,7 +9690,7 @@ configure:43275: Linux Netfilter support requested: auto
 configure:43314: Linux Netfilter Conntrack support requested: auto
 configure:43321: checking for library containing nfct_query
 configure:43350: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccFYooB3.o: in function `main':
+/usr/bin/ld: /tmp/ccJdmTcb.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:175:(.text.startup+0x5): undefined reference to `nfct_query'
 collect2: error: ld returned 1 exit status
 configure:43350: $? = 1
@@ -13232,7 +13232,7 @@ configure: failed program was:
 configure:45770: result: no
 configure:45777: checking for bswap_16
 configure:45777: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/cctKsNg2.o: in function `main':
+/usr/bin/ld: /tmp/ccttJ00B.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `bswap_16'
 collect2: error: ld returned 1 exit status
 configure:45777: $? = 1
@@ -13455,7 +13455,7 @@ configure: failed program was:
 configure:45777: result: no
 configure:45783: checking for bswap16
 configure:45783: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccuohv0T.o: in function `main':
+/usr/bin/ld: /tmp/ccDnhGrY.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `bswap16'
 collect2: error: ld returned 1 exit status
 configure:45783: $? = 1
@@ -13678,7 +13678,7 @@ configure: failed program was:
 configure:45783: result: no
 configure:45789: checking for bswap_32
 configure:45789: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccEhX5eS.o: in function `main':
+/usr/bin/ld: /tmp/ccfnZVwh.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `bswap_32'
 collect2: error: ld returned 1 exit status
 configure:45789: $? = 1
@@ -13901,7 +13901,7 @@ configure: failed program was:
 configure:45789: result: no
 configure:45795: checking for bswap32
 configure:45795: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccUkkQ93.o: in function `main':
+/usr/bin/ld: /tmp/ccEyjNgZ.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `bswap32'
 collect2: error: ld returned 1 exit status
 configure:45795: $? = 1
@@ -14124,7 +14124,7 @@ configure: failed program was:
 configure:45795: result: no
 configure:45801: checking for htole16
 configure:45801: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccgFbxHQ.o: in function `main':
+/usr/bin/ld: /tmp/ccDovnV3.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `htole16'
 collect2: error: ld returned 1 exit status
 configure:45801: $? = 1
@@ -14347,7 +14347,7 @@ configure: failed program was:
 configure:45801: result: no
 configure:45807: checking for __htole16
 configure:45807: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccuPvpOd.o: in function `main':
+/usr/bin/ld: /tmp/ccTYgayW.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `__htole16'
 collect2: error: ld returned 1 exit status
 configure:45807: $? = 1
@@ -14570,7 +14570,7 @@ configure: failed program was:
 configure:45807: result: no
 configure:45813: checking for htole32
 configure:45813: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccMv2cIb.o: in function `main':
+/usr/bin/ld: /tmp/ccTyckfs.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `htole32'
 collect2: error: ld returned 1 exit status
 configure:45813: $? = 1
@@ -14793,7 +14793,7 @@ configure: failed program was:
 configure:45813: result: no
 configure:45819: checking for __htole32
 configure:45819: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccoLOLXk.o: in function `main':
+/usr/bin/ld: /tmp/cc8WQeiA.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `__htole32'
 collect2: error: ld returned 1 exit status
 configure:45819: $? = 1
@@ -15016,7 +15016,7 @@ configure: failed program was:
 configure:45819: result: no
 configure:45825: checking for le16toh
 configure:45825: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccB9PYfT.o: in function `main':
+/usr/bin/ld: /tmp/cczZVcF9.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `le16toh'
 collect2: error: ld returned 1 exit status
 configure:45825: $? = 1
@@ -15239,7 +15239,7 @@ configure: failed program was:
 configure:45825: result: no
 configure:45831: checking for __le16toh
 configure:45831: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/cc66Vjc7.o: in function `main':
+/usr/bin/ld: /tmp/ccu7bbGN.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `__le16toh'
 collect2: error: ld returned 1 exit status
 configure:45831: $? = 1
@@ -15462,7 +15462,7 @@ configure: failed program was:
 configure:45831: result: no
 configure:45837: checking for le32toh
 configure:45837: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccgr1oKN.o: in function `main':
+/usr/bin/ld: /tmp/ccdTBWhZ.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `le32toh'
 collect2: error: ld returned 1 exit status
 configure:45837: $? = 1
@@ -15685,7 +15685,7 @@ configure: failed program was:
 configure:45837: result: no
 configure:45843: checking for __le32toh
 configure:45843: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/cc1MOVg1.o: in function `main':
+/usr/bin/ld: /tmp/ccCArv7g.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:212:(.text.startup+0x9): undefined reference to `__le32toh'
 collect2: error: ld returned 1 exit status
 configure:45843: $? = 1
@@ -28512,7 +28512,7 @@ configure:51432: $? = 0
 configure:51452: result: none required
 configure:51461: checking for library containing res_init
 configure:51490: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccXhuYx5.o: in function `main':
+/usr/bin/ld: /tmp/cch6YzGJ.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `res_init'
 collect2: error: ld returned 1 exit status
 configure:51490: $? = 1
@@ -28813,7 +28813,7 @@ configure: failed program was:
 |   return 0;
 | }
 configure:51490: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lresolv  -ldl  >&5
-/usr/bin/ld: /tmp/ccenai6C.o: in function `main':
+/usr/bin/ld: /tmp/cc1ljehz.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `res_init'
 collect2: error: ld returned 1 exit status
 configure:51490: $? = 1
@@ -29116,7 +29116,7 @@ configure: failed program was:
 configure:51510: result: no
 configure:51519: checking for library containing __res_search
 configure:51548: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccQ6uCbe.o: in function `main':
+/usr/bin/ld: /tmp/cc77B1kP.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `__res_search'
 collect2: error: ld returned 1 exit status
 configure:51548: $? = 1
@@ -29417,7 +29417,7 @@ configure: failed program was:
 |   return 0;
 | }
 configure:51548: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lresolv  -ldl  >&5
-/usr/bin/ld: /tmp/ccH2SR7D.o: in function `main':
+/usr/bin/ld: /tmp/ccQd9Y5C.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `__res_search'
 collect2: error: ld returned 1 exit status
 configure:51548: $? = 1
@@ -29724,7 +29724,7 @@ configure:51606: $? = 0
 configure:51626: result: none required
 configure:51635: checking for library containing opcom_stack_trace
 configure:51664: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/cc2lDvaj.o: in function `main':
+/usr/bin/ld: /tmp/ccwm6lPS.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `opcom_stack_trace'
 collect2: error: ld returned 1 exit status
 configure:51664: $? = 1
@@ -30327,7 +30327,7 @@ configure: failed program was:
 configure:51684: result: no
 configure:51693: checking for library containing yp_match
 configure:51722: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -ldl  >&5
-/usr/bin/ld: /tmp/ccFCOKJW.o: in function `main':
+/usr/bin/ld: /tmp/ccshowm0.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:292:(.text.startup+0x5): undefined reference to `yp_match'
 collect2: error: ld returned 1 exit status
 configure:51722: $? = 1
@@ -32145,7 +32145,7 @@ conftest.c:290:6: warning: conflicting types for built-in function 'log'; expect
       |      ^~~
 conftest.c:1:1: note: 'log' is declared in header '<math.h>'
     1 | /* confdefs.h */
-/usr/bin/ld: /tmp/ccd9a121.o: in function `main':
+/usr/bin/ld: /tmp/ccc0Wxyt.o: in function `main':
 /home/lior/salsa2squid/conftest.c:294:(.text.startup+0xb): undefined reference to `log'
 collect2: error: ld returned 1 exit status
 configure:52187: $? = 1
@@ -33424,7 +33424,7 @@ configure:53104: $? = 0
 configure:53104: result: yes
 configure:53110: checking for eui64_aton
 configure:53110: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/cc59cknc.o: in function `main':
+/usr/bin/ld: /tmp/ccHqiXEh.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:323:(.text.startup+0x9): undefined reference to `eui64_aton'
 collect2: error: ld returned 1 exit status
 configure:53110: $? = 1
@@ -33790,7 +33790,7 @@ configure:53158: $? = 0
 configure:53158: result: yes
 configure:53164: checking for mallocblksize
 configure:53164: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/ccFt0S6Q.o: in function `main':
+/usr/bin/ld: /tmp/ccxWo4DL.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:331:(.text.startup+0x9): undefined reference to `mallocblksize'
 collect2: error: ld returned 1 exit status
 configure:53164: $? = 1
@@ -34169,7 +34169,7 @@ configure:53206: $? = 0
 configure:53206: result: yes
 configure:53212: checking for mstats
 configure:53212: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/ccg8h7As.o: in function `main':
+/usr/bin/ld: /tmp/ccRdHNx3.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:338:(.text.startup+0x9): undefined reference to `mstats'
 collect2: error: ld returned 1 exit status
 configure:53212: $? = 1
@@ -34526,7 +34526,7 @@ configure:53224: $? = 0
 configure:53224: result: yes
 configure:53230: checking for procctl
 configure:53230: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/ccQ3V42x.o: in function `main':
+/usr/bin/ld: /tmp/cctSiJfK.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:340:(.text.startup+0x9): undefined reference to `procctl'
 collect2: error: ld returned 1 exit status
 configure:53230: $? = 1
@@ -34909,7 +34909,7 @@ configure:53278: $? = 0
 configure:53278: result: yes
 configure:53284: checking for res_init
 configure:53284: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/ccnb1FrN.o: in function `main':
+/usr/bin/ld: /tmp/cc17PBr3.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:348:(.text.startup+0x9): undefined reference to `res_init'
 collect2: error: ld returned 1 exit status
 configure:53284: $? = 1
@@ -35299,7 +35299,7 @@ configure:53326: $? = 0
 configure:53326: result: yes
 configure:53332: checking for setpflags
 configure:53332: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/cc7bl6aJ.o: in function `main':
+/usr/bin/ld: /tmp/ccfwfzTd.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:355:(.text.startup+0x9): undefined reference to `setpflags'
 collect2: error: ld returned 1 exit status
 configure:53332: $? = 1
@@ -35723,7 +35723,7 @@ configure:53432: $? = 0
 configure:53432: result: yes
 configure:53445: checking for tempnam
 configure:53445: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/ccNHJ4EU.o: in function `main':
+/usr/bin/ld: /tmp/cc04c6Xj.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:368:(.text.startup+0x9): warning: the use of `tempnam' is dangerous, better use `mkstemp'
 configure:53445: $? = 0
 configure:53445: result: yes
@@ -38870,8 +38870,8 @@ configure:55015: $? = 0
 configure:55018: result: yes
 configure:55033: checking for libresolv _dns_ttl_ hack
 configure:55051: g++ -std=c++17 -o conftest      -g -O2 -march=native      -g conftest.cpp -lm -ldl  >&5
-/usr/bin/ld: /tmp/cc8v4cLz.o: warning: relocation against `_dns_ttl_' in read-only section `.text.startup'
-/usr/bin/ld: /tmp/cc8v4cLz.o: in function `main':
+/usr/bin/ld: /tmp/cczTy3BX.o: warning: relocation against `_dns_ttl_' in read-only section `.text.startup'
+/usr/bin/ld: /tmp/cczTy3BX.o: in function `main':
 /home/lior/salsa2squid/conftest.cpp:368:(.text.startup+0x6): undefined reference to `_dns_ttl_'
 /usr/bin/ld: warning: creating DT_TEXTREL in a PIE
 collect2: error: ld returned 1 exit status
@@ -40593,192 +40593,285 @@ config.status:1818: creating tools/squidclient/Makefile
 config.status:1818: creating tools/systemd/Makefile
 config.status:1818: creating tools/sysvinit/Makefile
 config.status:1818: creating include/autoconf.h
+config.status:1999: include/autoconf.h is unchanged
 config.status:2047: executing depfiles commands
 config.status:2124: cd compat       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/libTrie       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/libTrie/test       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/ntlmauth       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/rfcnb       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/smblib       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd lib/snmplib       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
 config.status:2129: $? = 0
 config.status:2124: cd src/acl       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/AD_group       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/eDirectory_userip       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/file_userip       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/kerberos_ldap_group       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/LDAP_group       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/LM_group       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/session       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/unix_group       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/acl/external/time_quota       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/adaptation       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/adaptation/icap       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/adaptation/ecap       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/anyp       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/fake       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/getpwnam       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/LDAP       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/NCSA       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/NIS       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/PAM       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/RADIUS       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/SASL       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/SMB       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/SMB_LM       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/basic/SSPI       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/digest       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/digest/eDirectory       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/digest/file       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/digest/LDAP       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/negotiate       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/negotiate/kerberos       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/negotiate/SSPI       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/negotiate/wrapper       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/ntlm       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/ntlm/fake       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/ntlm/SMB_LM       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/auth/ntlm/SSPI       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/base       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/clients       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/comm       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/debug       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/dns       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/AIO       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/Blocking       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/DiskDaemon       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/DiskThreads       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/IpcIo       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/DiskIO/Mmapped       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/error       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/esi       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/eui       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/format       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/fs       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/ftp       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/helper       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/http       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/http/one       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/http/url_rewriters/fake       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/icmp       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/ident       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/ip       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/ipc       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/log       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/log/file       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/mem       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/mgr       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/parser       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/proxyp       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/repl       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/sbuf       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/security       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/security/cert_generators/file       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/servers       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/snmp       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/ssl       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/store       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd src/time       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd test-suite       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd tools       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd tools/purge       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2124: cd tools/squidclient       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:2129: $? = 0
 config.status:2047: executing libtool commands
 configure:58757: === configuring in libltdl (/home/lior/salsa2squid/libltdl)

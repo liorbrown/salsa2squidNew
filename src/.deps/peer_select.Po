@@ -442,7 +442,7 @@ peer_select.o: peer_select.cc /usr/include/stdc-predef.h \
  ../src/store_key_md5.h ../src/StoreIOState.h time/gadgets.h Store.h \
  base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h MemObject.h \
  RemovalPolicy.h stmem.h ../include/splay.h ../src/fatal.h \
- store/Controller.h StoreStats.h salsa2proxy.h salsa2parent.h \
+ store/Controller.h StoreStats.h salsa2selector.h salsa2parent.h \
  /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h
 /usr/include/stdc-predef.h:
@@ -1220,7 +1220,7 @@ stmem.h:
 ../src/fatal.h:
 store/Controller.h:
 StoreStats.h:
-salsa2proxy.h:
+salsa2selector.h:
 salsa2parent.h:
 /usr/include/c++/13/set:
 /usr/include/c++/13/bits/stl_set.h:

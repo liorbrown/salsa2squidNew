@@ -775,9 +775,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/digest/file/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/digest/file/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/auth/digest/file/Makefile
+	  $(AUTOMAKE) --gnu src/auth/digest/file/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

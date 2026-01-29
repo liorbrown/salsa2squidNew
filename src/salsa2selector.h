@@ -11,7 +11,7 @@ using namespace std;
 
 /// @brief This class represents on object that creates only in proxy cahce, not parent
 /// and its created for each reuquest and implements the salsa2 algorithm of parents peers choosing  
-class Salsa2Proxy{
+class Salsa2Selector{
 
     private:
 
@@ -65,7 +65,7 @@ class Salsa2Proxy{
         static map<const CachePeer*, ProbabilityMatrix>& getProbabilities();
 
     public:
-        Salsa2Proxy(PeerSelector* peerSelector, FwdServer*& fwdServers);
+        Salsa2Selector(PeerSelector* peerSelector, FwdServer*& fwdServers);
 
         /// @brief Update peer's probabilities matrix when new response arrived
         /// @param reply The reply that came from peer, this give us the new probability

@@ -746,9 +746,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/ntlm/SMB_LM/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/ntlm/SMB_LM/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/auth/ntlm/SMB_LM/Makefile
+	  $(AUTOMAKE) --gnu src/auth/ntlm/SMB_LM/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

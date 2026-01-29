@@ -742,9 +742,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(am_
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/acl/external/session/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/acl/external/session/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/acl/external/session/Makefile
+	  $(AUTOMAKE) --gnu src/acl/external/session/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

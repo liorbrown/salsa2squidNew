@@ -801,9 +801,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(top_srcdir)/src/Common.am $(top
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/auth/negotiate/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/auth/negotiate/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/auth/negotiate/Makefile
+	  $(AUTOMAKE) --gnu src/auth/negotiate/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

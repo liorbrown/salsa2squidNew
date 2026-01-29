@@ -764,9 +764,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/DiskIO/AIO/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/DiskIO/AIO/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/DiskIO/AIO/Makefile
+	  $(AUTOMAKE) --gnu src/DiskIO/AIO/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

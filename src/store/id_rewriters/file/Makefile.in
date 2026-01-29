@@ -687,9 +687,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/store/id_rewriters/file/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/store/id_rewriters/file/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/store/id_rewriters/file/Makefile
+	  $(AUTOMAKE) --gnu src/store/id_rewriters/file/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

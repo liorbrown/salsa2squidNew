@@ -777,9 +777,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/adaptation/ecap/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/adaptation/ecap/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/adaptation/ecap/Makefile
+	  $(AUTOMAKE) --gnu src/adaptation/ecap/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

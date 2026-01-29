@@ -453,9 +453,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am $(srcdir)/language.am $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign doc/manuals/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu doc/manuals/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign doc/manuals/Makefile
+	  $(AUTOMAKE) --gnu doc/manuals/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

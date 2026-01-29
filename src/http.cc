@@ -60,7 +60,7 @@
 #include "StrList.h"
 #include "tools.h"
 #include "util.h"
-#include "salsa2proxy.h"
+#include "salsa2selector.h"
 
 #if USE_AUTH
 #include "auth/UserRequest.h"
@@ -739,7 +739,7 @@ HttpStateData::processReplyHeader()
 
     // @category salsa2 
     // Update parent statistics
-    Salsa2Proxy::updateProbabilty(newrep, request, this->_peer);
+    Salsa2Selector::updateProbabilty(newrep, request, this->_peer);
 
     HttpReply *vrep = setVirginReply(newrep);
     flags.headers_parsed = true;
