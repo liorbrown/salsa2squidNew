@@ -380,7 +380,44 @@ Salsa2Dispatcher.o: Salsa2Dispatcher.cc /usr/include/stdc-predef.h \
  base/Range.h MemBuf.h base/Packable.h cbdata.h mem/forward.h \
  comm/Connection.h comm/ConnOpener.h ../src/CommCalls.h http/forward.h \
  log/forward.h ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h
+ /usr/include/c++/13/bits/stl_relops.h HttpRequest.h anyp/Uri.h \
+ ../src/anyp/UriScheme.h base/CbcPointer.h dns/forward.h error/Error.h \
+ ../src/error/Detail.h ../src/error/forward.h ../src/http/forward.h \
+ HierarchyLogEntry.h enums.h hier_code.h http/StatusCode.h lookup_t.h \
+ PingData.h mem/PoolingAllocator.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h http/Message.h ../src/BodyPipe.h \
+ ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
+ ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
+ ../src/HttpHeader.h ../src/anyp/ProtocolVersion.h \
+ ../src/base/LookupTable.h ../src/sbuf/Algorithms.h \
+ /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
+ /usr/include/c++/13/pstl/glue_numeric_defs.h \
+ ../src/http/RegisteredHeaders.h ../src/base/LookupTable.h \
+ ../src/HttpHeaderMask.h ../src/mem/PoolingAllocator.h \
+ http/RequestMethod.h ../src/http/MethodType.h Notes.h acl/forward.h \
+ format/Format.h SquidString.h RequestFlags.h base/SupportOrVeto.h \
+ /usr/include/c++/13/optional auth/UserRequest.h ../src/AccessLogEntry.h \
+ ../src/anyp/PortCfg.h ../src/base/CodeContext.h ../src/comm/Connection.h \
+ ../src/error/Error.h ../src/HierarchyLogEntry.h \
+ ../src/http/ProtocolVersion.h ../src/http/RequestMethod.h \
+ ../src/HttpHeader.h ../src/icp_opcode.h ../src/ip/Address.h \
+ ../src/LogTags.h ../src/CollapsingHistory.h ../src/MessageSizes.h \
+ ../src/Notes.h ../src/proxyp/forward.h ../src/adaptation/icap/Elements.h \
+ ../src/adaptation/Elements.h ../src/ssl/gadgets.h \
+ ../src/ssl/crtd_message.h /usr/include/openssl/txt_db.h \
+ /usr/include/openssl/x509v3.h /usr/include/openssl/x509v3err.h \
+ ../src/ssl/support.h ../src/ssl/gadgets.h /usr/include/openssl/engine.h \
+ /usr/include/openssl/rand.h /usr/include/openssl/randerr.h \
+ /usr/include/openssl/ui.h /usr/include/openssl/uierr.h \
+ /usr/include/openssl/engineerr.h ../src/auth/AuthAclState.h \
+ ../src/auth/Scheme.h ../src/auth/forward.h ../src/auth/User.h \
+ ../src/auth/CredentialState.h ../src/auth/Type.h ../src/dlink.h \
+ ../src/Notes.h ../src/helper/forward.h adaptation/History.h \
+ ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
+ ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
+ eui/Eui48.h eui/Eui64.h errorpage.h error/Detail.h ip/Address.h \
+ sbuf/SBuf.h CachePeer.h icp_opcode.h security/PeerOptions.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -963,3 +1000,107 @@ log/forward.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+HttpRequest.h:
+anyp/Uri.h:
+../src/anyp/UriScheme.h:
+base/CbcPointer.h:
+dns/forward.h:
+error/Error.h:
+../src/error/Detail.h:
+../src/error/forward.h:
+../src/http/forward.h:
+HierarchyLogEntry.h:
+enums.h:
+hier_code.h:
+http/StatusCode.h:
+lookup_t.h:
+PingData.h:
+mem/PoolingAllocator.h:
+/usr/include/c++/13/map:
+/usr/include/c++/13/bits/stl_tree.h:
+/usr/include/c++/13/bits/stl_map.h:
+/usr/include/c++/13/bits/stl_multimap.h:
+http/Message.h:
+../src/BodyPipe.h:
+../src/base/AsyncJob.h:
+../src/base/CbcPointer.h:
+../src/MemBuf.h:
+../src/enums.h:
+../src/http/ProtocolVersion.h:
+../src/http/StatusCode.h:
+../src/HttpHeader.h:
+../src/anyp/ProtocolVersion.h:
+../src/base/LookupTable.h:
+../src/sbuf/Algorithms.h:
+/usr/include/c++/13/numeric:
+/usr/include/c++/13/bits/stl_numeric.h:
+/usr/include/c++/13/pstl/glue_numeric_defs.h:
+../src/http/RegisteredHeaders.h:
+../src/base/LookupTable.h:
+../src/HttpHeaderMask.h:
+../src/mem/PoolingAllocator.h:
+http/RequestMethod.h:
+../src/http/MethodType.h:
+Notes.h:
+acl/forward.h:
+format/Format.h:
+SquidString.h:
+RequestFlags.h:
+base/SupportOrVeto.h:
+/usr/include/c++/13/optional:
+auth/UserRequest.h:
+../src/AccessLogEntry.h:
+../src/anyp/PortCfg.h:
+../src/base/CodeContext.h:
+../src/comm/Connection.h:
+../src/error/Error.h:
+../src/HierarchyLogEntry.h:
+../src/http/ProtocolVersion.h:
+../src/http/RequestMethod.h:
+../src/HttpHeader.h:
+../src/icp_opcode.h:
+../src/ip/Address.h:
+../src/LogTags.h:
+../src/CollapsingHistory.h:
+../src/MessageSizes.h:
+../src/Notes.h:
+../src/proxyp/forward.h:
+../src/adaptation/icap/Elements.h:
+../src/adaptation/Elements.h:
+../src/ssl/gadgets.h:
+../src/ssl/crtd_message.h:
+/usr/include/openssl/txt_db.h:
+/usr/include/openssl/x509v3.h:
+/usr/include/openssl/x509v3err.h:
+../src/ssl/support.h:
+../src/ssl/gadgets.h:
+/usr/include/openssl/engine.h:
+/usr/include/openssl/rand.h:
+/usr/include/openssl/randerr.h:
+/usr/include/openssl/ui.h:
+/usr/include/openssl/uierr.h:
+/usr/include/openssl/engineerr.h:
+../src/auth/AuthAclState.h:
+../src/auth/Scheme.h:
+../src/auth/forward.h:
+../src/auth/User.h:
+../src/auth/CredentialState.h:
+../src/auth/Type.h:
+../src/dlink.h:
+../src/Notes.h:
+../src/helper/forward.h:
+adaptation/History.h:
+../src/adaptation/DynamicGroupCfg.h:
+../src/SquidString.h:
+../src/adaptation/forward.h:
+adaptation/icap/History.h:
+../src/LogTags.h:
+eui/Eui48.h:
+eui/Eui64.h:
+errorpage.h:
+error/Detail.h:
+ip/Address.h:
+sbuf/SBuf.h:
+CachePeer.h:
+icp_opcode.h:
+security/PeerOptions.h:
