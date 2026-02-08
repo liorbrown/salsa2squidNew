@@ -15,32 +15,38 @@ Salsa2Dispatcher::Salsa2Dispatcher(
     int tries,
     const AccessLogEntryPointer &anAle):
     HappyConnOpener(nullptr, callback, request, aFwdStart, tries, anAle)
-    {
-        peers.reserve(paths.size());
-        
+    {        
         for (PeerConnectionPointer path : paths)
         {
-            Attempt<Salsa2Dispatcher> *attempt = new Attempt<Salsa2Dispatcher>(
-                &Salsa2Dispatcher::noteConnectDone, "Salsa2Dispatcher::noteConnectDone");
-            attempt->path = path;
-
-            peers.emplace_back(attempt);
+            this->peers[path->getPeer()] = new Attempt<Salsa2Dispatcher>(
+                 &Salsa2Dispatcher::noteConnectDone, "Salsa2Dispatcher::noteConnectDone");
+            
+            this->peers[path->getPeer()]->path = path;
         }
     }
 
 Salsa2Dispatcher::~Salsa2Dispatcher()
 {
-    for(auto peer : this->peers) delete(peer);
+    for(auto &peer : this->peers) delete(peer.second);
 }
 
 void Salsa2Dispatcher::start()
 {
-    for(auto peer : this->peers)
-        this->startConnecting<Salsa2Dispatcher>(*peer, peer->path);
+    for(auto &peer : this->peers)
+    {
+        Attempt<Salsa2Dispatcher> *attempt = peer.second;
+        PeerConnectionPointer path = attempt->path;
+        // Need to set it to null, since startConnecting check must(!attempt->path) 
+        attempt->path = nullptr;
+
+        this->startConnecting<Salsa2Dispatcher>(*attempt, path);
+    }
 }
 
 void Salsa2Dispatcher::noteConnectDone(const CommConnectCbParams &params)
 {
-    (void)params;
-}
+    auto attempt = this->peers.find(params.conn->getPeer());
+    assert(attempt != this->peers.end());
 
+    handleConnOpenerAnswer(*attempt->second, params, "new peer connection");
+}

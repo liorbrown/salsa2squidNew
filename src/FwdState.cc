@@ -68,6 +68,8 @@
 #endif
 
 #include <cerrno>
+// @category salsa2
+#include "Salsa2Dispatcher.h"
 
 static CLCB fwdServerClosedWrapper;
 
@@ -612,6 +614,10 @@ FwdState::noteDestination(Comm::ConnectionPointer path)
 
     destinations->addPath(path);
 
+    // @category salsa2
+    if (Config.salsa2 && Config.npeers)
+        this->paths.emplace_back(path, this->paths.size());
+
     if (transportWait) {
         assert(!transporting());
         notifyConnOpener();
@@ -1146,7 +1152,12 @@ FwdState::connectStart()
 
     const auto callback = asyncCallback(17, 5, FwdState::noteConnection, this);
     HttpRequest::Pointer cause = request;
-    const auto cs = new HappyConnOpener(destinations, callback, cause, start_t, n_tries, al);
+
+    // If its in salsa mode, uses Salsa2Dispatcher for send all peers Asynchronously
+    HappyConnOpener *const cs = (Config.salsa2 && Config.npeers) ?
+        new Salsa2Dispatcher(paths, callback, cause, start_t, n_tries, al) :
+        new HappyConnOpener(destinations, callback, cause, start_t, n_tries, al);
+    
     cs->setHost(request->url.host());
     bool retriable = checkRetriable();
     if (!retriable && Config.accessList.serverPconnForNonretriable) {

@@ -534,8 +534,6 @@ HappyConnOpener::reuseOldConnection(PeerConnectionPointer &dest)
     return false;
 }
 
-
-
 /// Comm::ConnOpener callback for the prime connection attempt
 void
 HappyConnOpener::notePrimeConnectDone(const CommConnectCbParams &params)

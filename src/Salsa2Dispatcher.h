@@ -4,14 +4,17 @@
 
 using namespace std;
 
+/// @brief Class for send all selected peers Asynchronously
 class Salsa2Dispatcher: public HappyConnOpener
 {
     private:
-        //vector<unique_ptr<HappyConnOpener::Attempt<Salsa2Dispatcher>>> peers;
-        vector<HappyConnOpener::Attempt<Salsa2Dispatcher>*> peers;
+        // Holds all peers and their attempts
+        map<CachePeer*, HappyConnOpener::Attempt<Salsa2Dispatcher>*> peers;
 
+        // Called when new connection created successfully
         void noteConnectDone(const CommConnectCbParams &params);
 
+        // Starting connections opening
         void start() override;
 
     public:

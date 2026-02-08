@@ -185,8 +185,7 @@ private:
     void notePrimeConnectDone(const CommConnectCbParams &);
     void noteSpareConnectDone(const CommConnectCbParams &);
 
-    template <typename T>
-    void handleConnOpenerAnswer(Attempt<T> &, const CommConnectCbParams &, const char *connDescription);
+    
 
     void checkForNewConnection();
 
@@ -259,6 +258,9 @@ private:
 protected:
     template <typename T>
     void startConnecting(Attempt<T> &, PeerConnectionPointer &);
+
+    template <typename T>
+    void handleConnOpenerAnswer(Attempt<T> &, const CommConnectCbParams &, const char *connDescription);
 };
 
 /// HappyConnOpener::Attempt printer for debugging

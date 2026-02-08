@@ -27,6 +27,9 @@
 #include "ssl/support.h"
 #endif
 
+// @category salsa2
+#include <vector>
+
 /* forward decls */
 
 class AccessLogEntry;
@@ -212,6 +215,9 @@ private:
     /// Whether the entire reply (including any body) was written to Store.
     /// The string literal value is only used for debugging.
     const char *storedWholeReply_;
+    
+    // @category salsa2
+    std::vector<PeerConnectionPointer> paths;
 };
 
 class acl_tos;

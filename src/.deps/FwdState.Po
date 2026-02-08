@@ -458,7 +458,7 @@ FwdState.o: FwdState.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/mem/PoolingAllocator.h ../src/SquidMath.h \
  ../src/base/TypeTraits.h ../src/ssl/cert_validate_message.h \
  ssl/ServerBump.h ../src/HttpRequest.h ../src/Store.h \
- ../src/XactionStep.h
+ ../src/XactionStep.h Salsa2Dispatcher.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1290,3 +1290,4 @@ ssl/ServerBump.h:
 ../src/HttpRequest.h:
 ../src/Store.h:
 ../src/XactionStep.h:
+Salsa2Dispatcher.h:
