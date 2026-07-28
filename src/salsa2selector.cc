@@ -10,6 +10,7 @@
 
 #define NOT_FOUND 99999
 #define V_INIT (0.85)
+#define SINGLE_SELECTION
 
 using namespace std;
 
@@ -266,10 +267,6 @@ void Salsa2Selector::addPeer(CachePeer* peer, hier_code code)
 
 size_t Salsa2Selector::exponentialSelection() const
 {
-    /////////// FOR DEBUG ///////////////////////////////////
-    return 3;
-    /////////////////////////////////////////////////////////
-
     // If expextation greater that miss penalty, so we prefer to not choose any peer
     double minExpectaion = Config.missPenalty;
     size_t result = 0;
@@ -277,7 +274,17 @@ size_t Salsa2Selector::exponentialSelection() const
 
     // Runs on all peers select options
     // Any select option is represent by corresponding bit
-    for (size_t i = 1; i < combinations; i++)
+    for 
+    (
+        size_t i = 1;
+        i < combinations;
+
+        #ifdef SINGLE_SELECTION
+        i <<= 1
+        #else
+        i++
+        #endif
+    )
     {
         double expectaion = this->getCost(i);
         

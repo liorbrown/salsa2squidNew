@@ -35,7 +35,7 @@ class Salsa2Selector{
         /// @brief Checks for each peer if its digest indicate that it have this request
         void checkDigestsHits();
 
-        /// @brief Check all selection option, and choose ther best
+        /// @brief Check all selection option, and choose the best
         /// @return Peers that select. store as bits in this given integer
         /// 0 - Not choose, 1 - Choose
         size_t exponentialSelection() const;
