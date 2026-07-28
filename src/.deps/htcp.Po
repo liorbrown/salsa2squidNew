@@ -417,28 +417,30 @@ htcp.o: htcp.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/hier_code.h ../src/ipcache.h ../src/dns/forward.h \
  ../src/PingData.h ../src/ResolvedPeers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h ../src/ssl/support.h \
- ../src/StoreIOBuffer.h ../src/adaptation/forward.h \
- ../src/adaptation/Initiator.h http/StateFlags.h \
- /usr/include/c++/13/optional http/ContentLengthInterpreter.h \
- ../src/http/StatusCode.h HttpRequest.h anyp/Uri.h \
- ../src/anyp/UriScheme.h dns/forward.h http/Message.h ../src/enums.h \
- ../src/http/ProtocolVersion.h RequestFlags.h base/SupportOrVeto.h \
- auth/UserRequest.h adaptation/History.h \
+ ../src/IDispatcher.h ../src/HttpRequest.h ../src/anyp/Uri.h \
+ ../src/anyp/UriScheme.h ../src/error/Error.h ../src/HierarchyLogEntry.h \
+ ../src/http/Message.h ../src/enums.h ../src/http/ProtocolVersion.h \
+ ../src/http/StatusCode.h ../src/http/RequestMethod.h \
+ ../src/MasterXaction.h ../src/Notes.h ../src/RequestFlags.h \
+ ../src/base/SupportOrVeto.h /usr/include/c++/13/optional \
+ ../src/auth/UserRequest.h ../src/adaptation/History.h \
  ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
- adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
- icmp/net_db.h ip/tools.h ipc/StartListening.h ../src/base/Subscription.h \
- ../src/ipc/FdNotes.h ../include/md5.h refresh.h SquidConfig.h \
- base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h \
- security/forward.h store/Disk.h ../src/store/Controlled.h \
- ../src/store/Storage.h ../src/http/RequestMethod.h \
- ../src/store/forward.h ../src/store_key_md5.h ../src/StoreIOState.h \
- ../src/cbdata.h store/forward.h time/gadgets.h StatCounters.h \
- base/ByteCounter.h StatHist.h Store.h base/DelayedAsyncCalls.h \
- ../src/base/AsyncCallList.h HttpReply.h http/StatusLine.h HttpBody.h \
- MemObject.h dlink.h RemovalPolicy.h stmem.h ../include/splay.h \
- ../src/fatal.h StoreIOState.h typedefs.h store/Controller.h StoreStats.h \
- StoreClient.h acl/ChecklistFiller.h base/forward.h store/ParsingBuffer.h \
- tools.h
+ ../src/adaptation/forward.h ../src/adaptation/icap/History.h \
+ ../src/LogTags.h ../src/eui/Eui48.h ../src/eui/Eui64.h \
+ ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
+ http/ContentLengthInterpreter.h HttpRequest.h icmp/net_db.h ip/tools.h \
+ ipc/StartListening.h ../src/base/Subscription.h ../src/ipc/FdNotes.h \
+ ../include/md5.h refresh.h SquidConfig.h base/YesNoNone.h \
+ helper/ChildConfig.h HttpHeaderTools.h security/forward.h store/Disk.h \
+ ../src/store/Controlled.h ../src/store/Storage.h \
+ ../src/http/RequestMethod.h ../src/store/forward.h \
+ ../src/store_key_md5.h ../src/StoreIOState.h ../src/cbdata.h \
+ store/forward.h time/gadgets.h StatCounters.h base/ByteCounter.h \
+ StatHist.h Store.h base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h \
+ HttpReply.h http/StatusLine.h HttpBody.h MemObject.h dlink.h \
+ RemovalPolicy.h stmem.h ../include/splay.h ../src/fatal.h StoreIOState.h \
+ typedefs.h store/Controller.h StoreStats.h StoreClient.h \
+ acl/ChecklistFiller.h base/forward.h store/ParsingBuffer.h tools.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1132,30 +1134,36 @@ clients/Client.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ../src/ssl/support.h:
-../src/StoreIOBuffer.h:
-../src/adaptation/forward.h:
-../src/adaptation/Initiator.h:
-http/StateFlags.h:
-/usr/include/c++/13/optional:
-http/ContentLengthInterpreter.h:
-../src/http/StatusCode.h:
-HttpRequest.h:
-anyp/Uri.h:
+../src/IDispatcher.h:
+../src/HttpRequest.h:
+../src/anyp/Uri.h:
 ../src/anyp/UriScheme.h:
-dns/forward.h:
-http/Message.h:
+../src/error/Error.h:
+../src/HierarchyLogEntry.h:
+../src/http/Message.h:
 ../src/enums.h:
 ../src/http/ProtocolVersion.h:
-RequestFlags.h:
-base/SupportOrVeto.h:
-auth/UserRequest.h:
-adaptation/History.h:
+../src/http/StatusCode.h:
+../src/http/RequestMethod.h:
+../src/MasterXaction.h:
+../src/Notes.h:
+../src/RequestFlags.h:
+../src/base/SupportOrVeto.h:
+/usr/include/c++/13/optional:
+../src/auth/UserRequest.h:
+../src/adaptation/History.h:
 ../src/adaptation/DynamicGroupCfg.h:
 ../src/SquidString.h:
-adaptation/icap/History.h:
+../src/adaptation/forward.h:
+../src/adaptation/icap/History.h:
 ../src/LogTags.h:
-eui/Eui48.h:
-eui/Eui64.h:
+../src/eui/Eui48.h:
+../src/eui/Eui64.h:
+../src/StoreIOBuffer.h:
+../src/adaptation/Initiator.h:
+http/StateFlags.h:
+http/ContentLengthInterpreter.h:
+HttpRequest.h:
 icmp/net_db.h:
 ip/tools.h:
 ipc/StartListening.h:

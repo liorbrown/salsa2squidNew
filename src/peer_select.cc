@@ -417,17 +417,8 @@ PeerSelector::resolveSelected()
 
     FwdServer *fs = servers;
 
-    // stringstream str;
-
-    // str << "Peers selected:";
-
-    // for (FwdServer *curr_fs = fs; curr_fs; curr_fs = curr_fs->next)
-    //     str << '\n' << curr_fs->code << " : " << *curr_fs->_peer;
-    
-    
-    // debugs(96, DBG_IMPORTANT, str.str());
     if (fs)
-        debugs(96, DBG_IMPORTANT, "Peer selected: " << hier_code_str[fs->code] << " : " << *fs->_peer);
+        debugs(96, 4, "Peer selected: " << hier_code_str[fs->code] << " : " << *fs->_peer);
     
     // Bug 3243: CVE 2009-0801
     // Bypass of browser same-origin access control in intercepted communication

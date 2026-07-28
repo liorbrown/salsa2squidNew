@@ -467,8 +467,9 @@ Xaction.lo: Xaction.cc /usr/include/stdc-predef.h \
  ../../../src/PeerSelectState.h ../../../src/AccessLogEntry.h \
  ../../../src/acl/Checklist.h ../../../src/ipcache.h \
  ../../../src/ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h icap_log.h \
- ../../../src/security/PeerConnector.h ../../../src/acl/ChecklistFiller.h \
+ /usr/include/c++/13/bits/stl_relops.h ../../../src/IDispatcher.h \
+ icap_log.h ../../../src/security/PeerConnector.h \
+ ../../../src/acl/ChecklistFiller.h \
  ../../../src/security/EncryptorAnswer.h \
  ../../../src/security/KeyLogger.h \
  ../../../src/security/CommunicationSecrets.h ../../../src/ssl/support.h \
@@ -1186,6 +1187,7 @@ Xaction.lo: Xaction.cc /usr/include/stdc-predef.h \
 ../../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+../../../src/IDispatcher.h:
 icap_log.h:
 ../../../src/security/PeerConnector.h:
 ../../../src/acl/ChecklistFiller.h:

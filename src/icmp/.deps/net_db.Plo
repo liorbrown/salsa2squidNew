@@ -421,11 +421,10 @@ net_db.lo: net_db.cc /usr/include/stdc-predef.h ../../include/squid.h \
  ../../src/acl/Options.h ../../src/dlink.h ../../src/ipcache.h \
  ../../src/dns/forward.h ../../src/ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- ../../src/HttpReply.h ../../src/http/StatusLine.h \
+ ../../src/IDispatcher.h ../../src/HttpRequest.h ../../src/anyp/Uri.h \
+ ../../src/anyp/UriScheme.h ../../src/http/Message.h ../../src/BodyPipe.h \
+ ../../src/base/AsyncJob.h ../../src/enums.h \
  ../../src/http/ProtocolVersion.h ../../src/http/StatusCode.h \
- ../../src/SquidString.h ../../src/HttpBody.h ../../src/HttpRequest.h \
- ../../src/anyp/Uri.h ../../src/anyp/UriScheme.h ../../src/http/Message.h \
- ../../src/BodyPipe.h ../../src/base/AsyncJob.h ../../src/enums.h \
  ../../src/HttpHeader.h ../../src/RequestFlags.h \
  ../../src/base/SupportOrVeto.h /usr/include/c++/13/optional \
  ../../src/auth/UserRequest.h ../../src/AccessLogEntry.h \
@@ -433,11 +432,12 @@ net_db.lo: net_db.cc /usr/include/stdc-predef.h ../../include/squid.h \
  ../../src/auth/forward.h ../../src/auth/User.h \
  ../../src/auth/CredentialState.h ../../src/auth/Type.h ../../src/Notes.h \
  ../../src/helper/forward.h ../../src/adaptation/History.h \
- ../../src/adaptation/DynamicGroupCfg.h ../../src/adaptation/forward.h \
- ../../src/adaptation/icap/History.h ../../src/LogTags.h \
- ../../src/eui/Eui48.h ../../src/eui/Eui64.h ../../src/icmp/net_db.h \
- ../../src/internal.h ../../src/log/forward.h ../../src/log/File.h \
- /usr/include/x86_64-linux-gnu/sys/param.h \
+ ../../src/adaptation/DynamicGroupCfg.h ../../src/SquidString.h \
+ ../../src/adaptation/forward.h ../../src/adaptation/icap/History.h \
+ ../../src/LogTags.h ../../src/eui/Eui48.h ../../src/eui/Eui64.h \
+ ../../src/HttpReply.h ../../src/http/StatusLine.h ../../src/HttpBody.h \
+ ../../src/icmp/net_db.h ../../src/internal.h ../../src/log/forward.h \
+ ../../src/log/File.h /usr/include/x86_64-linux-gnu/sys/param.h \
  /usr/include/x86_64-linux-gnu/bits/param.h /usr/include/linux/param.h \
  /usr/include/x86_64-linux-gnu/asm/param.h \
  /usr/include/asm-generic/param.h ../../src/MemObject.h \
@@ -1108,12 +1108,7 @@ net_db.lo: net_db.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-../../src/HttpReply.h:
-../../src/http/StatusLine.h:
-../../src/http/ProtocolVersion.h:
-../../src/http/StatusCode.h:
-../../src/SquidString.h:
-../../src/HttpBody.h:
+../../src/IDispatcher.h:
 ../../src/HttpRequest.h:
 ../../src/anyp/Uri.h:
 ../../src/anyp/UriScheme.h:
@@ -1121,6 +1116,8 @@ net_db.lo: net_db.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/BodyPipe.h:
 ../../src/base/AsyncJob.h:
 ../../src/enums.h:
+../../src/http/ProtocolVersion.h:
+../../src/http/StatusCode.h:
 ../../src/HttpHeader.h:
 ../../src/RequestFlags.h:
 ../../src/base/SupportOrVeto.h:
@@ -1137,11 +1134,15 @@ net_db.lo: net_db.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/helper/forward.h:
 ../../src/adaptation/History.h:
 ../../src/adaptation/DynamicGroupCfg.h:
+../../src/SquidString.h:
 ../../src/adaptation/forward.h:
 ../../src/adaptation/icap/History.h:
 ../../src/LogTags.h:
 ../../src/eui/Eui48.h:
 ../../src/eui/Eui64.h:
+../../src/HttpReply.h:
+../../src/http/StatusLine.h:
+../../src/HttpBody.h:
 ../../src/icmp/net_db.h:
 ../../src/internal.h:
 ../../src/log/forward.h:

@@ -438,11 +438,11 @@ client_side_reply.o: client_side_reply.cc /usr/include/stdc-predef.h \
  ../src/proxyp/Elements.h FwdState.h base/JobWait.h clients/forward.h \
  comm/Connection.h PeerSelectState.h acl/Checklist.h hier_code.h \
  ipcache.h PingData.h ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h globals.h http/Stream.h \
- HttpHeaderTools.h format/Format.h HttpHeader.h sbuf/forward.h \
- ip/QosConfig.h ../src/ip/NfMarkConfig.h log/access_log.h mime_header.h \
- neighbors.h ICP.h icp_opcode.h lookup_t.h refresh.h SquidConfig.h \
- base/YesNoNone.h helper/ChildConfig.h store/Disk.h \
+ /usr/include/c++/13/bits/stl_relops.h IDispatcher.h globals.h \
+ http/Stream.h HttpHeaderTools.h format/Format.h HttpHeader.h \
+ sbuf/forward.h ip/QosConfig.h ../src/ip/NfMarkConfig.h log/access_log.h \
+ mime_header.h neighbors.h ICP.h icp_opcode.h lookup_t.h refresh.h \
+ SquidConfig.h base/YesNoNone.h helper/ChildConfig.h store/Disk.h \
  ../src/store/Controlled.h ../src/StoreIOState.h time/gadgets.h \
  SquidMath.h base/TypeTraits.h StrList.h tools.h salsa2parent.h \
  CachePeer.h security/PeerOptions.h PeerDigest.h StatCounters.h \
@@ -1205,6 +1205,7 @@ PingData.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+IDispatcher.h:
 globals.h:
 http/Stream.h:
 HttpHeaderTools.h:

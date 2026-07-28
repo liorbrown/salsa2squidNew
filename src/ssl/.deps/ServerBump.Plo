@@ -451,10 +451,10 @@ ServerBump.lo: ServerBump.cc /usr/include/stdc-predef.h \
  ../../src/acl/InnerNode.h ../../src/acl/Acl.h ../../src/acl/Options.h \
  ../../src/ipcache.h ../../src/ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- ../../src/http/Stream.h ../../src/StoreIOBuffer.h \
- ../../src/ssl/ServerBump.h ../../src/HttpRequest.h ../../src/Store.h \
- ../../src/XactionStep.h ../../src/StoreClient.h \
- ../../src/store/ParsingBuffer.h
+ ../../src/IDispatcher.h ../../src/http/Stream.h \
+ ../../src/StoreIOBuffer.h ../../src/ssl/ServerBump.h \
+ ../../src/HttpRequest.h ../../src/Store.h ../../src/XactionStep.h \
+ ../../src/StoreClient.h ../../src/store/ParsingBuffer.h
 /usr/include/stdc-predef.h:
 ../../include/squid.h:
 ../../include/autoconf.h:
@@ -1171,6 +1171,7 @@ ServerBump.lo: ServerBump.cc /usr/include/stdc-predef.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+../../src/IDispatcher.h:
 ../../src/http/Stream.h:
 ../../src/StoreIOBuffer.h:
 ../../src/ssl/ServerBump.h:

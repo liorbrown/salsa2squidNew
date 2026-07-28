@@ -436,7 +436,8 @@ http.o: http.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/comm/forward.h ../src/ipcache.h ../src/dns/forward.h \
  ../src/typedefs.h ../src/ResolvedPeers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h ../src/security/forward.h \
- ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
+ ../src/IDispatcher.h ../src/HttpRequest.h ../src/StoreIOBuffer.h \
+ ../src/adaptation/Initiator.h http/StateFlags.h \
  http/one/ResponseParser.h ../src/http/one/Parser.h \
  http/one/TeChunkedParser.h http/Stream.h HttpHdrCc.h dlink.h \
  HttpHdrContRange.h HttpHeaderRange.h HttpHdrSc.h HttpHdrScTarget.h \
@@ -1200,6 +1201,8 @@ clients/Client.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ../src/security/forward.h:
+../src/IDispatcher.h:
+../src/HttpRequest.h:
 ../src/StoreIOBuffer.h:
 ../src/adaptation/Initiator.h:
 http/StateFlags.h:

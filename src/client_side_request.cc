@@ -1780,9 +1780,7 @@ ClientHttpRequest::doCallouts()
 
         
         // @category salsa2
-
-        debugs(96, DBG_IMPORTANT, "New request arrived - " << uri
-        << "\nFrom " << request->client_addr);
+        debugs(96, 3, "New request arrived - " << uri << " From " << request->client_addr);
 
         // Restore HTTPS for originally-HTTPS requests BEFORE cache lookup
         // This must happen AFTER clientInterpretRequestHeaders() sets the originally_https flag

@@ -417,20 +417,21 @@ neighbors.o: neighbors.cc /usr/include/stdc-predef.h ../include/squid.h \
  PeerSelectState.h AccessLogEntry.h acl/Checklist.h comm/forward.h \
  hier_code.h ipcache.h dns/forward.h PingData.h ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- ssl/support.h globals.h htcp.h http/forward.h HttpHeader.h \
- store_key_md5.h HttpRequest.h anyp/Uri.h ../src/anyp/UriScheme.h \
- error/Error.h HierarchyLogEntry.h http/Message.h ../src/BodyPipe.h \
- ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
- ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
- http/RequestMethod.h MasterXaction.h Notes.h RequestFlags.h \
- base/SupportOrVeto.h auth/UserRequest.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
- ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
- eui/Eui48.h eui/Eui64.h icmp/net_db.h ICP.h LogTags.h StoreClient.h \
- acl/ChecklistFiller.h base/AsyncCall.h dlink.h store/ParsingBuffer.h \
- ../src/StoreIOBuffer.h StoreIOState.h store/forward.h int.h ip/tools.h \
- MemObject.h base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h \
- RemovalPolicy.h SquidString.h stmem.h ../include/splay.h ../src/fatal.h \
+ ssl/support.h IDispatcher.h HttpRequest.h anyp/Uri.h \
+ ../src/anyp/UriScheme.h error/Error.h HierarchyLogEntry.h http/Message.h \
+ ../src/BodyPipe.h ../src/base/AsyncJob.h ../src/base/CbcPointer.h \
+ ../src/MemBuf.h ../src/enums.h ../src/http/ProtocolVersion.h \
+ ../src/http/StatusCode.h http/RequestMethod.h MasterXaction.h Notes.h \
+ RequestFlags.h base/SupportOrVeto.h auth/UserRequest.h \
+ adaptation/History.h ../src/adaptation/DynamicGroupCfg.h \
+ ../src/SquidString.h ../src/adaptation/forward.h \
+ adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
+ globals.h htcp.h http/forward.h HttpHeader.h store_key_md5.h \
+ icmp/net_db.h ICP.h LogTags.h StoreClient.h acl/ChecklistFiller.h \
+ base/AsyncCall.h dlink.h store/ParsingBuffer.h ../src/StoreIOBuffer.h \
+ StoreIOState.h store/forward.h int.h ip/tools.h MemObject.h \
+ base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h RemovalPolicy.h \
+ SquidString.h stmem.h ../include/splay.h ../src/fatal.h \
  mgr/Registration.h ../src/mgr/forward.h multicast.h neighbors.h \
  anyp/forward.h lookup_t.h NeighborTypeDomainList.h pconn.h \
  base/RunnersRegistry.h mgr/forward.h /usr/include/c++/13/set \
@@ -1126,11 +1127,7 @@ ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ssl/support.h:
-globals.h:
-htcp.h:
-http/forward.h:
-HttpHeader.h:
-store_key_md5.h:
+IDispatcher.h:
 HttpRequest.h:
 anyp/Uri.h:
 ../src/anyp/UriScheme.h:
@@ -1158,6 +1155,11 @@ adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+globals.h:
+htcp.h:
+http/forward.h:
+HttpHeader.h:
+store_key_md5.h:
 icmp/net_db.h:
 ICP.h:
 LogTags.h:

@@ -230,6 +230,7 @@ public:
     uint64_t swap_file_sz;
     uint16_t refcount;
     uint16_t flags;
+    CachePeer *peerWriting = nullptr;
     /* END OF ON-DISK STORE_META_STD */
 
     /// unique ID inside a cache_dir for swapped out entries; -1 for others

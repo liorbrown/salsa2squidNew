@@ -406,8 +406,8 @@ PeerPoolMgr.o: PeerPoolMgr.cc /usr/include/stdc-predef.h \
  ../src/acl/InnerNode.h ../src/acl/Acl.h ../src/acl/forward.h \
  ../src/acl/Options.h ../src/dlink.h comm/forward.h ipcache.h \
  dns/forward.h ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h globals.h HttpRequest.h anyp/Uri.h \
- ../src/anyp/UriScheme.h http/Message.h ../src/BodyPipe.h \
+ /usr/include/c++/13/bits/stl_relops.h IDispatcher.h HttpRequest.h \
+ anyp/Uri.h ../src/anyp/UriScheme.h http/Message.h ../src/BodyPipe.h \
  ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
  ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
  ../src/HttpHeader.h MasterXaction.h RequestFlags.h base/SupportOrVeto.h \
@@ -417,9 +417,9 @@ PeerPoolMgr.o: PeerPoolMgr.cc /usr/include/stdc-predef.h \
  ../src/Notes.h ../src/helper/forward.h adaptation/History.h \
  ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
  ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
- eui/Eui48.h eui/Eui64.h neighbors.h anyp/forward.h ICP.h store_key_md5.h \
- StoreClient.h acl/ChecklistFiller.h base/AsyncCall.h dlink.h \
- store/ParsingBuffer.h ../src/StoreIOBuffer.h StoreIOState.h \
+ eui/Eui48.h eui/Eui64.h globals.h neighbors.h anyp/forward.h ICP.h \
+ store_key_md5.h StoreClient.h acl/ChecklistFiller.h base/AsyncCall.h \
+ dlink.h store/ParsingBuffer.h ../src/StoreIOBuffer.h StoreIOState.h \
  store/forward.h pconn.h mgr/forward.h /usr/include/c++/13/set \
  /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h PeerPoolMgr.h base/AsyncJob.h \
@@ -1094,7 +1094,7 @@ dns/forward.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-globals.h:
+IDispatcher.h:
 HttpRequest.h:
 anyp/Uri.h:
 ../src/anyp/UriScheme.h:
@@ -1129,6 +1129,7 @@ adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+globals.h:
 neighbors.h:
 anyp/forward.h:
 ICP.h:

@@ -435,12 +435,13 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/squid.h \
  FwdState.h base/forward.h base/JobWait.h clients/forward.h fde.h \
  defines.h ip/forward.h PeerSelectState.h ipcache.h ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- globals.h htcp.h store_key_md5.h http/Stream.h ../src/StoreIOBuffer.h \
- icmp/IcmpSquid.h icmp/Icmp.h icmp/net_db.h ICP.h StoreClient.h dlink.h \
- store/ParsingBuffer.h StoreIOState.h store/forward.h Instance.h \
- ip/tools.h ipc/Coordinator.h ../src/ipc/Messages.h ../src/ipc/Port.h \
- ../src/ipc/UdsOp.h ../src/ipc/FdNotes.h ../src/ipc/TypedMsgHdr.h \
- ../compat/cmsg.h /usr/include/x86_64-linux-gnu/sys/un.h \
+ IDispatcher.h globals.h htcp.h store_key_md5.h http/Stream.h \
+ ../src/StoreIOBuffer.h icmp/IcmpSquid.h icmp/Icmp.h icmp/net_db.h ICP.h \
+ StoreClient.h dlink.h store/ParsingBuffer.h StoreIOState.h \
+ store/forward.h Instance.h ip/tools.h ipc/Coordinator.h \
+ ../src/ipc/Messages.h ../src/ipc/Port.h ../src/ipc/UdsOp.h \
+ ../src/ipc/FdNotes.h ../src/ipc/TypedMsgHdr.h ../compat/cmsg.h \
+ /usr/include/x86_64-linux-gnu/sys/un.h \
  /usr/include/x86_64-linux-gnu/sys/uio.h \
  /usr/include/x86_64-linux-gnu/bits/uio-ext.h ../src/ipc/SharedListen.h \
  ../src/base/Subscription.h ../src/ipc/QuestionerId.h \
@@ -1243,6 +1244,7 @@ ipcache.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+IDispatcher.h:
 globals.h:
 htcp.h:
 store_key_md5.h:

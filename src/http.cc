@@ -77,15 +77,21 @@ static void httpMaybeRemovePublic(StoreEntry *, Http::StatusCode);
 static void copyOneHeaderFromClientsideRequestToUpstreamRequest(const HttpHeaderEntry *e, const String strConnection, const HttpRequest * request,
         HttpHeader * hdr_out, const int we_do_ranges, const Http::StateFlags &);
 
-HttpStateData::HttpStateData(FwdState *theFwdState) :
+// @category Salsa2
+// Change params to IDispatcher and ConnectionPointer
+HttpStateData::HttpStateData(IDispatcher *theFwdState, Comm::ConnectionPointer conn) :
     AsyncJob("HttpStateData"),
-    Client(theFwdState)
+    Client(theFwdState),
+    serverConnection(conn)
 {
+    debugs(96,3,"Create " << this);
     debugs(11,5, "HttpStateData " << this << " created");
-    serverConnection = fwd->serverConnection();
 
-    if (fwd->serverConnection() != nullptr)
-        _peer = cbdataReference(fwd->serverConnection()->getPeer());         /* might be NULL */
+    // @category Salsa2
+    // Change for fwd->serverConnection() to serverConnection
+    // Since the Salsa2Dispatcher have multiply connections
+    if (serverConnection)
+        _peer = cbdataReference(serverConnection->getPeer());         /* might be NULL */
 
     flags.peering =  _peer;
     flags.tunneling = (_peer && request->flags.sslBumped);
@@ -119,13 +125,14 @@ HttpStateData::~HttpStateData()
      * don't forget that ~Client() gets called automatically
      */
 
+     debugs(96,3,"Delete " << this);
     if (httpChunkDecoder)
         delete httpChunkDecoder;
 
     cbdataReferenceDone(_peer);
 
     delete upgradeHeaderOut;
-
+    debugs(96,3, "HttpStateData " << this << " destroyed; " << serverConnection);
     debugs(11,5, "HttpStateData " << this << " destroyed; " << serverConnection);
 }
 
@@ -734,8 +741,8 @@ HttpStateData::processReplyHeader()
     if (!peerSupportsConnectionPinning())
         request->flags.connectionAuthDisabled = true;
 
-    debugs(96, DBG_IMPORTANT, "Got response for " << request->url 
-        << "\nfrom " << (this->_peer ? (this->_peer->name) : "origin"));
+    debugs(96, 3, "Got response for " << request->url 
+        << " from " << (this->_peer ? (this->_peer->name) : "origin"));
 
     // @category salsa2 
     // Update parent statistics
@@ -1188,10 +1195,31 @@ HttpStateData::readReply(const CommIoCbParams &io)
 
     debugs(11, 5, io.conn);
 
+    
+
     // Bail out early on Comm::ERR_CLOSING - close handlers will tidy up for us
     if (io.flag == Comm::ERR_CLOSING) {
         debugs(11, 3, "http socket closing");
         return;
+    }
+
+    // @category salsa2
+    // abort writing if entry already done by other httpState
+    if (Config.salsa2 && this->_peer)
+    {
+        if (this->entry->peerWriting)
+        {
+            if (this->entry->peerWriting != this->_peer)
+            {
+                abortTransaction("store entry already handle by other peer");
+                return;
+            }
+        }
+        else
+        {
+            debugs(96, 5, "entry: " << this->entry->url() << " set to handle by " << *this->_peer);
+            this->entry->peerWriting = this->_peer;
+        }
     }
 
     if (EBIT_TEST(entry->flags, ENTRY_ABORTED)) {
@@ -1506,13 +1534,15 @@ HttpStateData::processReplyBody()
      */
     if (entry->isAccepting()) {
         if (flags.chunked) {
-            if (!decodeAndWriteReplyBody()) {
+            if (!decodeAndWriteReplyBody()) 
+            {
                 flags.do_next_read = false;
                 serverComplete();
                 return;
             }
-        } else
+        } else{
             writeReplyBody();
+        }
     }
 
     // storing/sending methods like earlier adaptOrFinalizeReply() or
@@ -2519,15 +2549,16 @@ HttpStateData::getMoreRequestBody(MemBuf &buf)
 }
 
 void
-httpStart(FwdState *fwd)
+httpStart(IDispatcher *fwd, Comm::ConnectionPointer conn)
 {
     debugs(11, 3, fwd->request->method << ' ' << fwd->entry->url());
-    AsyncJob::Start(new HttpStateData(fwd));
+    AsyncJob::Start(new HttpStateData(fwd, conn));
 }
 
 void
 HttpStateData::start()
 {
+    debugs(96, 3, "Start requesting " <<  request->url << " from " << this->_peer);
     if (!sendRequest()) {
         debugs(11, 3, "httpStart: aborted");
         mustStop("HttpStateData::start failed");
@@ -2542,6 +2573,7 @@ HttpStateData::start()
      * Now its set in httpSendComplete() after the full request,
      * including request body, has been written to the server.
      */
+    debugs(96, 3, "End requesting " <<  request->url << " from " << this->_peer);
 }
 
 /// if broken posts are enabled for the request, try to fix and return true

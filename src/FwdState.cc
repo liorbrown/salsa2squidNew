@@ -33,6 +33,7 @@
 #include "FwdState.h"
 #include "globals.h"
 #include "HappyConnOpener.h"
+#include "Salsa2Dispatcher.h"
 #include "hier_code.h"
 #include "http.h"
 #include "http/Stream.h"
@@ -68,8 +69,6 @@
 #endif
 
 #include <cerrno>
-// @category salsa2
-#include "Salsa2Dispatcher.h"
 
 static CLCB fwdServerClosedWrapper;
 
@@ -121,9 +120,9 @@ FwdState::closeServerConnection(const char *reason)
 /**** PUBLIC INTERFACE ********************************************************/
 
 FwdState::FwdState(const Comm::ConnectionPointer &client, StoreEntry * e, HttpRequest * r, const AccessLogEntryPointer &alp):
-    entry(e),
-    request(r),
-    al(alp),
+    // @category salsa2
+    // Add IDispatcher construction
+    IDispatcher(r,e, alp),
     err(nullptr),
     clientConn(client),
     start_t(squid_curtime),
@@ -537,8 +536,12 @@ FwdState::unregister(int fd)
  * to finish it off
  */
 void
-FwdState::complete()
+FwdState::complete(const Comm::ConnectionPointer conn)
 {
+    // @category Salsa2
+    // add this to avoid NotUsedParam Error
+    // Need this param for IDispatcher
+    (void)conn;
     const auto replyStatus = entry->mem().baseReply().sline.status();
     debugs(17, 3, *entry << " status " << replyStatus << ' ' << entry->url());
 #if URL_CHECKSUM_DEBUG
@@ -613,10 +616,12 @@ FwdState::noteDestination(Comm::ConnectionPointer path)
     debugs(17, 3, path);
 
     destinations->addPath(path);
+    debugs(96, 3, "Salsa2: Path added: " << path);
 
     // @category salsa2
-    if (Config.salsa2 && Config.npeers)
-        this->paths.emplace_back(path, this->paths.size());
+    // adds salsa2 condition to ensure in salsa useDestinations() called 
+    // only once from noteDestinationEnd()
+    if (Config.salsa2) return;
 
     if (transportWait) {
         assert(!transporting());
@@ -649,6 +654,14 @@ FwdState::noteDestinationsEnd(ErrorState *selectionError)
     // else continue to use one of the previously noted destinations;
     // if all of them fail, forwarding as whole will fail
     Must(!selectionError); // finding at least one path means selection succeeded
+
+    // @category salsa2
+    // Salsa2 create connections only after got all destinations
+    if (Config.salsa2)
+    {
+        this->useDestinations();
+        return;
+    }
 
     if (transportWait) {
         assert(!transporting());
@@ -1150,15 +1163,6 @@ FwdState::connectStart()
 
     request->hier.startPeerClock();
 
-    const auto callback = asyncCallback(17, 5, FwdState::noteConnection, this);
-    HttpRequest::Pointer cause = request;
-
-    // If its in salsa mode, uses Salsa2Dispatcher for send all peers Asynchronously
-    HappyConnOpener *const cs = (Config.salsa2 && Config.npeers) ?
-        new Salsa2Dispatcher(paths, callback, cause, start_t, n_tries, al) :
-        new HappyConnOpener(destinations, callback, cause, start_t, n_tries, al);
-    
-    cs->setHost(request->url.host());
     bool retriable = checkRetriable();
     if (!retriable && Config.accessList.serverPconnForNonretriable) {
         ACLFilledChecklist ch(Config.accessList.serverPconnForNonretriable, request, nullptr);
@@ -1166,6 +1170,31 @@ FwdState::connectStart()
         ch.syncAle(request, nullptr);
         retriable = ch.fastCheck().allowed();
     }
+
+    // @category salsa2
+    // Start Salsa2Dispatcher if there more than 1 path
+    if (Config.salsa2 && destinations->paths_.size() > 1)
+    {
+        Salsa2Dispatcher::Salsa2DispatcherStart(
+            this->destinations, 
+            this->start_t, 
+            this->n_tries, 
+            retriable,
+            pconnRace != raceHappened,
+            *this,
+            this->clientConn
+        );
+
+        return;
+    }
+
+    const auto callback = asyncCallback(17, 5, FwdState::noteConnection, this);
+    HttpRequest::Pointer cause = request;
+
+    auto const cs = new HappyConnOpener(destinations, callback, cause, start_t, n_tries, al);
+    
+    cs->setHost(request->url.host());
+    
     cs->setRetriable(retriable);
     cs->allowPersistent(pconnRace != raceHappened);
     destinations->notificationPending = true; // start() is async
@@ -1279,9 +1308,9 @@ FwdState::dispatch()
         ++peer->stats.fetches;
         request->prepForPeering(*peer);
 
-        debugs(96, DBG_IMPORTANT, "Start requesting " << request->url << " from " << *peer);
-
-        httpStart(this);
+        // @category salsa2
+        // Add connection parameter
+        httpStart(this, this->serverConnection());
     } else {
         assert(!request->flags.sslPeek);
         request->prepForDirect();
@@ -1291,15 +1320,19 @@ FwdState::dispatch()
         // These headers are only for internal Squid-to-Squid communication
         request->header.delByName("X-Originally-HTTPS");
         request->header.delByName("salsa2");
-        debugs(96, DBG_IMPORTANT, "Start requesting " << request->url << " from origin");
+        debugs(96, 3, "Start requesting " << request->url << " from origin");
         switch (request->url.getScheme()) {
 
         case AnyP::PROTO_HTTPS:
-            httpStart(this);
+            // @category salsa2
+            // Add connection parameter
+            httpStart(this, this->serverConnection());
             break;
 
         case AnyP::PROTO_HTTP:
-            httpStart(this);
+            // @category salsa2
+            // Add connection parameter
+            httpStart(this, this->serverConnection());
             break;
 
         case AnyP::PROTO_FTP:

@@ -1298,9 +1298,9 @@ clientReplyContext::buildReplyHeader()
 
     ConnStateData *clientConn = http->getConn();
 
-    debugs(96, DBG_IMPORTANT, "Salsa2: replays to " 
+    debugs(96, 3, "Salsa2: replays to " 
         << clientConn->clientConnection << ":" << clientConn->port
-        << "\nResponse for " << request->url);
+        << ". Response for " << request->url);
 
     if (is_hit || collapsedRevalidation == crSlave)
         hdr->delById(Http::HdrType::SET_COOKIE);
@@ -2045,6 +2045,7 @@ clientReplyContext::processReplyAccessResult(const Acl::Answer &accessAllowed)
         localTempBuffer.data = body_buf;
     }
 
+    
     clientStreamCallback((clientStreamNode *)http->client_stream.head->data,
                          http, reply, localTempBuffer);
 

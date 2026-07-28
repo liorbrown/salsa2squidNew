@@ -264,8 +264,12 @@ void Salsa2Selector::addPeer(CachePeer* peer, hier_code code)
     }
 }
 
-size_t Salsa2Selector::naiveSelection() const
+size_t Salsa2Selector::exponentialSelection() const
 {
+    /////////// FOR DEBUG ///////////////////////////////////
+    return 3;
+    /////////////////////////////////////////////////////////
+
     // If expextation greater that miss penalty, so we prefer to not choose any peer
     double minExpectaion = Config.missPenalty;
     size_t result = 0;
@@ -338,7 +342,7 @@ void Salsa2Selector::selectPeers()
     debugs(96, 4, "salsa2: missProbabilities:" << this->missProbabilities);
 
     // Gets best peers selection by naive selection
-    size_t selection = this->naiveSelection();
+    size_t selection = this->exponentialSelection();
 
     // Run on all peers and add to selection the selected peers.
     // if selection = 0 it says that the best option is to leave peers and go directly

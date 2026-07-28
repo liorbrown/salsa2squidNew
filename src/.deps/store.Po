@@ -428,29 +428,29 @@ store.o: store.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/acl/InnerNode.h ../src/acl/Acl.h ../src/acl/forward.h \
  ../src/acl/Options.h ../src/dlink.h ../src/ipcache.h \
  ../src/dns/forward.h ../src/typedefs.h ../src/ResolvedPeers.h \
- ../src/security/forward.h ../src/StoreIOBuffer.h \
- ../src/adaptation/forward.h ../src/adaptation/Initiator.h \
- http/StateFlags.h sbuf/SBuf.h HttpReply.h http/StatusLine.h \
- ../src/http/ProtocolVersion.h ../src/http/StatusCode.h HttpBody.h \
- HttpRequest.h anyp/Uri.h ../src/anyp/UriScheme.h base/CbcPointer.h \
- dns/forward.h error/Error.h HierarchyLogEntry.h http/Message.h \
- ../src/enums.h ../src/HttpHeader.h http/RequestMethod.h MasterXaction.h \
- Notes.h RequestFlags.h auth/UserRequest.h ../src/AccessLogEntry.h \
- ../src/auth/AuthAclState.h ../src/auth/Scheme.h ../src/auth/forward.h \
- ../src/auth/User.h ../src/auth/CredentialState.h ../src/auth/Type.h \
- ../src/Notes.h ../src/helper/forward.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h adaptation/icap/History.h \
- ../src/LogTags.h eui/Eui48.h eui/Eui64.h mem_node.h MemObject.h \
- base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h dlink.h \
- RemovalPolicy.h SquidString.h stmem.h ../include/splay.h ../src/fatal.h \
- StoreIOState.h base/RefCount.h MemStore.h ipc/mem/Page.h \
- ipc/mem/PageStack.h ipc/StoreMap.h ../src/ipc/ReadWriteLock.h \
- ../src/store/forward.h ../src/store_key_md5.h Store.h store/Controller.h \
- ../src/store/Storage.h StoreStats.h store/Controlled.h \
- mgr/Registration.h mgr/StoreIoAction.h ../src/mgr/Action.h \
- repl_modules.h sbuf/Stream.h ../src/base/PackableStream.h SquidConfig.h \
- acl/forward.h base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h \
- format/Format.h HttpHeader.h sbuf/forward.h ssl/support.h store/Disk.h \
+ ../src/security/forward.h ../src/IDispatcher.h ../src/HttpRequest.h \
+ ../src/anyp/Uri.h ../src/anyp/UriScheme.h ../src/http/Message.h \
+ ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
+ ../src/HttpHeader.h ../src/RequestFlags.h ../src/auth/UserRequest.h \
+ ../src/AccessLogEntry.h ../src/auth/AuthAclState.h ../src/auth/Scheme.h \
+ ../src/auth/forward.h ../src/auth/User.h ../src/auth/CredentialState.h \
+ ../src/auth/Type.h ../src/Notes.h ../src/helper/forward.h \
+ ../src/adaptation/History.h ../src/adaptation/DynamicGroupCfg.h \
+ ../src/adaptation/forward.h ../src/adaptation/icap/History.h \
+ ../src/LogTags.h ../src/eui/Eui48.h ../src/eui/Eui64.h \
+ ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
+ sbuf/SBuf.h HttpReply.h http/StatusLine.h HttpBody.h HttpRequest.h \
+ mem_node.h MemObject.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h dlink.h http/RequestMethod.h RemovalPolicy.h \
+ SquidString.h stmem.h ../include/splay.h ../src/fatal.h StoreIOState.h \
+ base/RefCount.h MemStore.h ipc/mem/Page.h ipc/mem/PageStack.h \
+ ipc/StoreMap.h ../src/ipc/ReadWriteLock.h ../src/store/forward.h \
+ ../src/store_key_md5.h Store.h store/Controller.h ../src/store/Storage.h \
+ StoreStats.h store/Controlled.h mgr/Registration.h mgr/StoreIoAction.h \
+ ../src/mgr/Action.h repl_modules.h RequestFlags.h sbuf/Stream.h \
+ ../src/base/PackableStream.h SquidConfig.h acl/forward.h \
+ base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h format/Format.h \
+ HttpHeader.h sbuf/forward.h Notes.h ssl/support.h store/Disk.h \
  ../src/store/Controlled.h ../src/StoreIOState.h time/gadgets.h \
  StatCounters.h base/ByteCounter.h StatHist.h store/Disks.h \
  store/SwapMetaOut.h store_digest.h store_log.h store_rebuild.h \
@@ -1163,31 +1163,17 @@ clients/Client.h:
 ../src/typedefs.h:
 ../src/ResolvedPeers.h:
 ../src/security/forward.h:
-../src/StoreIOBuffer.h:
-../src/adaptation/forward.h:
-../src/adaptation/Initiator.h:
-http/StateFlags.h:
-sbuf/SBuf.h:
-HttpReply.h:
-http/StatusLine.h:
+../src/IDispatcher.h:
+../src/HttpRequest.h:
+../src/anyp/Uri.h:
+../src/anyp/UriScheme.h:
+../src/http/Message.h:
+../src/enums.h:
 ../src/http/ProtocolVersion.h:
 ../src/http/StatusCode.h:
-HttpBody.h:
-HttpRequest.h:
-anyp/Uri.h:
-../src/anyp/UriScheme.h:
-base/CbcPointer.h:
-dns/forward.h:
-error/Error.h:
-HierarchyLogEntry.h:
-http/Message.h:
-../src/enums.h:
 ../src/HttpHeader.h:
-http/RequestMethod.h:
-MasterXaction.h:
-Notes.h:
-RequestFlags.h:
-auth/UserRequest.h:
+../src/RequestFlags.h:
+../src/auth/UserRequest.h:
 ../src/AccessLogEntry.h:
 ../src/auth/AuthAclState.h:
 ../src/auth/Scheme.h:
@@ -1197,17 +1183,27 @@ auth/UserRequest.h:
 ../src/auth/Type.h:
 ../src/Notes.h:
 ../src/helper/forward.h:
-adaptation/History.h:
+../src/adaptation/History.h:
 ../src/adaptation/DynamicGroupCfg.h:
-adaptation/icap/History.h:
+../src/adaptation/forward.h:
+../src/adaptation/icap/History.h:
 ../src/LogTags.h:
-eui/Eui48.h:
-eui/Eui64.h:
+../src/eui/Eui48.h:
+../src/eui/Eui64.h:
+../src/StoreIOBuffer.h:
+../src/adaptation/Initiator.h:
+http/StateFlags.h:
+sbuf/SBuf.h:
+HttpReply.h:
+http/StatusLine.h:
+HttpBody.h:
+HttpRequest.h:
 mem_node.h:
 MemObject.h:
 base/DelayedAsyncCalls.h:
 ../src/base/AsyncCallList.h:
 dlink.h:
+http/RequestMethod.h:
 RemovalPolicy.h:
 SquidString.h:
 stmem.h:
@@ -1231,6 +1227,7 @@ mgr/Registration.h:
 mgr/StoreIoAction.h:
 ../src/mgr/Action.h:
 repl_modules.h:
+RequestFlags.h:
 sbuf/Stream.h:
 ../src/base/PackableStream.h:
 SquidConfig.h:
@@ -1241,6 +1238,7 @@ HttpHeaderTools.h:
 format/Format.h:
 HttpHeader.h:
 sbuf/forward.h:
+Notes.h:
 ssl/support.h:
 store/Disk.h:
 ../src/store/Controlled.h:

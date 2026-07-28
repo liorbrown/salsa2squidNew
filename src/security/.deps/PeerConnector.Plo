@@ -431,21 +431,21 @@ PeerConnector.lo: PeerConnector.cc /usr/include/stdc-predef.h \
  ../../src/PeerSelectState.h ../../src/AccessLogEntry.h \
  ../../src/acl/Checklist.h ../../src/ipcache.h ../../src/dns/forward.h \
  ../../src/ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h ../../src/http/Stream.h \
- ../../src/StoreIOBuffer.h ../../src/HttpRequest.h ../../src/anyp/Uri.h \
- ../../src/anyp/UriScheme.h ../../src/http/Message.h ../../src/BodyPipe.h \
- ../../src/enums.h ../../src/http/ProtocolVersion.h \
- ../../src/http/StatusCode.h ../../src/RequestFlags.h \
- ../../src/base/SupportOrVeto.h ../../src/adaptation/History.h \
- ../../src/adaptation/DynamicGroupCfg.h ../../src/SquidString.h \
- ../../src/adaptation/forward.h ../../src/adaptation/icap/History.h \
- ../../src/LogTags.h ../../src/eui/Eui48.h ../../src/eui/Eui64.h \
- ../../src/neighbors.h ../../src/ICP.h ../../src/StoreClient.h \
- ../../src/acl/ChecklistFiller.h ../../src/dlink.h \
- ../../src/store/ParsingBuffer.h ../../src/StoreIOState.h \
- ../../src/pconn.h ../../src/base/RunnersRegistry.h \
- ../../src/mgr/forward.h /usr/include/c++/13/set \
- /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_relops.h ../../src/IDispatcher.h \
+ ../../src/HttpRequest.h ../../src/anyp/Uri.h ../../src/anyp/UriScheme.h \
+ ../../src/http/Message.h ../../src/BodyPipe.h ../../src/enums.h \
+ ../../src/http/ProtocolVersion.h ../../src/http/StatusCode.h \
+ ../../src/RequestFlags.h ../../src/base/SupportOrVeto.h \
+ ../../src/adaptation/History.h ../../src/adaptation/DynamicGroupCfg.h \
+ ../../src/SquidString.h ../../src/adaptation/forward.h \
+ ../../src/adaptation/icap/History.h ../../src/LogTags.h \
+ ../../src/eui/Eui48.h ../../src/eui/Eui64.h ../../src/http/Stream.h \
+ ../../src/StoreIOBuffer.h ../../src/HttpRequest.h ../../src/neighbors.h \
+ ../../src/ICP.h ../../src/StoreClient.h ../../src/acl/ChecklistFiller.h \
+ ../../src/dlink.h ../../src/store/ParsingBuffer.h \
+ ../../src/StoreIOState.h ../../src/pconn.h \
+ ../../src/base/RunnersRegistry.h ../../src/mgr/forward.h \
+ /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h ../../src/security/Certificate.h \
  ../../src/security/Io.h ../../src/security/ErrorDetail.h \
  ../../src/ssl/ErrorDetailManager.h ../../src/ssl/support.h \
@@ -1138,8 +1138,7 @@ PeerConnector.lo: PeerConnector.cc /usr/include/stdc-predef.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-../../src/http/Stream.h:
-../../src/StoreIOBuffer.h:
+../../src/IDispatcher.h:
 ../../src/HttpRequest.h:
 ../../src/anyp/Uri.h:
 ../../src/anyp/UriScheme.h:
@@ -1158,6 +1157,9 @@ PeerConnector.lo: PeerConnector.cc /usr/include/stdc-predef.h \
 ../../src/LogTags.h:
 ../../src/eui/Eui48.h:
 ../../src/eui/Eui64.h:
+../../src/http/Stream.h:
+../../src/StoreIOBuffer.h:
+../../src/HttpRequest.h:
 ../../src/neighbors.h:
 ../../src/ICP.h:
 ../../src/StoreClient.h:

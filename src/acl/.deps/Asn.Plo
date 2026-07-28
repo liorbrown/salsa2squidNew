@@ -428,20 +428,21 @@ Asn.lo: Asn.cc /usr/include/stdc-predef.h ../../include/squid.h \
  ../../src/anyp/ProtocolType.h ../../src/PeerSelectState.h \
  ../../src/AccessLogEntry.h ../../src/acl/Checklist.h ../../src/ipcache.h \
  ../../src/ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h ../../src/HttpReply.h \
- ../../src/http/StatusLine.h ../../src/http/ProtocolVersion.h \
- ../../src/http/StatusCode.h ../../src/SquidString.h ../../src/HttpBody.h \
+ /usr/include/c++/13/bits/stl_relops.h ../../src/IDispatcher.h \
  ../../src/HttpRequest.h ../../src/anyp/Uri.h ../../src/anyp/UriScheme.h \
  ../../src/http/Message.h ../../src/BodyPipe.h ../../src/base/AsyncJob.h \
- ../../src/enums.h ../../src/RequestFlags.h \
+ ../../src/enums.h ../../src/http/ProtocolVersion.h \
+ ../../src/http/StatusCode.h ../../src/RequestFlags.h \
  ../../src/base/SupportOrVeto.h /usr/include/c++/13/optional \
  ../../src/auth/UserRequest.h ../../src/adaptation/History.h \
- ../../src/adaptation/DynamicGroupCfg.h ../../src/adaptation/forward.h \
- ../../src/adaptation/icap/History.h ../../src/LogTags.h \
- ../../src/eui/Eui48.h ../../src/eui/Eui64.h ../../src/HttpRequest.h \
- ../../src/MasterXaction.h ../../src/mgr/Registration.h \
- ../../src/mgr/forward.h ../../src/parser/Tokenizer.h \
- ../../include/radix.h ../../src/RequestFlags.h ../../src/SquidConfig.h \
+ ../../src/adaptation/DynamicGroupCfg.h ../../src/SquidString.h \
+ ../../src/adaptation/forward.h ../../src/adaptation/icap/History.h \
+ ../../src/LogTags.h ../../src/eui/Eui48.h ../../src/eui/Eui64.h \
+ ../../src/HttpReply.h ../../src/http/StatusLine.h ../../src/HttpBody.h \
+ ../../src/HttpRequest.h ../../src/MasterXaction.h \
+ ../../src/mgr/Registration.h ../../src/mgr/forward.h \
+ ../../src/parser/Tokenizer.h ../../include/radix.h \
+ ../../src/RequestFlags.h ../../src/SquidConfig.h \
  ../../src/base/YesNoNone.h ../../src/helper/ChildConfig.h \
  ../../src/HttpHeaderTools.h ../../src/store/Disk.h \
  ../../src/store/Controlled.h ../../src/store/Storage.h \
@@ -1122,12 +1123,7 @@ Asn.lo: Asn.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-../../src/HttpReply.h:
-../../src/http/StatusLine.h:
-../../src/http/ProtocolVersion.h:
-../../src/http/StatusCode.h:
-../../src/SquidString.h:
-../../src/HttpBody.h:
+../../src/IDispatcher.h:
 ../../src/HttpRequest.h:
 ../../src/anyp/Uri.h:
 ../../src/anyp/UriScheme.h:
@@ -1135,17 +1131,23 @@ Asn.lo: Asn.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/BodyPipe.h:
 ../../src/base/AsyncJob.h:
 ../../src/enums.h:
+../../src/http/ProtocolVersion.h:
+../../src/http/StatusCode.h:
 ../../src/RequestFlags.h:
 ../../src/base/SupportOrVeto.h:
 /usr/include/c++/13/optional:
 ../../src/auth/UserRequest.h:
 ../../src/adaptation/History.h:
 ../../src/adaptation/DynamicGroupCfg.h:
+../../src/SquidString.h:
 ../../src/adaptation/forward.h:
 ../../src/adaptation/icap/History.h:
 ../../src/LogTags.h:
 ../../src/eui/Eui48.h:
 ../../src/eui/Eui64.h:
+../../src/HttpReply.h:
+../../src/http/StatusLine.h:
+../../src/HttpBody.h:
 ../../src/HttpRequest.h:
 ../../src/MasterXaction.h:
 ../../src/mgr/Registration.h:

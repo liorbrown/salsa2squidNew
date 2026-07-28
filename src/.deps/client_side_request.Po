@@ -439,7 +439,7 @@ client_side_request.o: client_side_request.cc /usr/include/stdc-predef.h \
  ../src/proxyp/Elements.h FwdState.h base/JobWait.h clients/forward.h \
  PeerSelectState.h acl/Checklist.h hier_code.h PingData.h ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- helper.h helper/ChildConfig.h helper/Reply.h \
+ IDispatcher.h helper.h helper/ChildConfig.h helper/Reply.h \
  ../src/helper/ReservationId.h ../src/helper/ResultCode.h ../src/MemBuf.h \
  helper/Request.h helper/ReservationId.h http.h clients/Client.h \
  ../src/FwdState.h ../src/adaptation/Initiator.h http/StateFlags.h \
@@ -1216,6 +1216,7 @@ PingData.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+IDispatcher.h:
 helper.h:
 helper/ChildConfig.h:
 helper/Reply.h:

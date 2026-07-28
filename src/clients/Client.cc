@@ -35,7 +35,7 @@
 // implemented in client_side_reply.cc until sides have a common parent
 void purgeEntriesByUrl(HttpRequest * req, const char *url);
 
-Client::Client(FwdState *theFwdState) :
+Client::Client(IDispatcher *theFwdState) :
     AsyncJob("Client"),
     fwd(theFwdState),
     request(fwd->request)

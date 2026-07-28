@@ -337,11 +337,13 @@ HappyConnOpener::HappyConnOpener(const ResolvedPeers::Pointer &dests, const Asyn
     cause(request),
     n_tries(tries)
 {
+    debugs(96,3,"Create " << this);
     assert(destinations);
 }
 
 HappyConnOpener::~HappyConnOpener()
 {
+    debugs(96,3,"Delete " << this);
     safe_free(host_);
     delete lastError;
 }
@@ -488,6 +490,7 @@ HappyConnOpener::sendSuccess(const PeerConnectionPointer &conn, const bool reuse
     if (auto *answer = futureAnswer(conn)) {
         answer->reused = reused;
         assert(!answer->error);
+        debugs(96, 3, " callback:  " << callback_->name);
         ScheduleCallHere(callback_.release());
     }
 }
@@ -806,4 +809,121 @@ HappyConnOpener::ranOutOfTimeOrAttempts() const
     }
 
     return false;
+}
+
+/// HappyConnOpener::Attempt printer for debugging
+std::ostream &
+operator <<(std::ostream &os, const HappyConnOpener::Attempt &attempt)
+{
+    if (!attempt.path)
+        os << '-';
+    else if (attempt.path->isOpen())
+        os << "FD " << attempt.path->fd;
+    else if (attempt.connWait)
+        os << attempt.connWait;
+    else // destination is known; connection closed (and we are not opening any)
+        os << attempt.path->id;
+    return os;
+}
+
+/// starts opening (or reusing) a connection to the given destination
+void
+HappyConnOpener::startConnecting(Attempt &attempt, PeerConnectionPointer &dest)
+{
+    debugs(96, 3, "dest = " << *dest);
+    Must(!attempt.path);
+    Must(!attempt.connWait);
+    Must(dest);
+
+    const auto bumpThroughPeer = cause->flags.sslBumped && dest->getPeer();
+    const auto canReuseOld = allowPconn_ && !bumpThroughPeer;
+    if (!canReuseOld || !reuseOldConnection(dest))
+        openFreshConnection(attempt, dest);
+}
+
+/// cancels the in-progress attempt, making its path a future candidate
+void
+HappyConnOpener::cancelAttempt(Attempt &attempt, const char *reason)
+{
+    Must(attempt);
+    destinations->reinstatePath(attempt.path); // before attempt.cancel() clears path
+    attempt.cancel(reason);
+}
+
+/// opens a fresh connection to the given destination
+/// must be called via startConnecting()
+void
+HappyConnOpener::openFreshConnection(Attempt &attempt, PeerConnectionPointer &dest)
+{
+#if URL_CHECKSUM_DEBUG
+    entry->mem_obj->checkUrlChecksum();
+#endif
+    const auto conn = dest->cloneProfile();
+    GetMarkingsToServer(cause.getRaw(), *conn);
+
+    typedef CommCbMemFunT<HappyConnOpener, CommConnectCbParams> Dialer;
+    AsyncCall::Pointer callConnect = asyncCall(48, 5, attempt.callbackMethodName,
+                                     Dialer(static_cast<HappyConnOpener*>(this), attempt.callbackMethod));
+    const time_t connTimeout = dest->connectTimeout(fwdStart);
+    auto cs = new Comm::ConnOpener(conn, callConnect, connTimeout);
+    if (!conn->getPeer())
+        cs->setHost(host_);
+
+    attempt.path = dest; // but not the being-opened conn!
+    attempt.connWait.start(cs, callConnect);
+}
+
+/// prime/spare-agnostic processing of a Comm::ConnOpener result
+void
+HappyConnOpener::handleConnOpenerAnswer(Attempt &attempt, const CommConnectCbParams &params, const char *what)
+{
+    Must(params.conn);
+
+    // finalize the previously selected path before attempt.finish() forgets it
+    auto handledPath = attempt.path;
+    handledPath.finalize(params.conn); // closed on errors
+    attempt.finish();
+
+    ++n_tries;
+
+    if (params.flag == Comm::OK) {
+        sendSuccess(handledPath, false, what);
+        return;
+    }
+
+    debugs(17, 8, what << " failed: " << params.conn);
+
+    // remember the last failure (we forward it if we cannot connect anywhere)
+    lastFailedConnection = handledPath;
+    delete lastError;
+    lastError = nullptr; // in case makeError() throws
+    lastError = makeError(ERR_CONNECT_FAIL);
+    lastError->xerrno = params.xerrno;
+
+    NoteOutgoingConnectionFailure(params.conn->getPeer(), lastError->httpStatus);
+
+    if (spareWaiting)
+        updateSpareWaitAfterPrimeFailure();
+
+    checkForNewConnection();
+}
+
+HappyConnOpener::Attempt::Attempt(const CallbackMethod method, const char *methodName):
+    callbackMethod(method),
+    callbackMethodName(methodName)
+{
+}
+
+void
+HappyConnOpener::Attempt::finish()
+{
+    connWait.finish();
+    path = nullptr;
+}
+
+void
+HappyConnOpener::Attempt::cancel(const char *reason)
+{
+    connWait.cancel(reason);
+    path = nullptr;
 }

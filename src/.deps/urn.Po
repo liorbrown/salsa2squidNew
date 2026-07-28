@@ -408,15 +408,15 @@ urn.o: urn.cc /usr/include/stdc-predef.h ../include/squid.h \
  security/forward.h typedefs.h anyp/ProtocolType.h PeerSelectState.h \
  acl/Checklist.h base/CbcPointer.h ipcache.h dns/forward.h \
  ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h globals.h HttpReply.h \
- http/StatusLine.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
- ../src/SquidString.h HttpBody.h HttpRequest.h anyp/Uri.h \
- ../src/anyp/UriScheme.h http/Message.h ../src/BodyPipe.h \
+ /usr/include/c++/13/bits/stl_relops.h IDispatcher.h HttpRequest.h \
+ anyp/Uri.h ../src/anyp/UriScheme.h http/Message.h ../src/BodyPipe.h \
  ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
- ../src/enums.h RequestFlags.h base/SupportOrVeto.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h ../src/adaptation/forward.h \
- adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
- icmp/net_db.h mime_header.h Store.h base/DelayedAsyncCalls.h \
+ ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
+ RequestFlags.h base/SupportOrVeto.h adaptation/History.h \
+ ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
+ ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
+ eui/Eui48.h eui/Eui64.h globals.h HttpReply.h http/StatusLine.h \
+ HttpBody.h icmp/net_db.h mime_header.h Store.h base/DelayedAsyncCalls.h \
  ../src/base/AsyncCallList.h MemObject.h dlink.h RemovalPolicy.h stmem.h \
  ../include/splay.h ../src/fatal.h store/forward.h StoreIOState.h \
  store/Controller.h ../src/store/Storage.h ../src/http/RequestMethod.h \
@@ -1093,13 +1093,7 @@ dns/forward.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-globals.h:
-HttpReply.h:
-http/StatusLine.h:
-../src/http/ProtocolVersion.h:
-../src/http/StatusCode.h:
-../src/SquidString.h:
-HttpBody.h:
+IDispatcher.h:
 HttpRequest.h:
 anyp/Uri.h:
 ../src/anyp/UriScheme.h:
@@ -1109,15 +1103,22 @@ http/Message.h:
 ../src/base/CbcPointer.h:
 ../src/MemBuf.h:
 ../src/enums.h:
+../src/http/ProtocolVersion.h:
+../src/http/StatusCode.h:
 RequestFlags.h:
 base/SupportOrVeto.h:
 adaptation/History.h:
 ../src/adaptation/DynamicGroupCfg.h:
+../src/SquidString.h:
 ../src/adaptation/forward.h:
 adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+globals.h:
+HttpReply.h:
+http/StatusLine.h:
+HttpBody.h:
 icmp/net_db.h:
 mime_header.h:
 Store.h:

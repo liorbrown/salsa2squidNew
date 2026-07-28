@@ -437,7 +437,8 @@ HttpRequest.o: HttpRequest.cc /usr/include/stdc-predef.h \
  ../src/hier_code.h ../src/ipcache.h ../src/dns/forward.h \
  ../src/PingData.h ../src/ResolvedPeers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h ../src/ssl/support.h \
- ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
+ ../src/IDispatcher.h ../src/HttpRequest.h ../src/StoreIOBuffer.h \
+ ../src/adaptation/Initiator.h http/StateFlags.h \
  http/ContentLengthInterpreter.h http/one/RequestParser.h \
  ../src/http/one/Parser.h http/Stream.h HttpHdrCc.h log/Config.h \
  ../src/format/Format.h ../src/log/Formats.h sbuf/StringConvert.h \
@@ -1201,6 +1202,8 @@ clients/Client.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ../src/ssl/support.h:
+../src/IDispatcher.h:
+../src/HttpRequest.h:
 ../src/StoreIOBuffer.h:
 ../src/adaptation/Initiator.h:
 http/StateFlags.h:

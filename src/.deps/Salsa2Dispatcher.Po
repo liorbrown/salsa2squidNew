@@ -417,7 +417,25 @@ Salsa2Dispatcher.o: Salsa2Dispatcher.cc /usr/include/stdc-predef.h \
  ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
  ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
  eui/Eui48.h eui/Eui64.h errorpage.h error/Detail.h ip/Address.h \
- sbuf/SBuf.h CachePeer.h icp_opcode.h security/PeerOptions.h
+ sbuf/SBuf.h CachePeer.h icp_opcode.h security/PeerOptions.h http.h \
+ clients/Client.h ../src/FwdState.h ../src/base/JobWait.h \
+ ../src/base/RefCount.h ../src/clients/forward.h ../src/comm.h \
+ ../src/error/forward.h ../src/fde.h ../src/ip/forward.h \
+ ../src/security/forward.h ../src/typedefs.h ../src/anyp/ProtocolType.h \
+ ../src/enums.h ../src/http/StatusCode.h ../src/PeerSelectState.h \
+ ../src/AccessLogEntry.h ../src/acl/Checklist.h ../src/acl/InnerNode.h \
+ ../src/acl/Acl.h ../src/acl/forward.h ../src/acl/Options.h \
+ ../src/comm/forward.h ../src/hier_code.h ../src/ipcache.h \
+ ../src/dns/forward.h ../src/PingData.h ../src/ResolvedPeers.h \
+ ../src/IDispatcher.h ../src/HttpRequest.h ../src/StoreIOBuffer.h \
+ ../src/adaptation/Initiator.h http/StateFlags.h fd.h ip/QosConfig.h \
+ ../src/ip/NfMarkConfig.h Store.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h HttpReply.h http/StatusLine.h HttpBody.h \
+ MemObject.h dlink.h RemovalPolicy.h stmem.h ../include/splay.h \
+ ../src/fatal.h store/forward.h StoreIOState.h typedefs.h \
+ store/Controller.h ../src/store/Storage.h ../src/http/RequestMethod.h \
+ ../src/store/forward.h ../src/store_key_md5.h store_key_md5.h \
+ StoreStats.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1104,3 +1122,61 @@ sbuf/SBuf.h:
 CachePeer.h:
 icp_opcode.h:
 security/PeerOptions.h:
+http.h:
+clients/Client.h:
+../src/FwdState.h:
+../src/base/JobWait.h:
+../src/base/RefCount.h:
+../src/clients/forward.h:
+../src/comm.h:
+../src/error/forward.h:
+../src/fde.h:
+../src/ip/forward.h:
+../src/security/forward.h:
+../src/typedefs.h:
+../src/anyp/ProtocolType.h:
+../src/enums.h:
+../src/http/StatusCode.h:
+../src/PeerSelectState.h:
+../src/AccessLogEntry.h:
+../src/acl/Checklist.h:
+../src/acl/InnerNode.h:
+../src/acl/Acl.h:
+../src/acl/forward.h:
+../src/acl/Options.h:
+../src/comm/forward.h:
+../src/hier_code.h:
+../src/ipcache.h:
+../src/dns/forward.h:
+../src/PingData.h:
+../src/ResolvedPeers.h:
+../src/IDispatcher.h:
+../src/HttpRequest.h:
+../src/StoreIOBuffer.h:
+../src/adaptation/Initiator.h:
+http/StateFlags.h:
+fd.h:
+ip/QosConfig.h:
+../src/ip/NfMarkConfig.h:
+Store.h:
+base/DelayedAsyncCalls.h:
+../src/base/AsyncCallList.h:
+HttpReply.h:
+http/StatusLine.h:
+HttpBody.h:
+MemObject.h:
+dlink.h:
+RemovalPolicy.h:
+stmem.h:
+../include/splay.h:
+../src/fatal.h:
+store/forward.h:
+StoreIOState.h:
+typedefs.h:
+store/Controller.h:
+../src/store/Storage.h:
+../src/http/RequestMethod.h:
+../src/store/forward.h:
+../src/store_key_md5.h:
+store_key_md5.h:
+StoreStats.h:

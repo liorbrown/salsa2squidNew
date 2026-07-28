@@ -445,11 +445,11 @@ FtpRelay.lo: FtpRelay.cc /usr/include/stdc-predef.h ../../include/squid.h \
  ../../src/acl/InnerNode.h ../../src/acl/Acl.h ../../src/acl/Options.h \
  ../../src/ipcache.h ../../src/ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- ../../src/StoreIOBuffer.h ../../src/adaptation/Initiator.h \
- ../../src/error/SysErrorDetail.h ../../src/ftp/Elements.h \
- ../../src/ftp/Parsing.h ../../src/http/Stream.h ../../src/HttpHdrCc.h \
- ../../src/dlink.h ../../src/HttpRequest.h ../../src/servers/FtpServer.h \
- ../../src/base/JobWait.h ../../src/Store.h \
+ ../../src/IDispatcher.h ../../src/StoreIOBuffer.h \
+ ../../src/adaptation/Initiator.h ../../src/error/SysErrorDetail.h \
+ ../../src/ftp/Elements.h ../../src/ftp/Parsing.h ../../src/http/Stream.h \
+ ../../src/HttpHdrCc.h ../../src/dlink.h ../../src/HttpRequest.h \
+ ../../src/servers/FtpServer.h ../../src/base/JobWait.h ../../src/Store.h \
  ../../src/base/DelayedAsyncCalls.h ../../src/base/AsyncCallList.h \
  ../../src/MemObject.h ../../src/RemovalPolicy.h ../../src/stmem.h \
  ../../include/splay.h ../../src/fatal.h ../../src/StoreIOState.h \
@@ -1155,6 +1155,7 @@ FtpRelay.lo: FtpRelay.cc /usr/include/stdc-predef.h ../../include/squid.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+../../src/IDispatcher.h:
 ../../src/StoreIOBuffer.h:
 ../../src/adaptation/Initiator.h:
 ../../src/error/SysErrorDetail.h:

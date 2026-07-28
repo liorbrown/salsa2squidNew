@@ -402,18 +402,19 @@ peer_digest.o: peer_digest.cc /usr/include/stdc-predef.h \
  ../src/acl/forward.h ../src/acl/Options.h ../src/dlink.h \
  ../src/mem/forward.h ipcache.h dns/forward.h ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- globals.h HttpReply.h http/StatusLine.h ../src/http/ProtocolVersion.h \
- ../src/http/StatusCode.h ../src/SquidString.h HttpBody.h HttpRequest.h \
- anyp/Uri.h ../src/anyp/UriScheme.h http/Message.h ../src/BodyPipe.h \
- ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
- ../src/enums.h ../src/HttpHeader.h RequestFlags.h base/SupportOrVeto.h \
+ IDispatcher.h HttpRequest.h anyp/Uri.h ../src/anyp/UriScheme.h \
+ http/Message.h ../src/BodyPipe.h ../src/base/AsyncJob.h \
+ ../src/base/CbcPointer.h ../src/MemBuf.h ../src/enums.h \
+ ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
+ ../src/HttpHeader.h RequestFlags.h base/SupportOrVeto.h \
  /usr/include/c++/13/optional auth/UserRequest.h ../src/AccessLogEntry.h \
  ../src/auth/AuthAclState.h ../src/auth/Scheme.h ../src/auth/forward.h \
  ../src/auth/User.h ../src/auth/CredentialState.h ../src/auth/Type.h \
  ../src/Notes.h ../src/helper/forward.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h ../src/adaptation/forward.h \
- adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
- internal.h log/forward.h MemObject.h base/DelayedAsyncCalls.h \
+ ../src/adaptation/DynamicGroupCfg.h ../src/SquidString.h \
+ ../src/adaptation/forward.h adaptation/icap/History.h ../src/LogTags.h \
+ eui/Eui48.h eui/Eui64.h globals.h HttpReply.h http/StatusLine.h \
+ HttpBody.h internal.h log/forward.h MemObject.h base/DelayedAsyncCalls.h \
  ../src/base/AsyncCallList.h dlink.h RemovalPolicy.h stmem.h \
  ../include/splay.h ../src/fatal.h StoreIOState.h mime_header.h \
  neighbors.h ICP.h StoreClient.h acl/ChecklistFiller.h \
@@ -1074,13 +1075,7 @@ dns/forward.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
-globals.h:
-HttpReply.h:
-http/StatusLine.h:
-../src/http/ProtocolVersion.h:
-../src/http/StatusCode.h:
-../src/SquidString.h:
-HttpBody.h:
+IDispatcher.h:
 HttpRequest.h:
 anyp/Uri.h:
 ../src/anyp/UriScheme.h:
@@ -1090,6 +1085,8 @@ http/Message.h:
 ../src/base/CbcPointer.h:
 ../src/MemBuf.h:
 ../src/enums.h:
+../src/http/ProtocolVersion.h:
+../src/http/StatusCode.h:
 ../src/HttpHeader.h:
 RequestFlags.h:
 base/SupportOrVeto.h:
@@ -1106,11 +1103,16 @@ auth/UserRequest.h:
 ../src/helper/forward.h:
 adaptation/History.h:
 ../src/adaptation/DynamicGroupCfg.h:
+../src/SquidString.h:
 ../src/adaptation/forward.h:
 adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+globals.h:
+HttpReply.h:
+http/StatusLine.h:
+HttpBody.h:
 internal.h:
 log/forward.h:
 MemObject.h:

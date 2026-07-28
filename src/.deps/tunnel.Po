@@ -441,11 +441,11 @@ tunnel.o: tunnel.cc /usr/include/stdc-predef.h ../include/squid.h \
  base/forward.h defines.h ip/forward.h FwdState.h clients/forward.h \
  PeerSelectState.h acl/Checklist.h hier_code.h ipcache.h PingData.h \
  ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h globals.h HappyConnOpener.h http.h \
- clients/Client.h ../src/FwdState.h ../src/StoreIOBuffer.h \
- ../src/adaptation/Initiator.h http/StateFlags.h http/Stream.h \
- icmp/net_db.h ip/QosConfig.h ../src/ip/NfMarkConfig.h neighbors.h ICP.h \
- StoreClient.h store/ParsingBuffer.h lookup_t.h \
+ /usr/include/c++/13/bits/stl_relops.h IDispatcher.h globals.h \
+ HappyConnOpener.h http.h clients/Client.h ../src/FwdState.h \
+ ../src/StoreIOBuffer.h ../src/adaptation/Initiator.h http/StateFlags.h \
+ http/Stream.h icmp/net_db.h ip/QosConfig.h ../src/ip/NfMarkConfig.h \
+ neighbors.h ICP.h StoreClient.h store/ParsingBuffer.h lookup_t.h \
  security/BlindPeerConnector.h ../src/security/PeerConnector.h \
  ../src/acl/ChecklistFiller.h ../src/base/JobWait.h \
  ../src/security/EncryptorAnswer.h ../src/security/KeyLogger.h \
@@ -1219,6 +1219,7 @@ PingData.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+IDispatcher.h:
 globals.h:
 HappyConnOpener.h:
 http.h:

@@ -431,19 +431,20 @@ peer_select.o: peer_select.cc /usr/include/stdc-predef.h \
  ip/forward.h typedefs.h anyp/ProtocolType.h PeerSelectState.h \
  AccessLogEntry.h acl/Checklist.h hier_code.h ipcache.h PingData.h \
  ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h globals.h htcp.h HttpHeader.h \
- store_key_md5.h http/Stream.h ../src/StoreIOBuffer.h icmp/net_db.h ICP.h \
- LogTags.h StoreClient.h dlink.h store/ParsingBuffer.h StoreIOState.h \
- store/forward.h ip/tools.h neighbors.h lookup_t.h peer_sourcehash.h \
- peer_userhash.h SquidConfig.h base/YesNoNone.h helper/ChildConfig.h \
- HttpHeaderTools.h format/Format.h sbuf/forward.h store/Disk.h \
- ../src/store/Controlled.h ../src/store/Storage.h \
- ../src/http/RequestMethod.h ../src/store/forward.h \
- ../src/store_key_md5.h ../src/StoreIOState.h time/gadgets.h Store.h \
- base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h MemObject.h \
- RemovalPolicy.h stmem.h ../include/splay.h ../src/fatal.h \
- store/Controller.h StoreStats.h salsa2selector.h salsa2parent.h \
- /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_relops.h IDispatcher.h globals.h htcp.h \
+ HttpHeader.h store_key_md5.h http/Stream.h ../src/StoreIOBuffer.h \
+ icmp/net_db.h ICP.h LogTags.h StoreClient.h dlink.h \
+ store/ParsingBuffer.h StoreIOState.h store/forward.h ip/tools.h \
+ neighbors.h lookup_t.h peer_sourcehash.h peer_userhash.h SquidConfig.h \
+ base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h format/Format.h \
+ sbuf/forward.h store/Disk.h ../src/store/Controlled.h \
+ ../src/store/Storage.h ../src/http/RequestMethod.h \
+ ../src/store/forward.h ../src/store_key_md5.h ../src/StoreIOState.h \
+ time/gadgets.h Store.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h MemObject.h RemovalPolicy.h stmem.h \
+ ../include/splay.h ../src/fatal.h store/Controller.h StoreStats.h \
+ salsa2selector.h salsa2parent.h /usr/include/c++/13/set \
+ /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
@@ -1177,6 +1178,7 @@ PingData.h:
 ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+IDispatcher.h:
 globals.h:
 htcp.h:
 HttpHeader.h:

@@ -422,18 +422,31 @@ Connection.lo: Connection.cc /usr/include/stdc-predef.h \
  ../../src/acl/Options.h ../../src/dlink.h ../../src/ipcache.h \
  ../../src/dns/forward.h ../../src/ResolvedPeers.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ ../../src/IDispatcher.h ../../src/HttpRequest.h ../../src/anyp/Uri.h \
+ ../../src/anyp/UriScheme.h ../../src/http/Message.h ../../src/BodyPipe.h \
+ ../../src/base/AsyncJob.h ../../src/enums.h \
+ ../../src/http/ProtocolVersion.h ../../src/http/StatusCode.h \
+ ../../src/HttpHeader.h ../../src/RequestFlags.h \
+ ../../src/base/SupportOrVeto.h /usr/include/c++/13/optional \
+ ../../src/auth/UserRequest.h ../../src/AccessLogEntry.h \
+ ../../src/auth/AuthAclState.h ../../src/auth/Scheme.h \
+ ../../src/auth/forward.h ../../src/auth/User.h \
+ ../../src/auth/CredentialState.h ../../src/auth/Type.h ../../src/Notes.h \
+ ../../src/helper/forward.h ../../src/adaptation/History.h \
+ ../../src/adaptation/DynamicGroupCfg.h ../../src/SquidString.h \
+ ../../src/adaptation/forward.h ../../src/adaptation/icap/History.h \
+ ../../src/LogTags.h ../../src/eui/Eui48.h ../../src/eui/Eui64.h \
  ../../src/neighbors.h ../../src/ICP.h ../../src/StoreClient.h \
  ../../src/acl/ChecklistFiller.h ../../src/dlink.h \
  ../../src/store/ParsingBuffer.h ../../src/StoreIOBuffer.h \
- /usr/include/c++/13/optional ../../src/StoreIOState.h \
- ../../src/security/NegotiationHistory.h ../../src/security/Handshake.h \
- ../../src/parser/BinaryTokenizer.h ../../src/SquidConfig.h \
- ../../src/base/YesNoNone.h ../../src/helper/ChildConfig.h \
- ../../src/HttpHeaderTools.h ../../src/store/Disk.h \
- ../../src/store/Controlled.h ../../src/store/Storage.h \
- ../../src/http/RequestMethod.h ../../src/store/forward.h \
- ../../src/store_key_md5.h ../../src/StoreIOState.h \
- ../../src/time/gadgets.h
+ ../../src/StoreIOState.h ../../src/security/NegotiationHistory.h \
+ ../../src/security/Handshake.h ../../src/parser/BinaryTokenizer.h \
+ ../../src/SquidConfig.h ../../src/base/YesNoNone.h \
+ ../../src/helper/ChildConfig.h ../../src/HttpHeaderTools.h \
+ ../../src/store/Disk.h ../../src/store/Controlled.h \
+ ../../src/store/Storage.h ../../src/http/RequestMethod.h \
+ ../../src/store/forward.h ../../src/store_key_md5.h \
+ ../../src/StoreIOState.h ../../src/time/gadgets.h
 /usr/include/stdc-predef.h:
 ../../include/squid.h:
 ../../include/autoconf.h:
@@ -1080,6 +1093,38 @@ Connection.lo: Connection.cc /usr/include/stdc-predef.h \
 ../../src/ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
+../../src/IDispatcher.h:
+../../src/HttpRequest.h:
+../../src/anyp/Uri.h:
+../../src/anyp/UriScheme.h:
+../../src/http/Message.h:
+../../src/BodyPipe.h:
+../../src/base/AsyncJob.h:
+../../src/enums.h:
+../../src/http/ProtocolVersion.h:
+../../src/http/StatusCode.h:
+../../src/HttpHeader.h:
+../../src/RequestFlags.h:
+../../src/base/SupportOrVeto.h:
+/usr/include/c++/13/optional:
+../../src/auth/UserRequest.h:
+../../src/AccessLogEntry.h:
+../../src/auth/AuthAclState.h:
+../../src/auth/Scheme.h:
+../../src/auth/forward.h:
+../../src/auth/User.h:
+../../src/auth/CredentialState.h:
+../../src/auth/Type.h:
+../../src/Notes.h:
+../../src/helper/forward.h:
+../../src/adaptation/History.h:
+../../src/adaptation/DynamicGroupCfg.h:
+../../src/SquidString.h:
+../../src/adaptation/forward.h:
+../../src/adaptation/icap/History.h:
+../../src/LogTags.h:
+../../src/eui/Eui48.h:
+../../src/eui/Eui64.h:
 ../../src/neighbors.h:
 ../../src/ICP.h:
 ../../src/StoreClient.h:
@@ -1087,7 +1132,6 @@ Connection.lo: Connection.cc /usr/include/stdc-predef.h \
 ../../src/dlink.h:
 ../../src/store/ParsingBuffer.h:
 ../../src/StoreIOBuffer.h:
-/usr/include/c++/13/optional:
 ../../src/StoreIOState.h:
 ../../src/security/NegotiationHistory.h:
 ../../src/security/Handshake.h:

@@ -43,7 +43,7 @@ public:
         const Http::StatusCode statusCode; ///< HTTP status for debugging
     };
 
-    HttpStateData(FwdState *);
+    HttpStateData(IDispatcher *, Comm::ConnectionPointer);
     ~HttpStateData() override;
 
     static void httpBuildRequestHeader(HttpRequest * request,
@@ -160,7 +160,7 @@ private:
 std::ostream &operator <<(std::ostream &os, const HttpStateData::ReuseDecision &d);
 
 int httpCachable(const HttpRequestMethod&);
-void httpStart(FwdState *);
+void httpStart(IDispatcher *, Comm::ConnectionPointer);
 SBuf httpMakeVaryMark(HttpRequest * request, HttpReply const * reply);
 
 #endif /* SQUID_SRC_HTTP_H */

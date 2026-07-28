@@ -1707,6 +1707,7 @@ StoreEntry::replaceHttpReply(const HttpReplyPointer &rep, const bool andStartWri
 void
 StoreEntry::startWriting()
 {
+    
     /* TODO: when we store headers separately remove the header portion */
     /* TODO: mark the length of the headers ? */
     /* We ONLY want the headers */

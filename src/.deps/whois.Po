@@ -413,25 +413,25 @@ whois.o: whois.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/acl/InnerNode.h ../src/acl/Acl.h ../src/acl/forward.h \
  ../src/acl/Options.h base/CbcPointer.h hier_code.h ipcache.h \
  dns/forward.h PingData.h ResolvedPeers.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h ssl/support.h HttpReply.h \
- http/StatusLine.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
- ../src/SquidString.h HttpBody.h HttpRequest.h anyp/Uri.h \
- ../src/anyp/UriScheme.h error/Error.h HierarchyLogEntry.h http/Message.h \
- ../src/BodyPipe.h ../src/base/AsyncJob.h ../src/base/CbcPointer.h \
- ../src/MemBuf.h ../src/enums.h http/RequestMethod.h Notes.h \
- RequestFlags.h base/SupportOrVeto.h adaptation/History.h \
- ../src/adaptation/DynamicGroupCfg.h ../src/adaptation/forward.h \
+ /usr/include/c++/13/bits/stl_relops.h ssl/support.h IDispatcher.h \
+ HttpRequest.h anyp/Uri.h ../src/anyp/UriScheme.h error/Error.h \
+ HierarchyLogEntry.h http/Message.h ../src/BodyPipe.h \
+ ../src/base/AsyncJob.h ../src/base/CbcPointer.h ../src/MemBuf.h \
+ ../src/enums.h ../src/http/ProtocolVersion.h ../src/http/StatusCode.h \
+ http/RequestMethod.h Notes.h RequestFlags.h base/SupportOrVeto.h \
+ adaptation/History.h ../src/adaptation/DynamicGroupCfg.h \
+ ../src/SquidString.h ../src/adaptation/forward.h \
  adaptation/icap/History.h ../src/LogTags.h eui/Eui48.h eui/Eui64.h \
- SquidConfig.h acl/forward.h base/YesNoNone.h helper/ChildConfig.h \
- HttpHeaderTools.h format/Format.h HttpHeader.h sbuf/forward.h \
- store/Disk.h ../src/store/Controlled.h ../src/store/Storage.h \
- ../src/http/RequestMethod.h ../src/store/forward.h \
- ../src/store_key_md5.h ../src/StoreIOState.h ../src/cbdata.h \
- store/forward.h time/gadgets.h StatCounters.h base/ByteCounter.h \
- StatHist.h Store.h base/DelayedAsyncCalls.h ../src/base/AsyncCallList.h \
- MemObject.h dlink.h RemovalPolicy.h stmem.h ../include/splay.h \
- ../src/fatal.h StoreIOState.h store/Controller.h store_key_md5.h \
- StoreStats.h tools.h whois.h
+ HttpReply.h http/StatusLine.h HttpBody.h SquidConfig.h acl/forward.h \
+ base/YesNoNone.h helper/ChildConfig.h HttpHeaderTools.h format/Format.h \
+ HttpHeader.h sbuf/forward.h store/Disk.h ../src/store/Controlled.h \
+ ../src/store/Storage.h ../src/http/RequestMethod.h \
+ ../src/store/forward.h ../src/store_key_md5.h ../src/StoreIOState.h \
+ ../src/cbdata.h store/forward.h time/gadgets.h StatCounters.h \
+ base/ByteCounter.h StatHist.h Store.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h MemObject.h dlink.h RemovalPolicy.h stmem.h \
+ ../include/splay.h ../src/fatal.h StoreIOState.h store/Controller.h \
+ store_key_md5.h StoreStats.h tools.h whois.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1108,12 +1108,7 @@ ResolvedPeers.h:
 /usr/include/c++/13/utility:
 /usr/include/c++/13/bits/stl_relops.h:
 ssl/support.h:
-HttpReply.h:
-http/StatusLine.h:
-../src/http/ProtocolVersion.h:
-../src/http/StatusCode.h:
-../src/SquidString.h:
-HttpBody.h:
+IDispatcher.h:
 HttpRequest.h:
 anyp/Uri.h:
 ../src/anyp/UriScheme.h:
@@ -1125,17 +1120,23 @@ http/Message.h:
 ../src/base/CbcPointer.h:
 ../src/MemBuf.h:
 ../src/enums.h:
+../src/http/ProtocolVersion.h:
+../src/http/StatusCode.h:
 http/RequestMethod.h:
 Notes.h:
 RequestFlags.h:
 base/SupportOrVeto.h:
 adaptation/History.h:
 ../src/adaptation/DynamicGroupCfg.h:
+../src/SquidString.h:
 ../src/adaptation/forward.h:
 adaptation/icap/History.h:
 ../src/LogTags.h:
 eui/Eui48.h:
 eui/Eui64.h:
+HttpReply.h:
+http/StatusLine.h:
+HttpBody.h:
 SquidConfig.h:
 acl/forward.h:
 base/YesNoNone.h:

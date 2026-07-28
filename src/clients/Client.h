@@ -18,6 +18,7 @@
 #if USE_ADAPTATION
 #include "adaptation/forward.h"
 #include "adaptation/Initiator.h"
+#include "IDispatcher.h"
 #endif
 
 /**
@@ -35,7 +36,7 @@ class Client:
 {
 
 public:
-    Client(FwdState *);
+    Client(IDispatcher *);
     ~Client() override;
 
     /// \return primary or "request data connection"
@@ -174,7 +175,7 @@ protected:
 
 public: // should not be
     StoreEntry *entry = nullptr;
-    FwdState::Pointer fwd;
+    IDispatcher *fwd;
     HttpRequestPointer request;
 
 protected:

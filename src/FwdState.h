@@ -23,12 +23,14 @@
 #include "PeerSelectState.h"
 #include "ResolvedPeers.h"
 #include "security/forward.h"
+
 #if USE_OPENSSL
 #include "ssl/support.h"
 #endif
 
 // @category salsa2
 #include <vector>
+#include "IDispatcher.h"
 
 /* forward decls */
 
@@ -52,7 +54,9 @@ void ResetMarkingsToServer(HttpRequest *, Comm::Connection &);
 
 class HelperReply;
 
-class FwdState: public RefCountable, public PeerSelectionInitiator
+// @category salsa2
+// add IDispatcher implementation
+class FwdState: public RefCountable, public PeerSelectionInitiator, public IDispatcher
 {
     CBDATA_CHILD(FwdState);
 
@@ -76,16 +80,16 @@ public:
     /// Produces the cannot-forward error on fail if no better error exists.
     void useDestinations();
 
-    void fail(ErrorState *err);
-    void unregister(Comm::ConnectionPointer &conn);
+    void fail(ErrorState *err) override;
+    void unregister(Comm::ConnectionPointer &conn) override;
     void unregister(int fd);
-    void complete();
+    void complete(const Comm::ConnectionPointer conn = nullptr) override;
 
     /// Mark reply as written to Store in its entirety, including the header and
     /// any body. If the reply has a body, the entire body has to be stored.
-    void markStoredReplyAsWhole(const char *whyWeAreSure);
+    void markStoredReplyAsWhole(const char *whyWeAreSure) override;
 
-    void handleUnregisteredServerEnd();
+    void handleUnregisteredServerEnd() override;
     int reforward();
     void serverClosed();
     void connectStart();
@@ -98,13 +102,18 @@ public:
 
     bool dontRetry() { return flags.dont_retry; }
 
-    void dontRetry(bool val) { flags.dont_retry = val; }
+    void dontRetry(bool val) override { flags.dont_retry = val; }
 
     /// get rid of a to-server connection that failed to become serverConn
     void closePendingConnection(const Comm::ConnectionPointer &conn, const char *reason);
 
     /** return a ConnectionPointer to the current server connection (may or may not be open) */
-    Comm::ConnectionPointer const & serverConnection() const { return serverConn; };
+    Comm::ConnectionPointer const & serverConnection() const { return serverConn; } ;
+
+    // @category Salsa2
+    // Change those methods to public, for Salsa2Dispatcher
+    void syncHierNote(const Comm::ConnectionPointer &server, const char *host);
+    void syncWithServerConn(const Comm::ConnectionPointer &server, const char *host, const bool reused);
 
 private:
     // hidden for safer management of self; use static fwdStart
@@ -149,10 +158,7 @@ private:
 
     /// stops monitoring server connection for closure and updates pconn stats
     void closeServerConnection(const char *reason);
-
-    void syncWithServerConn(const Comm::ConnectionPointer &server, const char *host, const bool reused);
-    void syncHierNote(const Comm::ConnectionPointer &server, const char *host);
-
+    
     /// whether we have used up all permitted forwarding attempts
     bool exhaustedTries() const;
     void updateAttempts(int);
@@ -168,9 +174,6 @@ private:
     void updateAleWithFinalError();
 
 public:
-    StoreEntry *entry;
-    HttpRequest *request;
-    AccessLogEntryPointer al; ///< info for the future access.log entry
 
     /// called by Store if the entry is no longer usable
     static void HandleStoreAbort(FwdState *);
@@ -215,9 +218,6 @@ private:
     /// Whether the entire reply (including any body) was written to Store.
     /// The string literal value is only used for debugging.
     const char *storedWholeReply_;
-    
-    // @category salsa2
-    std::vector<PeerConnectionPointer> paths;
 };
 
 class acl_tos;

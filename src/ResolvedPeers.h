@@ -83,6 +83,10 @@ public:
     /// whether HappyConnOpener::noteCandidatesChange() is scheduled to fire
     bool notificationPending = false;
 
+    // @category salsa2
+    // Change this to public for Salsa2Dispatcher
+    Paths paths_; ///< resolved addresses in (peer, family) order
+
 private:
     /// A find*() result: An iterator of the found path (or paths_.end()) and
     /// whether the "other" path was found instead.
@@ -103,7 +107,7 @@ private:
     void increaseAvailability();
     void decreaseAvailability();
 
-    Paths paths_; ///< resolved addresses in (peer, family) order
+    
 
     /// the number of leading paths_ elements that are all currently unavailable
     /// i.e. the size of the front paths_ segment comprised of unavailable items
