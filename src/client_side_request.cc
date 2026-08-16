@@ -1128,7 +1128,7 @@ clientInterpretRequestHeaders(ClientHttpRequest * http)
         request->header.hasNamed(SBuf("X-Originally-HTTPS"), &headerValue) &&
                                  !headerValue.cmp("1");
 
-    debugs(96, DBG_CRITICAL, "salsa2: isOriginallyHttps (" <<
+    debugs(96, 4, "salsa2: isOriginallyHttps (" <<
         request->url << 
         ") = " << request->flags.originally_https);
 

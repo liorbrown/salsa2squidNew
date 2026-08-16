@@ -38,7 +38,7 @@ class Salsa2Proxy{
         /// @brief Check all selection oprion, and choose ther best
         /// @return Peers that select. store as bits in this given integer
         /// 0 - Not choose, 1 - Choose
-        size_t naiveSelection() const;
+        size_t exponentialSelection() const;
 
         /// @brief Calculate cost of specific peers selection
         /// @param peersSelection Peers that select. store as bits in this given integer

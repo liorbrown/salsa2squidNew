@@ -206,7 +206,7 @@ Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request, char** uri)
 {
     // Fiddler workaround: Restore HTTPS scheme for originally-HTTPS requests
     // Only restore if this Squid has NO peers (i.e., it goes DIRECT to origin)
-    debugs(96, DBG_CRITICAL, "salsa2: restoreHttpsIfNeeded for " << request->url 
+    debugs(96, 4, "salsa2: restoreHttpsIfNeeded for " << request->url 
         << " originally_https=" << request->flags.originally_https 
         << " scheme=" << request->url.getScheme() 
         << " npeers=" << Config.npeers);
@@ -232,7 +232,7 @@ Salsa2Parent::restoreHttpsIfNeeded(HttpRequest* request, char** uri)
             }
         } else {
             // This Squid has peers - keep as HTTP, peers will restore HTTPS
-            debugs(96, DBG_CRITICAL, "salsa2: Keeping HTTP (forwarding to peers): " << request->url);
+            debugs(96, 4, "salsa2: Keeping HTTP (forwarding to peers): " << request->url);
         }
     }
 
