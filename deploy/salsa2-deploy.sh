@@ -350,7 +350,10 @@ debug_options ALL,1 96,3
 
 ############### peers ##############
 icp_port 3130
-icp_access allow all
+# Client-side selector: sends ICP queries to its parents and consumes their
+# replies (reply handling is peer-based, not gated by icp_access). It serves
+# ICP to no one, so refuse all incoming ICP queries.
+icp_access deny all
 
 $PEER_BLOCK
 

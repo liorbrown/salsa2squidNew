@@ -1,6 +1,5 @@
 # /etc/profile.d/salsa2.sh - SALSA2 Squid operator shortcuts.
 # Installed by salsa2-deploy.sh. Portable subset of the original ~/.bashrc helpers
-# (the dev-box-only bits - 'sim', REQUESTS_CA_BUNDLE - were dropped).
 # 'supdate' rebuilds from the source tree recorded in /etc/default/salsa2.
 
 alias squidreq='curl -k -I -x http://localhost:3128'
