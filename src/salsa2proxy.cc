@@ -7,9 +7,15 @@
 #include "neighbors.h"
 #include "mem/AllocatorProxy.h"
 #include "http/RegisteredHeaders.h"
+#include "ICP.h"
+#include "comm/Connection.h"
+#include "Store.h"
 
 #define NOT_FOUND 99999
 #define V_INIT (0.85)
+
+// Hardcoded for now; later this should come from squid.conf.
+#define SALSA2_ICP_TIMEOUT_SEC 2.0
 
 using namespace std;
 
@@ -98,16 +104,28 @@ string to_string(const map<const CachePeer*, ProbabilityMatrix>& m)
 // Static member to keep track of the current peer for round-robin selection.
 CachePeer* Salsa2Proxy::currentPeer = nullptr;
 
+// Static member to rotate the ICP send order across requests.
+CachePeer* Salsa2Proxy::icpRotationCursor = nullptr;
+
 map<const CachePeer*, ProbabilityMatrix> Salsa2Proxy::exclusionProbabilities;
 
-Salsa2Proxy::Salsa2Proxy(PeerSelector *peerSelector, FwdServer *&fwdServers): 
+Salsa2Proxy::Salsa2Proxy(PeerSelector *peerSelector, FwdServer *&fwdServers):
     selector(peerSelector),
     servers(fwdServers),
     tail(nullptr),
     request(peerSelector->request),
-    digestsHits({})
+    digestsHits({}),
+    winner(nullptr),
+    nSent(0),
+    nRecv(0),
+    icpTimeoutPending(false)
 {
-    this->peerSelection();
+}
+
+Salsa2Proxy::~Salsa2Proxy()
+{
+    if (this->icpTimeoutPending)
+        eventDelete(&Salsa2Proxy::IcpTimeout, this);
 }
 
 map<const CachePeer*, ProbabilityMatrix>& Salsa2Proxy::getProbabilities()
@@ -179,18 +197,34 @@ void Salsa2Proxy::peerSelection()
 
     // Check for digest hits among the available peers
     this->checkDigestsHits();
-    
+
     // Apply the Salsa2 peer selection logic
     this->selectPeers();
 
-    // If no peers selected, add one in round robbin
-    this->addRoundRobin();
+    if (this->selectedPeers.empty())
+    {
+        // No peer selected by Salsa2: route to some parent using round robin
+        debugs(96,DBG_CRITICAL,"Salsa2: No peers selected, falling back to round robin");
+        this->addRoundRobin();
+        if (this->selector->entry)
+            this->selector->entry->ping_status = PING_DONE;
+        return;
+    }
 
-    debugs(96,4,"Salsa2: Those are the peers that selected by Salsa2:");
+    if (!this->selector->entry ||
+        Config.Port.icp <= 0 ||
+        !Comm::IsConnOpen(icpOutgoingConn))
+    {
+        // Can't ICP (no StoreEntry to track replies on, or ICP disabled):
+        // fall back to round robin exactly like the no-selection case
+        debugs(96,DBG_CRITICAL,"Salsa2: ICP unavailable, falling back to round robin");
+        this->addRoundRobin();
+        if (this->selector->entry)
+            this->selector->entry->ping_status = PING_DONE;
+        return;
+    }
 
-    // Iterate through the list of selected forward servers and print their information.
-    for(FwdServer* f = this->servers; f; f = f->next)
-        debugs(96,4,"Salsa2: "<< *(f->_peer));
+    this->sendIcpRequests();
 }
 
 // This function checks the digests of each peer to see if they have the requested content.
@@ -352,7 +386,7 @@ void Salsa2Proxy::selectPeers()
         // Check if current peer is in selection,
         // by checking if its bit is 1
         if (selection % 2)
-            this->addPeer(currPeer->second, SALSA2);
+            this->selectedPeers.insert(currPeer->second);
 
         // Move to next bit/peer
         selection /= 2;
@@ -403,5 +437,152 @@ void Salsa2Proxy::addRoundRobin()
 
         // If the loop finishes without finding any online parent.
         debugs(96,4,"Salsa2: Not found any online parent");
-    }   
+    }
+}
+
+void Salsa2Proxy::sendIcpRequests()
+{
+    StoreEntry* entry = this->selector->entry;
+    const char* url = entry->url();
+    int reqnum = icpSetCacheKey((const cache_key*)entry->key);
+
+    if (this->selectedPeers.empty())
+    {
+        debugs(96,DBG_CRITICAL,"Salsa2: No peers selected, falling back to round robin");
+        this->addRoundRobin();
+        entry->ping_status = PING_DONE;
+        return;
+    }
+
+    debugs(96,DBG_CRITICAL,"Salsa2: Sending ICP requests for URL: " << url);
+
+    // Rotate the ICP send order across requests instead of always sending
+    // in the same fixed order (selectedPeers is a set<CachePeer*>, ordered
+    // by pointer value, which would otherwise make the same peer first
+    // every time for the whole process lifetime). Walk the full configured
+    // peer list starting from the rotation cursor, sending only to peers
+    // that are actually selected, then advance the cursor by one position
+    // for next time - e.g. with 4 peers: 1,2,3,4 then 2,3,4,1 then 3,4,1,2...
+    if (!icpRotationCursor)
+        icpRotationCursor = Config.peers;
+
+    CachePeer* p = icpRotationCursor;
+    do
+    {
+        if (this->selectedPeers.count(p))
+        {
+            // No ICP_FLAG_SRC_RTT: Salsa2 doesn't use RTT for peer selection,
+            // so it doesn't need Config.onoff.query_icmp set to work.
+            icpCreateAndSend(ICP_QUERY, 0, url, reqnum, 0,
+                             icpOutgoingConn->fd, p->in_addr, nullptr);
+
+            debugs(96,DBG_CRITICAL,"Salsa2: Sent ICP request to " << *p);
+        }
+
+        p = p->next ? p->next : Config.peers;
+    } while (p != icpRotationCursor);
+
+    icpRotationCursor = icpRotationCursor->next ? icpRotationCursor->next : Config.peers;
+
+    this->nSent = static_cast<int>(this->selectedPeers.size());
+
+    entry->mem_obj->ping_reply_callback = &Salsa2Proxy::HandlePingReply;
+    entry->mem_obj->ircb_data = this->selector;
+    entry->ping_status = PING_WAITING;
+
+    eventAdd("Salsa2Proxy::IcpTimeout", &Salsa2Proxy::IcpTimeout, this,
+             SALSA2_ICP_TIMEOUT_SEC, 0, false);
+    this->icpTimeoutPending = true;
+}
+
+void Salsa2Proxy::HandlePingReply(CachePeer* peer, peer_t, AnyP::ProtocolType proto, void* pingdata, void* data)
+{
+    if (proto != AnyP::PROTO_ICP)
+    {
+        debugs(96,DBG_CRITICAL,"Salsa2: ERROR: ignoring a non-ICP reply with protocol " << proto);
+        return;
+    }
+
+    PeerSelector* selector = static_cast<PeerSelector*>(data);
+
+    if (!selector->salsa2)
+    {
+        debugs(96,DBG_CRITICAL,"Salsa2: ERROR: ICP reply with no live Salsa2Proxy");
+        return;
+    }
+
+    selector->salsa2->handleIcpReply(peer, static_cast<icp_common_t*>(pingdata)->getOpCode());
+}
+
+void Salsa2Proxy::handleIcpReply(CachePeer* peer, icp_opcode op)
+{
+    ++this->nRecv;
+
+    if (op == ICP_HIT)
+    {
+        debugs(96,DBG_CRITICAL,"Salsa2: ICP HIT from " << *peer);
+        this->winner = peer;
+        this->forward();
+        return;
+    }
+
+    debugs(96,DBG_CRITICAL,"Salsa2: ICP MISS from " << *peer);
+
+    // Remember only the first peer that replied MISS
+    if (!this->winner)
+        this->winner = peer;
+
+    if (this->nRecv < this->nSent)
+        return; // still waiting for other replies
+
+    // All replies are in and none of them was a HIT: forward to the first MISS
+    this->forward();
+}
+
+void Salsa2Proxy::forward()
+{
+    // Cancel our own ICP timeout: we already have a winner
+    if (this->icpTimeoutPending)
+    {
+        eventDelete(&Salsa2Proxy::IcpTimeout, this);
+        this->icpTimeoutPending = false;
+    }
+
+    debugs(96,DBG_CRITICAL,"Salsa2: Forwarding to winner " << *(this->winner));
+
+    // Prevents any further (late/duplicate) ICP reply for this entry from
+    // being delivered to us, and guards against double forwarding
+    this->selector->entry->ping_status = PING_DONE;
+
+    this->addPeer(this->winner, SALSA2);
+
+    PeerSelector* sel = this->selector;
+    sel->selectMore();
+}
+
+void Salsa2Proxy::IcpTimeout(void* data)
+{
+    static_cast<Salsa2Proxy*>(data)->icpTimeout();
+}
+
+void Salsa2Proxy::icpTimeout()
+{
+    StoreEntry* entry = this->selector->entry;
+
+    // The event that fired us has already been dequeued by the scheduler
+    // itself; nothing left for us to cancel.
+    this->icpTimeoutPending = false;
+
+    // Do nothing if we already got a winner while this timeout was queued
+    if (!entry || entry->ping_status != PING_WAITING)
+        return;
+
+    debugs(96,DBG_CRITICAL,"Salsa2: ICP timeout before we got a winner, falling back to round robin");
+
+    entry->ping_status = PING_DONE;
+
+    this->addRoundRobin();
+
+    PeerSelector* sel = this->selector;
+    sel->selectMore();
 }

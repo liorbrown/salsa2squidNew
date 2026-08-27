@@ -25,6 +25,7 @@ class HtcpReplyData;
 class HttpRequest;
 class icp_common_t;
 class StoreEntry;
+class Salsa2Proxy;
 
 void peerSelectInit(void);
 
@@ -103,8 +104,18 @@ public:
 
     ping_data ping;
 
+    /// SALSA2 ICP fan-out state for this request; lazily created, lives and
+    /// dies with this PeerSelector. @category SALSA2
+    Salsa2Proxy *salsa2 = nullptr;
+
 protected:
     bool selectionAborted();
+
+    /// Resolves `direct` via always_direct/never_direct ACLs (and the other
+    /// existing DIRECT_YES/NO heuristics) if not already resolved.
+    /// \returns true if resolution is still pending an async ACL check
+    /// (caller must return from selectMore() and wait to be re-invoked)
+    bool resolveDirect();
 
     void handlePingTimeout();
     void handleIcpReply(CachePeer*, const peer_t, icp_common_t *header);

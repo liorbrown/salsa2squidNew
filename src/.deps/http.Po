@@ -454,7 +454,8 @@ http.o: http.cc /usr/include/stdc-predef.h ../include/squid.h \
  ../src/store_key_md5.h ../src/StoreIOState.h time/gadgets.h SquidMath.h \
  base/TypeTraits.h StatCounters.h base/ByteCounter.h StatHist.h Store.h \
  store/Controller.h StoreStats.h StrList.h tools.h ../include/util.h \
- /usr/include/arpa/inet.h salsa2proxy.h PeerSelectState.h salsa2parent.h
+ /usr/include/arpa/inet.h salsa2proxy.h PeerSelectState.h salsa2parent.h \
+ event.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1270,3 +1271,4 @@ tools.h:
 salsa2proxy.h:
 PeerSelectState.h:
 salsa2parent.h:
+event.h:

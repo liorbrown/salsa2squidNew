@@ -230,6 +230,9 @@ PeerSelectorPingMonitor::forget(PeerSelector *selector)
 
 PeerSelector::~PeerSelector()
 {
+    // @category SALSA2
+    delete salsa2;
+
     while (servers) {
         FwdServer *next = servers->next;
         delete servers;
@@ -604,6 +607,51 @@ PeerSelector::checkNetdbDirect()
     return 0;
 }
 
+bool
+PeerSelector::resolveDirect()
+{
+    /** If we don't know whether DIRECT is permitted ... */
+    if (direct == DIRECT_UNKNOWN) {
+        if (always_direct == ACCESS_DUNNO) {
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (always_direct to be checked)");
+            /** check always_direct; */
+            ACLFilledChecklist *ch = new ACLFilledChecklist(Config.accessList.AlwaysDirect, request, nullptr);
+            ch->al = al;
+            acl_checklist = ch;
+            acl_checklist->syncAle(request, nullptr);
+            acl_checklist->nonBlockingCheck(CheckAlwaysDirectDone, this);
+            return true;
+        } else if (never_direct == ACCESS_DUNNO) {
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (never_direct to be checked)");
+            /** check never_direct; */
+            ACLFilledChecklist *ch = new ACLFilledChecklist(Config.accessList.NeverDirect, request, nullptr);
+            ch->al = al;
+            acl_checklist = ch;
+            acl_checklist->syncAle(request, nullptr);
+            acl_checklist->nonBlockingCheck(CheckNeverDirectDone, this);
+            return true;
+        } else if (request->flags.noDirect) {
+            /** if we are accelerating, direct is not an option. */
+            direct = DIRECT_NO;
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (forced non-direct)");
+        } else if (request->flags.loopDetected) {
+            /** if we are in a forwarding-loop, direct is not an option. */
+            direct = DIRECT_YES;
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (forwarding loop detected)");
+        } else if (checkNetdbDirect()) {
+            direct = DIRECT_YES;
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (checkNetdbDirect)");
+        } else {
+            direct = DIRECT_MAYBE;
+            debugs(44, 3, "direct = " << DirectStr[direct] << " (default)");
+        }
+
+        debugs(44, 3, "direct = " << DirectStr[direct]);
+    }
+
+    return false;
+}
+
 void
 PeerSelector::selectMore()
 {
@@ -612,53 +660,34 @@ PeerSelector::selectMore()
 
     debugs(44, 3, request->method << ' ' << request->url.host());
 
+    if (resolveDirect())
+        return; // waiting for an async always_direct/never_direct ACL check
+
     // @category SALSA2
-    if (Config.salsa2 && 
-        Config.npeers)
+    if (Config.salsa2 &&
+        Config.npeers) {
         // && request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
 
-            Salsa2Proxy salsa2(this, servers);
-    else {
-        debugs(96,4,"Salsa2: Not salsa selection: " 
-        << this->request->storeId());
-        /** If we don't know whether DIRECT is permitted ... */
-        if (direct == DIRECT_UNKNOWN) {
-            if (always_direct == ACCESS_DUNNO) {
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (always_direct to be checked)");
-                /** check always_direct; */
-                ACLFilledChecklist *ch = new ACLFilledChecklist(Config.accessList.AlwaysDirect, request, nullptr);
-                ch->al = al;
-                acl_checklist = ch;
-                acl_checklist->syncAle(request, nullptr);
-                acl_checklist->nonBlockingCheck(CheckAlwaysDirectDone, this);
-                return;
-            } else if (never_direct == ACCESS_DUNNO) {
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (never_direct to be checked)");
-                /** check never_direct; */
-                ACLFilledChecklist *ch = new ACLFilledChecklist(Config.accessList.NeverDirect, request, nullptr);
-                ch->al = al;
-                acl_checklist = ch;
-                acl_checklist->syncAle(request, nullptr);
-                acl_checklist->nonBlockingCheck(CheckNeverDirectDone, this);
-                return;
-            } else if (request->flags.noDirect) {
-                /** if we are accelerating, direct is not an option. */
-                direct = DIRECT_NO;
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (forced non-direct)");
-            } else if (request->flags.loopDetected) {
-                /** if we are in a forwarding-loop, direct is not an option. */
-                direct = DIRECT_YES;
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (forwarding loop detected)");
-            } else if (checkNetdbDirect()) {
-                direct = DIRECT_YES;
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (checkNetdbDirect)");
-            } else {
-                direct = DIRECT_MAYBE;
-                debugs(44, 3, "direct = " << DirectStr[direct] << " (default)");
-            }
+        if (direct == DIRECT_YES) {
+            // always_direct (or loopDetected/checkNetdbDirect) says this
+            // request must bypass the hierarchy entirely
+            debugs(96, DBG_CRITICAL, "Salsa2: always_direct allowed this request, bypassing Salsa2 selection for " << url());
+            selectSomeDirect();
+            if (entry)
+                entry->ping_status = PING_DONE;
+        } else if (!entry || entry->ping_status == PING_NONE) {
+            if (!salsa2)
+                salsa2 = new Salsa2Proxy(this, servers);
+            salsa2->peerSelection();
 
-            debugs(44, 3, "direct = " << DirectStr[direct]);
+            if (entry && entry->ping_status == PING_WAITING)
+                return; // wait for Salsa2Proxy's ICP replies/timeout to resume us
         }
+        // else: ping_status == PING_DONE, `servers` already holds the winner
+        // (or the round-robin fallback) chosen by salsa2->forward()/icpTimeout()
+    } else {
+        debugs(96,4,"Salsa2: Not salsa selection: "
+        << this->request->storeId());
 
         if (!entry || entry->ping_status == PING_NONE)
             selectPinned();

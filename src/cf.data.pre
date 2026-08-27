@@ -10956,4 +10956,13 @@ DOC_START
 	1 - on
 DOC_END
 
+NAME: miss_penalty
+DEFAULT: 0
+LOC: Config.missPenalty
+TYPE: int
+DOC_START
+	Sets the cost of miss in caches request
+	needed for salsa2 algorithm
+DOC_END
+
 EOF

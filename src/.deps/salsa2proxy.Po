@@ -419,7 +419,7 @@ salsa2proxy.o: salsa2proxy.cc /usr/include/stdc-predef.h \
  acl/Checklist.h ../src/acl/InnerNode.h ../src/acl/Acl.h \
  ../src/acl/forward.h ../src/acl/Options.h ipcache.h typedefs.h \
  anyp/ProtocolType.h CachePeer.h icp_opcode.h security/PeerOptions.h \
- salsa2parent.h /usr/include/c++/13/set \
+ salsa2parent.h event.h /usr/include/c++/13/set \
  /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h /usr/include/c++/13/random \
  /usr/include/c++/13/cmath /usr/include/math.h \
@@ -456,7 +456,10 @@ salsa2proxy.o: salsa2proxy.cc /usr/include/stdc-predef.h \
  store_key_md5.h StoreClient.h acl/ChecklistFiller.h base/AsyncCall.h \
  base/forward.h dlink.h store/ParsingBuffer.h ../src/StoreIOBuffer.h \
  ../src/base/Range.h StoreIOBuffer.h StoreIOState.h mem/AllocatorProxy.h \
- http/RegisteredHeaders.h
+ http/RegisteredHeaders.h Store.h base/DelayedAsyncCalls.h \
+ ../src/base/AsyncCallList.h base/Packable.h base/Range.h http/forward.h \
+ MemObject.h RemovalPolicy.h cbdata.h stmem.h ../include/splay.h \
+ ../src/fatal.h store/Controller.h StoreStats.h
 /usr/include/stdc-predef.h:
 ../include/squid.h:
 ../include/autoconf.h:
@@ -1148,6 +1151,7 @@ CachePeer.h:
 icp_opcode.h:
 security/PeerOptions.h:
 salsa2parent.h:
+event.h:
 /usr/include/c++/13/set:
 /usr/include/c++/13/bits/stl_set.h:
 /usr/include/c++/13/bits/stl_multiset.h:
@@ -1201,3 +1205,17 @@ StoreIOBuffer.h:
 StoreIOState.h:
 mem/AllocatorProxy.h:
 http/RegisteredHeaders.h:
+Store.h:
+base/DelayedAsyncCalls.h:
+../src/base/AsyncCallList.h:
+base/Packable.h:
+base/Range.h:
+http/forward.h:
+MemObject.h:
+RemovalPolicy.h:
+cbdata.h:
+stmem.h:
+../include/splay.h:
+../src/fatal.h:
+store/Controller.h:
+StoreStats.h:
