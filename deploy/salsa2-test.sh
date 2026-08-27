@@ -18,6 +18,12 @@ if [ -z "$ROLE" ]; then
   if grep -qE '^\s*cache_peer\s' /etc/squid/squid.conf 2>/dev/null; then ROLE=proxy; else ROLE=parent; fi
 fi
 
+# Active (uncommented) cache_peer lines. Distinguishes a wired SALSA2 proxy
+# (forwards to parents; proxy-only + no cache_dir => never caches locally) from
+# a parent / standalone node that has its own store.
+has_peers="$(grep -cE '^\s*cache_peer\s' /etc/squid/squid.conf 2>/dev/null || true)"
+has_peers="${has_peers:-0}"
+
 PROXY="http://localhost:3128"
 STAMP="$(date -u +%Y%m%d-%H%M%S)"
 HOST="$(hostname -s 2>/dev/null || hostname)"
@@ -91,13 +97,37 @@ case "$code" in
 esac
 
 printf '\nCache behaviour (same URL twice):\n'
-x1="$(curl -sS -D - -o /dev/null -x "$PROXY" --max-time 30 http://example.com/ | awk -F': ' 'tolower($1)=="x-cache"{print $2}' | tr -d '\r')"
-x2="$(curl -sS -D - -o /dev/null -x "$PROXY" --max-time 30 http://example.com/ | awk -F': ' 'tolower($1)=="x-cache"{print $2}' | tr -d '\r')"
-printf '  1st X-Cache: %s\n  2nd X-Cache: %s\n' "${x1:-<none>}" "${x2:-<none>}"
-case "${x2:-}" in
-  *HIT*) pass "second request served from cache" ;;
-  *)     printf '  [warn] second request was not a cache HIT (origin headers may forbid caching)\n' ;;
-esac
+curl -sS -o /dev/null -x "$PROXY" --max-time 30 http://example.com/ || true
+sleep 1
+curl -sS -o /dev/null -x "$PROXY" --max-time 30 http://example.com/ || true
+sleep 2
+if [ "$has_peers" -gt 0 ]; then
+  # A wired SALSA2 proxy forwards to a parent and, with proxy-only peers and no
+  # cache_dir, never stores a local copy - a local HIT is impossible here by
+  # design. The meaningful signal is what the parents answer over ICP: walk the
+  # section-96 trace, pairing each "Sending ICP requests for URL:" with the
+  # HIT/MISS lines that follow it.
+  seen="$(grep -F 'Salsa2: ' "$CACHE_LOG" 2>/dev/null | tail -n 200 | awk '
+    /Sending ICP requests for URL:/ { u=$0; sub(/.*URL: /,"",u) }
+    /ICP HIT from/  && u ~ /example\.com/ { hit=1 }
+    /ICP MISS from/ && u ~ /example\.com/ { miss=1 }
+    END { print (hit ? "HIT" : (miss ? "MISS" : "none")) }')"
+  printf '  parent ICP verdict for probe URL: %s\n' "$seen"
+  case "$seen" in
+    HIT)  pass "a parent returned an ICP HIT for the probe URL" ;;
+    MISS) printf '  [info] parents answered ICP MISS - probe URL not cached upstream (origin may forbid it)\n' ;;
+    *)    printf '  [info] no ICP HIT/MISS seen for the probe URL (parents cold or unreachable)\n' ;;
+  esac
+else
+  # Parent / standalone node with its own store: read Squid's own verdict from
+  # the access.log result code (%Ss/%Hs) of the 2nd request.
+  code2="$(grep -F 'GET http://example.com/' "$ACCESS_LOG" 2>/dev/null | tail -n 1 | awk '{print $4}')"
+  printf '  2nd request result code: %s\n' "${code2:-<none>}"
+  case "${code2:-}" in
+    *HIT*) pass "second request served from local cache ($code2)" ;;
+    *)     printf '  [info] 2nd request not a local HIT (%s) - origin headers may forbid caching\n' "${code2:-none}" ;;
+  esac
+fi
 
 # --------------------------------------------------------------------------- #
 sect "SALSA2 HTTPS-restore path (X-Originally-HTTPS)"
@@ -109,8 +139,6 @@ printf 'GET http://example.com/  + X-Originally-HTTPS: 1  -> HTTP %s\n' "$code"
 sleep 1
 tail_line="$(grep -F 'example.com' "$ACCESS_LOG" 2>/dev/null | tail -n 1)"
 printf 'access.log: %s\n' "${tail_line:-<no matching line>}"
-has_peers="$(grep -cE '^\s*cache_peer\s' /etc/squid/squid.conf 2>/dev/null || true)"
-has_peers="${has_peers:-0}"
 if [ "$has_peers" -gt 0 ]; then
   printf '  [info] this node has cache_peer(s); HTTPS restore happens on the parent, not here.\n'
   [ "$code" = 200 ] && pass "request forwarded to parent (HTTP 200)" \
@@ -145,8 +173,16 @@ fi
 
 # --------------------------------------------------------------------------- #
 sect "Cache manager (info)"
-curl -sS -x "$PROXY" --max-time 15 "$PROXY/squid-internal-mgr/info" 2>&1 | head -n 25 \
-  || printf '  cache manager query failed\n'
+# Query the LOCAL manager directly: origin-form URL, no -x. Sending this through
+# the proxy (-x) would run it through SALSA2 peer selection and ship it to a
+# parent, which answers 403 for a client it does not recognise as local.
+mgr="$(curl -sS --max-time 15 "$PROXY/squid-internal-mgr/info" 2>&1 || true)"
+printf '%s\n' "$mgr" | head -n 25
+if printf '%s\n' "$mgr" | grep -q '^Squid Object Cache:'; then
+  pass "cache manager reachable on the local proxy"
+else
+  printf '  [warn] cache manager did not return the expected info page\n'
+fi
 
 # --------------------------------------------------------------------------- #
 sect "Result"
