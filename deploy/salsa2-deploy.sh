@@ -20,6 +20,10 @@
 #                         and salsa2Peers lines are written enabled with these IPs
 #                         instead of the commented-out {insert here parent IP} block.
 #   --no-test             Skip the post-install self-test.
+#   --deploy-user USER    User the update-config.sh NOPASSWD sudoers rule is
+#                         written for (default: the sudo invoker). This is the
+#                         account you SSH in as when pushing configs from your
+#                         laptop.
 #   -h, --help            Show this help.
 #
 # Environment overrides:
@@ -71,7 +75,7 @@ log()  { printf '\n==> %s\n' "$*"; }
 info() { printf '    %s\n' "$*"; }
 die()  { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
 
-usage() { sed -n '2,34p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit "${1:-0}"; }
+usage() { sed -n '2,38p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit "${1:-0}"; }
 
 # --------------------------------------------------------------------------- #
 # Argument parsing
@@ -81,16 +85,18 @@ ASSUME_YES=0
 RUN_TEST=1
 DO_UPDATE=0
 PEERS=""
+DEPLOY_USER=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    proxy|parent)  ROLE="$1"; shift ;;
-    -y|--yes)      ASSUME_YES=1; shift ;;
-    --update)      DO_UPDATE=1; shift ;;
-    --peers)       PEERS="${2:-}"; shift 2 ;;
-    --no-test)     RUN_TEST=0; shift ;;
-    -h|--help)     usage 0 ;;
-    *)             die "unknown argument: $1 (try --help)" ;;
+    proxy|parent)   ROLE="$1"; shift ;;
+    -y|--yes)       ASSUME_YES=1; shift ;;
+    --update)       DO_UPDATE=1; shift ;;
+    --peers)        PEERS="${2:-}"; shift 2 ;;
+    --no-test)      RUN_TEST=0; shift ;;
+    --deploy-user)  DEPLOY_USER="${2:-}"; shift 2 ;;
+    -h|--help)      usage 0 ;;
+    *)              die "unknown argument: $1 (try --help)" ;;
   esac
 done
 
@@ -105,6 +111,10 @@ fi
 INVOKER="${SUDO_USER:-root}"
 INVOKER_HOME="$(getent passwd "$INVOKER" | cut -d: -f6)"
 [ -n "$INVOKER_HOME" ] || INVOKER_HOME="$HOME"
+
+# Account the update-config.sh NOPASSWD sudoers rule is written for (the user you
+# SSH in as when pushing configs from your laptop). Defaults to the sudo invoker.
+[ -n "$DEPLOY_USER" ] || DEPLOY_USER="$INVOKER"
 
 # Source dir: build from the checkout this script lives in (no re-clone). Only
 # fall back to a clone if the script was copied out of its repo.
@@ -142,6 +152,7 @@ else
   info "Source:      $SALSA2_SRC  (will clone from $SALSA2_REPO)"
 fi
 info "Invoked by:  $INVOKER  (home: $INVOKER_HOME)"
+info "Push user:   $DEPLOY_USER  (update-config.sh sudoers rule)"
 if [ "$ROLE" = "proxy" ]; then
   if [ -n "$PEERS" ]; then info "Parent IPs:  $PEERS"; else info "Parent IPs:  (none - template placeholders, edit later)"; fi
 fi
@@ -409,6 +420,34 @@ SALSA2_SRC="$SALSA2_SRC"
 SALSA2_ROLE="$ROLE"
 EOF
 chmod 0644 /etc/default/salsa2
+
+# --------------------------------------------------------------------------- #
+# 9b. Remote config-push helper (for deploy/update-config.sh on your laptop)
+# --------------------------------------------------------------------------- #
+log "Installing config-push helper -> /usr/local/sbin/salsa2-apply-config"
+install -m 0755 "$SCRIPT_DIR/salsa2-apply-config.sh" /usr/local/sbin/salsa2-apply-config 2>/dev/null \
+  || { cp "$SCRIPT_DIR/salsa2-apply-config.sh" /usr/local/sbin/salsa2-apply-config; chmod 0755 /usr/local/sbin/salsa2-apply-config; }
+
+if id "$DEPLOY_USER" >/dev/null 2>&1; then
+  # Scoped NOPASSWD: only the hardcoded-path helper, only its three arg forms.
+  cat > /etc/sudoers.d/salsa2-update-config <<EOF
+# Written by salsa2-deploy.sh on $(date -u +%FT%TZ)
+# Lets '$DEPLOY_USER' push a new /etc/squid/squid.conf from a laptop via
+# deploy/update-config.sh without an interactive sudo password. The helper
+# hardcodes every path, so this grants exactly "replace squid.conf + bounce squid".
+$DEPLOY_USER ALL=(root) NOPASSWD: /usr/local/sbin/salsa2-apply-config "", /usr/local/sbin/salsa2-apply-config --no-reload, /usr/local/sbin/salsa2-apply-config --restart
+EOF
+  chmod 0440 /etc/sudoers.d/salsa2-update-config
+  if visudo -cf /etc/sudoers.d/salsa2-update-config >/dev/null 2>&1; then
+    info "sudoers rule installed for '$DEPLOY_USER'"
+  else
+    rm -f /etc/sudoers.d/salsa2-update-config
+    info "WARNING: generated sudoers rule failed visudo check - not installed."
+  fi
+else
+  info "WARNING: user '$DEPLOY_USER' not found - skipping the update-config sudoers rule."
+  info "         Re-run with --deploy-user <name>, or add the rule by hand later."
+fi
 
 # --------------------------------------------------------------------------- #
 # 10. Start

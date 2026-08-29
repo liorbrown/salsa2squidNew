@@ -40,7 +40,7 @@ slog() {
 
 # Rebuild + reinstall Squid from the deployed source tree and restart the service.
 # Use after tweaking code on the test node. Source dir comes from
-# /etc/default/salsa2 (written by salsa2-deploy.sh), else $SALSA2_SRC, else ~/salsa2squid.
+# $SALSA2_SRC, else /etc/default/salsa2 (written by salsa2-deploy.sh), else ~/salsa2squid.
 supdate() {
     local src="${SALSA2_SRC:-}"
     if [ -z "$src" ] && [ -r /etc/default/salsa2 ]; then
