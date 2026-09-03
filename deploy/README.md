@@ -64,13 +64,15 @@ before building (otherwise the wizard builds whatever the checkout currently has
 8. Enable NTP (`timedatectl set-ntp true` / `systemd-timesyncd`, `chrony` fallback) — the
    SALSA2 parent statistics loop is time-driven.
 9. Install operator shortcuts to `/etc/profile.d/salsa2.sh` (`squidr`, `squidstat`,
-   `slog`, `killsquid`, `restartsquid`, …) and record the source tree path in
-   `/etc/default/salsa2`. The full source is deployed (not just the binary), so on a
-   test node you can edit code and run **`supdate`** to `make` + `make install` +
-   restart squid from that tree. Also installs `/usr/local/sbin/salsa2-apply-config`
-   and a scoped `NOPASSWD` sudoers rule (`/etc/sudoers.d/salsa2-update-config`) so
-   `update-config.sh` can push a new `squid.conf` from your laptop without a sudo
-   password — see [Pushing a new squid.conf to the fleet](#pushing-a-new-squidconf-to-the-fleet).
+   `slog`, `killsquid`, `restartsquid`, …) and record the source tree path, role,
+   and branch in `/etc/default/salsa2` (`SALSA2_SRC`, `SALSA2_ROLE`, `SALSA2_BRANCH`).
+   The full source is deployed (not just the binary), so on a test node you can edit
+   code and run **`supdate`** to `make` + `make install` + restart squid from that
+   tree. Also installs two hardcoded-path root helpers —
+   `/usr/local/sbin/salsa2-apply-config` and `/usr/local/sbin/salsa2-update-code` —
+   plus a scoped `NOPASSWD` sudoers rule (`/etc/sudoers.d/salsa2-update-config`) so a
+   laptop-side tool can push a new `squid.conf` or pull + rebuild the source without a
+   sudo password — see [Driving the fleet from a laptop](#driving-the-fleet-from-a-laptop).
 10. `systemctl restart squid` and wait for it to become active.
 11. Run `salsa2-test.sh`.
 
@@ -107,42 +109,43 @@ recent `access.log` lines, and `cache_mgr` `info`.
 | `salsa2-deploy.sh` | the wizard |
 | `salsa2-test.sh` | post-install smoke test (standalone-callable) |
 | `salsa2.profile.sh` | installed to `/etc/profile.d/salsa2.sh` |
-| `salsa2-apply-config.sh` | installed to `/usr/local/sbin/salsa2-apply-config`; the root-side half of a config push |
-| `update-config.sh` | laptop-side: push one `squid.conf` to many nodes over SSH, parse-check, reload |
+| `salsa2-apply-config.sh` | installed to `/usr/local/sbin/salsa2-apply-config`; root-side half of a config push |
+| `salsa2-update-code.sh` | installed to `/usr/local/sbin/salsa2-update-code`; root-side half of a code update (git fetch + hard reset + rebuild + restart) |
 
-## Pushing a new squid.conf to the fleet
+## Driving the fleet from a laptop
 
-`update-config.sh` runs on your laptop and replaces `/etc/squid/squid.conf` on
-every host you list with a local file, over SSH:
+Laptop-side fleet ops live in a **separate repo** (`salsa2-fleet`, kept at
+`~/salsa2/fleet`) — this repo is only the patched Squid and its on-node scripts.
+The `s2fleet` menu there drives the two root helpers this wizard installs, over
+SSH:
 
-```sh
-./deploy/update-config.sh -f squid.conf -d 10.43.23.54 10.43.23.67 10.43.23.71
-```
-
-Per host it `scp`s the file to `/tmp/salsa2-squid.conf.staged`, then runs
-`sudo /usr/local/sbin/salsa2-apply-config` there. That helper (installed by the
-wizard, step 9b) backs up the current config (`squid.conf.bak.<UTCstamp>`),
-installs your file, runs `squid -k parse`, and reloads squid — rolling the
-backup back and exiting non-zero on a parse failure. One bad host doesn't stop
-the others; a PASS/FAIL summary prints at the end.
+- **config push** — `scp` a `squid.conf` to `/tmp/salsa2-squid.conf.staged`, then
+  `sudo /usr/local/sbin/salsa2-apply-config [--restart]`. The helper backs up the
+  current config (`squid.conf.bak.<UTCstamp>`), installs the new one, `squid -k
+  parse`s it, and reloads squid — rolling back and exiting non-zero on a parse
+  failure.
+- **code update** — `sudo /usr/local/sbin/salsa2-update-code [--clean]`. The
+  helper reads `SALSA2_SRC` / `SALSA2_BRANCH` from `/etc/default/salsa2`, does
+  `git fetch` + `git reset --hard origin/<branch>` in that checkout, `make` +
+  `make install`, then restarts squid and waits for it to come back active.
+  `--clean` additionally wipes build artifacts and re-runs `./configure`.
 
 ### Sudoless targets
 
-No interactive `sudo` password is needed. The wizard installs the helper plus
-`/etc/sudoers.d/salsa2-update-config`, a scoped `NOPASSWD` rule for exactly:
+No interactive `sudo` password is needed. The wizard installs the two helpers
+plus `/etc/sudoers.d/salsa2-update-config`, a scoped `NOPASSWD` rule for exactly:
 
 ```
 <deploy-user> ALL=(root) NOPASSWD: /usr/local/sbin/salsa2-apply-config "", \
                                    /usr/local/sbin/salsa2-apply-config --no-reload, \
-                                   /usr/local/sbin/salsa2-apply-config --restart
+                                   /usr/local/sbin/salsa2-apply-config --restart, \
+                                   /usr/local/sbin/salsa2-update-code "", \
+                                   /usr/local/sbin/salsa2-update-code --clean
 ```
 
-Every path inside the helper is hardcoded and it has no meaningful arguments, so
-this grants precisely "replace `squid.conf` and bounce squid" — not general
-root. The rule names the wizard's `sudo` invoker; pass
-`--deploy-user <name>` to `salsa2-deploy.sh` if you SSH in from your laptop as a
-different account. `update-config.sh -u <name>` must match that user.
-
-Flags: `-i KEY` ssh key, `-u USER` ssh login (default `$USER`), `-r` restart
-instead of reload, `-n` copy only (no parse/reload), `-y` skip the confirm
-prompt.
+Every path inside both helpers is hardcoded and neither takes a meaningful
+argument, so this grants precisely "replace `squid.conf` and bounce squid" and
+"rebuild from the recorded source tree and restart squid" — not general root.
+The rule names the wizard's `sudo` invoker; pass `--deploy-user <name>` to
+`salsa2-deploy.sh` if you SSH in from your laptop as a different account, and
+point `s2fleet` at that same user (`SALSA2_USER`).

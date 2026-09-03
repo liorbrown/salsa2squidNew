@@ -418,6 +418,7 @@ cat > /etc/default/salsa2 <<EOF
 # Written by salsa2-deploy.sh on $(date -u +%FT%TZ)
 SALSA2_SRC="$SALSA2_SRC"
 SALSA2_ROLE="$ROLE"
+SALSA2_BRANCH="$SALSA2_BRANCH"
 EOF
 chmod 0644 /etc/default/salsa2
 
@@ -428,14 +429,19 @@ log "Installing config-push helper -> /usr/local/sbin/salsa2-apply-config"
 install -m 0755 "$SCRIPT_DIR/salsa2-apply-config.sh" /usr/local/sbin/salsa2-apply-config 2>/dev/null \
   || { cp "$SCRIPT_DIR/salsa2-apply-config.sh" /usr/local/sbin/salsa2-apply-config; chmod 0755 /usr/local/sbin/salsa2-apply-config; }
 
+log "Installing code-update helper -> /usr/local/sbin/salsa2-update-code"
+install -m 0755 "$SCRIPT_DIR/salsa2-update-code.sh" /usr/local/sbin/salsa2-update-code 2>/dev/null \
+  || { cp "$SCRIPT_DIR/salsa2-update-code.sh" /usr/local/sbin/salsa2-update-code; chmod 0755 /usr/local/sbin/salsa2-update-code; }
+
 if id "$DEPLOY_USER" >/dev/null 2>&1; then
   # Scoped NOPASSWD: only the hardcoded-path helper, only its three arg forms.
   cat > /etc/sudoers.d/salsa2-update-config <<EOF
 # Written by salsa2-deploy.sh on $(date -u +%FT%TZ)
-# Lets '$DEPLOY_USER' push a new /etc/squid/squid.conf from a laptop via
-# deploy/update-config.sh without an interactive sudo password. The helper
-# hardcodes every path, so this grants exactly "replace squid.conf + bounce squid".
-$DEPLOY_USER ALL=(root) NOPASSWD: /usr/local/sbin/salsa2-apply-config "", /usr/local/sbin/salsa2-apply-config --no-reload, /usr/local/sbin/salsa2-apply-config --restart
+# Lets '$DEPLOY_USER' drive a laptop-side fleet tool (the separate salsa2-fleet
+# repo) without an interactive sudo password. Both helpers hardcode every path,
+# so this grants exactly "replace squid.conf + bounce squid" or "rebuild from
+# the recorded source tree + restart squid" - nothing more.
+$DEPLOY_USER ALL=(root) NOPASSWD: /usr/local/sbin/salsa2-apply-config "", /usr/local/sbin/salsa2-apply-config --no-reload, /usr/local/sbin/salsa2-apply-config --restart, /usr/local/sbin/salsa2-update-code "", /usr/local/sbin/salsa2-update-code --clean
 EOF
   chmod 0440 /etc/sudoers.d/salsa2-update-config
   if visudo -cf /etc/sudoers.d/salsa2-update-config >/dev/null 2>&1; then

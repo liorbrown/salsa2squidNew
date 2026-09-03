@@ -288,14 +288,11 @@ void Salsa2Proxy::addPeer(CachePeer* peer, hier_code code)
 
     // If the list of servers is currently empty.
     if (!this->tail)
-    {
         // Set the head and tail of the list to the new server.
         this->servers = this->tail = newTail;
-    } else
-    {
+    else
         // Append the new server to the end of the list and update the tail.
         this->tail = this->tail->next = newTail;
-    }
 }
 
 size_t Salsa2Proxy::exponentialSelection() const

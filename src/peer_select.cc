@@ -664,20 +664,22 @@ PeerSelector::selectMore()
         return; // waiting for an async always_direct/never_direct ACL check
 
     // @category SALSA2
-    if (Config.salsa2 &&
-        Config.npeers) {
-        // && request->header.getById(Http::HdrType::ACCEPT).find(StoreDigestMimeStr) == String::npos)
-
-        if (direct == DIRECT_YES) {
+    if (Config.salsa2 && Config.npeers) 
+    {
+        if (direct == DIRECT_YES) 
+        {
             // always_direct (or loopDetected/checkNetdbDirect) says this
             // request must bypass the hierarchy entirely
             debugs(96, DBG_CRITICAL, "Salsa2: always_direct allowed this request, bypassing Salsa2 selection for " << url());
             selectSomeDirect();
             if (entry)
                 entry->ping_status = PING_DONE;
-        } else if (!entry || entry->ping_status == PING_NONE) {
+        } 
+        else if (!entry || entry->ping_status == PING_NONE) 
+        {
             if (!salsa2)
                 salsa2 = new Salsa2Proxy(this, servers);
+                
             salsa2->peerSelection();
 
             if (entry && entry->ping_status == PING_WAITING)
